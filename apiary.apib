@@ -27,6 +27,15 @@ Operation | Description
 **503** | Service Temporarily Unavailable.
 
 
+# NOTES
+
+- All IDs (user, company, consumer, brand, etc) will be GUIDs to prevent ID spoofing.
+- Delete functions do not remove data they simply flag an item as deleted so as not to skew metrics and to keep an audit trail.
+
+# API END POINTS
+
+# Group Login
+
 ## Login [/login]
 
 Log the user into the system
@@ -92,14 +101,14 @@ Please update field names
 ### Create Brand[POST]
 Please update field names
 
-- `Company Id`
+- `Brand Id`
 - `Name`
 + Response 200
 
 ### View Brand[GET]
 Please update field names
 
-- `Company Id`
+- `Brand Id`
 - `Name`
 
 + Response 200
@@ -107,7 +116,7 @@ Please update field names
 ### Delete Brand[DELETE]
 Please update field names
 
-- `Company Id`
+- `Brand Id`
 - `Name`
 + Response 200
 
@@ -179,6 +188,7 @@ This is a user of the system (not a subscriber)!
 ### Create User [POST]
 Please update field names
 
+- `User Id`
 - `Company Id`
 - `Brand Id`
 - `First name`
@@ -188,13 +198,14 @@ Please update field names
 - `User company`
 - `Last active`
 - `Country code`
-- `Language code`
+
 + Response 200
 [User][]
 
 ### View User [GET]
 Please update field names
 
+- `User Id`
 - `Company Id`
 - `Brand Id`
 - `First name`
@@ -204,7 +215,7 @@ Please update field names
 - `User company`
 - `Last active`
 - `Country code`
-- `Language code`
+
 + Response 200
 
     [User][]
@@ -212,6 +223,7 @@ Please update field names
 ### Delete User [DELETE]
 Please update field names
 
+- `User Id`
 - `Company Id`
 - `Brand Id`
 - `First name`
@@ -221,7 +233,7 @@ Please update field names
 - `User company`
 - `Last active`
 - `Country code`
-- `Language code`
+
 + Response 200
 
 ## User Metrics [/user/metrics/{userId}]
@@ -302,16 +314,17 @@ Please update field names
 - `Name`
 - `Description`
 - `Start date & time`
-- `End date & time (optional)`
+- `End date & time` (optional)
 - `Activation channels`
 - `Engagement channels`
-- `SMS message (optional)`
-- `SMS response message (optional)`
-- `SMS opt-out (optional)`
-- `Email Subject line (optional)`
-- `View online text (optional)`
-- `Unsubscribe text (optional)`
-- `Status (optional)`
+- `SMS message` (optional)
+- `SMS response message` (optional)
+- `SMS opt-out` (optional)
+- `Email Subject line` (optional)
+- `View online text` (optional)
+- `Unsubscribe text` (optional)
+- `Status` (optional)
+
 + Response 200
 
 ### View Campaign [GET]
@@ -324,16 +337,16 @@ Please update field names
 - `Name`
 - `Description`
 - `Start date & time`
-- `End date & time (optional)`
+- `End date & time` (optional)
 - `Activation channels`
 - `Engagement channels`
-- `SMS message (optional)`
-- `SMS response message (optional)`
-- `SMS opt-out (optional)`
-- `Email Subject line (optional)`
-- `View online text (optional)`
-- `Unsubscribe text (optional)`
-- `Status (optional)`
+- `SMS message` (optional)
+- `SMS response message` (optional)
+- `SMS opt-out` (optional)
+- `Email Subject line` (optional)
+- `View online text` (optional)
+- `Unsubscribe text` (optional)
+- `Status` (optional)
 + Response 200
 
 ### Delete Campaign [DELETE]
@@ -359,11 +372,16 @@ Please update field names
 + Response 200
 
 ## Campaign Assests [/campaigns/assets/{campaignId}]
+
 Please update field names
 
 - `Asset file`. A zip file containing all your email assets, the zip file must contain at least `email.htm`, `unsubscribe.htm` and preferably `email.txt` for the plain text version.
 - Image assets should be packaged in the zip file in the root folder. The `unsubscribe.htm` is a page users will view when unsubscribing, and should contain your corporate identity.
 - Files with the same name will be automatically overwritten.
+
++ Parameters 
+    + campaignId (string, required) ... 
+
 
 ### View Campaign Assets [POST]
 
@@ -378,6 +396,8 @@ Please update field names
 + Response 200
 
 ## Campaign Subscriber [/campaigns/subscriber/{campaignId}]
++ Parameters 
+    + campaignId (string, required) ... 
 
 ### Create Campaign Subscriber [POST]
 
@@ -398,6 +418,10 @@ Please update field names
 
 This will add or remove multiple users to/from a campaign. A list of all currently assigned users may
 also be retrieved. A subscriber will only ever be added to a campaign once.
+
++ Parameters 
+    + campaignId (string, required) ... 
+
 
 ### Create Campaign Subscribers [POST]
 
@@ -422,6 +446,8 @@ Please update field names
 + Response 200
 
 ## Campaign Metrics [/campaigns/metrics/{campaignId}]
++ Parameters 
+    + campaignId (string, required) ... 
 
 ### View Campaign Metrics [GET]
 
@@ -451,6 +477,11 @@ Please update field names
 + Response 200
 
 ## Campaign Responses [/campaigns/responses/{campaignId}]
+This will return the current metrics for a campaign.
+
+
++ Parameters
+    + campaignId (string,required) ...
 
 ### View Campaign Responses [GET]
 
@@ -464,10 +495,11 @@ Please update field names
 + Response 200
 
 # Group Programs
+
+## Programs [/programs/{programId}]
+
 + Parameters
     + programId (string,required) ...
-
-## Programs [/programs/{campaignId}]
 
 ### Create a Program [POST]
 
@@ -525,6 +557,9 @@ Please update field names
 
 ## Programs Messaging [/programs/message/{programId}]
 
++ Parameters
+    + programId (string,required) ...
+
 ### Create Programs Message [POST]
 
 Please update fields
@@ -558,6 +593,9 @@ Please update fields
 
 + Response 200
 
+
+
+
 ## Programs SMS [/programs/assets/sms/{messageId}]
 This adds a SMS message to a program message
 
@@ -579,6 +617,9 @@ This adds a SMS message to a program message
 - `SMS Message`
 + Response 200
 
+
+
+
 ## Programs Email Assets [/programs/assets/email/{messageId}]
 This adds email assets to a program message
 
@@ -596,6 +637,9 @@ This adds email assets to a program message
 ### Delete Program Email Assets [DELETE]
 - `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "email.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
 + Response 200
+
+
+
 
 ## Programs Unsubscribe [/programs/unsubscribe/{programId}]
 This adds an unsubscribe email message to a program
@@ -615,6 +659,9 @@ This adds an unsubscribe email message to a program
 - `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "unsubscribe.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
 + Response 200
 
+
+
+
 ## Programs Subscriber [/programs/subscriber/{programId}]
 This will add or remove a single user to a program. A subscriber will only ever be added to a program once.
 
@@ -628,6 +675,10 @@ This will add or remove a single user to a program. A subscriber will only ever 
 ### Delete Subscribe from Program [DELETE]
 - `Subscriber Id`
 + Response 200
+
+
+
+
 
 ## Programs Subscribers [/programs/subscribers/{programId}]
 This will add or remove multiple users to/from a program. A list of all currently assigned users may also be retrieved. A subscriber will only ever be added to a program once.
@@ -647,9 +698,14 @@ This will add or remove multiple users to/from a program. A list of all currentl
 - `Subscriber Id`
 + Response 200
 
+
+
+
 ## Program Metrics [/programs/metrics/{programId}]
 
 This will retrieve the overall metrics for a program
++ Parameters
+    + programId (string,required) ...
 
 ### View Program Metrics[GET]
 
@@ -674,10 +730,16 @@ This will retrieve the overall metrics for a program
 - `SMSs percentage bounced`
 - `SMSs percentage unsubscribed`
 + Response 200
+
+
+
+
 
 ## Program Message Metrics [/programs/metrics/message/{programId}]
 
 This will retrieve the metrics for an individual program message.
++ Parameters
+    + programId (string,required) ...
 
 ### View Program Metrics[GET]
 - `Total sent`
@@ -702,6 +764,9 @@ This will retrieve the metrics for an individual program message.
 - `SMSs percentage unsubscribed`
 
 + Response 200
+
+
+
 
 
 # Group Consumer
@@ -759,6 +824,10 @@ This will retrieve the metrics for an individual program message.
 
 + Response 200
 
+
+
+
+
 ## Consumer Engagement Campaigns [/consumer/engagement/campaigns/{consumerId}]
  + Parameters
      + consumerId (string, required) ...
@@ -784,6 +853,9 @@ This will retrieve the metrics for an individual program message.
 
 + Response 200
 
+
+
+
 ## Consumer Fields [/consumer/{consumerId}/{fieldId}]
 Allows you to add, read or delete any meta data for a single consumer specified by fieldname
  + Parameters
@@ -807,13 +879,17 @@ Allows you to add, read or delete any meta data for a single consumer specified 
 
 + Response 200
 
+
+
+
+
+
+
 # Group Consumers
 
-Generates a list of consumers by company, brand, campaign or program
+## Consumers Company List [/consumers/company/{companyId}]
 
-## Consumers Company List[/consumers/company/{companyId}]
-
- + Parameters
++ Parameters
      + companyId (string, required) ...
 
 ### View Consumers By Company [GET]
@@ -833,10 +909,14 @@ Generates a list of consumers by company, brand, campaign or program
 
 + Response 200
 
-## Consumers Brand List[/consumers/brand/{brandId}]
 
- + Parameters
-     + brandId (string, required) ...
+
+
+
+## Consumers Brand List [/consumers/brand/{brandId}]
+
++ Parameters
+    + brandId (string, required) ...
 
 ### View Consumers By Brand [GET]
 
@@ -855,10 +935,13 @@ Generates a list of consumers by company, brand, campaign or program
 
 + Response 200
 
-## Consumers Campaign List[/consumers/campaign/{campaignId}]
 
- + Parameters
-     + campaignId (string, required) ...
+
+
+## Consumers Campaign List [/consumers/campaign/{campaignId}]
+
++ Parameters
+    + campaignId (string, required) ...
 
 ### View Consumers By Campaign [GET]
 
@@ -877,10 +960,13 @@ Generates a list of consumers by company, brand, campaign or program
 
 + Response 200
 
-## Consumers Program List[/consumers/program/{programId}]
 
- + Parameters
-     + programId (string, required) ...
+
+
+## Consumers Program List [/consumers/program/{programId}]
+
++ Parameters
+    + programId (string, required) ...
 
 ### View Consumers By Program [GET]
 
