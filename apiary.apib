@@ -60,6 +60,7 @@ Please update field names
 + Response 200
 
 ### Delete Company [DELETE]
+Please update field names
 
 - `Company Id`
 - `Name`
@@ -89,13 +90,25 @@ Please update field names
     + brandId (string, required) ... 
 
 ### Create Brand[POST]
+Please update field names
+
+- `Company Id`
+- `Name`
 + Response 200
 
 ### View Brand[GET]
+Please update field names
+
+- `Company Id`
+- `Name`
 
 + Response 200
 
 ### Delete Brand[DELETE]
+Please update field names
+
+- `Company Id`
+- `Name`
 + Response 200
 
 ## Brand Metrics [/brand/metrics/{brandId}]
@@ -120,6 +133,8 @@ Please update field names
 
 # Group User
 ## User [/user/{userId}]
+
+This is a user of the system (not a subscriber)!
 
 + Parameters 
     + userId (string, required, `1123`) ... User's ID in the DB
@@ -195,6 +210,18 @@ Please update field names
     [User][]
 
 ### Delete User [DELETE]
+Please update field names
+
+- `Company Id`
+- `Brand Id`
+- `First name`
+- `Last name`
+- `Email address`
+- `Mobile`
+- `User company`
+- `Last active`
+- `Country code`
+- `Language code`
 + Response 200
 
 ## User Metrics [/user/metrics/{userId}]
@@ -205,6 +232,20 @@ Please update field names
 Please update field names
 
 - `User Id`
+- `Company Id`
+- `Brand Id`
+- `First name`
+- `Last name`
+- `Email address`
+- `Mobile`
+- `User company`
+- `Last active`
+- `Country code`
+- `language code`
+- `Campaigns created`
+- `Campaigns deleted`
+- `Programs created`
+- `Programs deleted`
 
 + Response 200
 
@@ -215,6 +256,17 @@ Please update field names
 ### Reset Password [POST]
 This will generate a single use password change token. The token should ideally be sent directly to
 the user as part of a confirmation link.
+
++ Response 200
+
+## Change User Password [/user/password-change/]
+
+### Change Password [POST]
+
+Please update field names
+
+- `Token Id`
+- `New Password`
 
 + Response 200
 
@@ -294,24 +346,34 @@ Please update field names
 - `Name`
 - `Description`
 - `Start date & time`
-- `End date & time (optional)`
+- `End date & time` (optional)
 - `Activation channels`
 - `Engagement channels`
-- `SMS message (optional)`
-- `SMS response message (optional)`
-- `SMS opt-out (optional)`
-- `Email Subject line (optional)`
-- `View online text (optional)`
-- `Unsubscribe text (optional)`
-- `Status (optional)`
+- `SMS message` (optional)
+- `SMS response message` (optional)
+- `SMS opt-out`
+- `Email Subject line` (optional)
+- `View online text` (optional)
+- `Unsubscribe text` (optional)
+- `Status` (optional)
 + Response 200
 
 ## Campaign Assests [/campaigns/assets/{campaignId}]
+Please update field names
 
-### View Campaign Assets [GET]
 - `Asset file`. A zip file containing all your email assets, the zip file must contain at least `email.htm`, `unsubscribe.htm` and preferably `email.txt` for the plain text version.
 - Image assets should be packaged in the zip file in the root folder. The `unsubscribe.htm` is a page users will view when unsubscribing, and should contain your corporate identity.
 - Files with the same name will be automatically overwritten.
+
+### View Campaign Assets [POST]
+
++ Response 200
+
+### View Campaign Assets [GET]
+
++ Response 200
+
+### View Campaign Assets [DELETE]
 
 + Response 200
 
@@ -395,17 +457,17 @@ Please update field names
 Please update field names
 
 - `Date of response`
-- `Type of response (email, sms or USSD)`
+- `Type of response` (email, sms or USSD)
 - `Consumer Id`
 - `Response data` (this will include all fields captured for the subscriber
 
 + Response 200
 
 # Group Programs
-## Programs [/programs/{programId}]
-
 + Parameters
     + programId (string,required) ...
+
+## Programs [/programs/{campaignId}]
 
 ### Create a Program [POST]
 
@@ -425,6 +487,402 @@ Please update field names
 
 + Response  200
 
+### View a Program [GET]
+
+Please update field names
+
+- `Program Id`
+- `Company Id`
+- `Brand Id`
+- `Name`
+- `Description`
+- `Start date & time`
+- `End date & time (optional)`
+- `Engagement channels`
+- `SMS opt-out (optional)`
+- `1Cadence field`
+- `1Status (optional)`
+
++ Response  200
+
+### Delete a Program [DELETE]
+
+Please update field names
+
+- `Program Id`
+- `Company Id`
+- `Brand Id`
+- `Name`
+- `Description`
+- `Start date & time`
+- `End date & time (optional)`
+- `Engagement channels`
+- `SMS opt-out (optional)`
+- `1Cadence field`
+- `1Status (optional)`
+
++ Response  200
+
+## Programs Messaging [/programs/message/{programId}]
+
+### Create Programs Message [POST]
+
+Please update fields
+
+- `Message Id`
+- `Program Id`
+- `Message number`
+- `Condition`
+
++ Response 200
+
+### View Programs Message [GET]
+
+Please update fields
+
+- `Message Id`
+- `Program Id`
+- `Message number`
+- `Condition`
+
++ Response 200
+
+### Delete Programs Message [DELETE]
+
+Please update fields
+
+- `Message Id`
+- `Program Id`
+- `Message number`
+- `Condition`
+
++ Response 200
+
+## Programs SMS [/programs/assets/sms/{messageId}]
+This adds a SMS message to a program message
+
+ + Parameters 
+     + messageId (string, required) ... 
+
+### Create Program Message [POST]
+
+- `SMS Message`
++ Response 200
+
+### View Program Message [GET]
+
+- `SMS Message`
++ Response 200
+
+### Delete Program Message [DELETE]
+
+- `SMS Message`
++ Response 200
+
+## Programs Email Assets [/programs/assets/email/{messageId}]
+This adds email assets to a program message
+
+ + Parameters 
+     + messageId (string, required) ... 
+
+### Create Program Email Assets [POST]
+- `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "email.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
++ Response 200
+
+### View Program Email Assets [GET]
+- `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "email.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
++ Response 200
+
+### Delete Program Email Assets [DELETE]
+- `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "email.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
++ Response 200
+
+## Programs Unsubscribe [/programs/unsubscribe/{programId}]
+This adds an unsubscribe email message to a program
+
+ + Parameters 
+     + programId (string, required) ... 
+
+### Unsubscribe from Program Email[POST]
+- `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "unsubscribe.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
++ Response 200
+
+### View Unsubscribe from Program Email [GET]
+- `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "unsubscribe.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
++ Response 200
+
+### Delete Unsubscribe from Program Email [DELETE]
+- `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "unsubscribe.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
++ Response 200
+
+## Programs Subscriber [/programs/subscriber/{programId}]
+This will add or remove a single user to a program. A subscriber will only ever be added to a program once.
+
+ + Parameters 
+     + programId (string, required) ... 
+
+### Subscribe from Program[POST]
+- `Subscriber Id`
++ Response 200
+
+### Delete Subscribe from Program [DELETE]
+- `Subscriber Id`
++ Response 200
+
+## Programs Subscribers [/programs/subscribers/{programId}]
+This will add or remove multiple users to/from a program. A list of all currently assigned users may also be retrieved. A subscriber will only ever be added to a program once.
+
+ + Parameters 
+     + programId (string, required) ... 
+
+### Create Program Subscribers[POST]
+- `Subscriber Id`
++ Response 200
+
+### View Program Subscribers[GET]
+- `Subscriber Id`
++ Response 200
+
+### Delete Program Subscribers[DELETE]
+- `Subscriber Id`
++ Response 200
+
+## Program Metrics [/programs/metrics/{programId}]
+
+This will retrieve the overall metrics for a program
+
+### View Program Metrics[GET]
+
+- `Total sent`
+- `Total bounced`
+- `Total unique opens`
+- `Total clicks`
+- `Total unique clicks`
+- `Total modified`
+- `Total unsubscribed`
+- `Total delivered`
+- `Percentage bounced`
+- `Percentage delivered`
+- `Percentage opened`
+- `Percentage clicked`
+- `Percentage clicked to open`
+- `Percentage modified`
+- `Percentage unsubscribed`
+- `SMSs sent`
+- `SMSs bounced`
+- `SMSs unsubscribed`
+- `SMSs percentage bounced`
+- `SMSs percentage unsubscribed`
++ Response 200
+
+## Program Message Metrics [/programs/metrics/message/{programId}]
+
+This will retrieve the metrics for an individual program message.
+
+### View Program Metrics[GET]
+- `Total sent`
+- `Total bounced`
+- `Total unique opens`
+- `Total clicks`
+- `Total unique clicks`
+- `Total modified`
+- `Total unsubscribed`
+- `Total delivered`
+- `Percentage bounced`
+- `Percentage delivered`
+- `Percentage opened`
+- `Percentage clicked`
+- `Percentage clicked to open`
+- `Percentage modified`
+- `Percentage unsubscribed`
+- `SMSs sent`
+- `SMSs bounced`
+- `SMSs unsubscribed`
+- `SMSs percentage bounced`
+- `SMSs percentage unsubscribed`
+
++ Response 200
+
+
 # Group Consumer
 
+## Consumer [/consumer/{consumerId}]
+
++ Parameters 
+    + consumerId (string, required) ...
+
+### Create a Consumer [POST]
+- `Consumer Id`
+- `First name`
+- `Last name`
+- `Email address`
+- `Mobile`
+- `Gender`
+- `Title`
+- `Date of birth`
+- `Last active`
+- `Country code`
+- `Language code`
+- `Status `
+
++ Response 200
+
+### View a Consumer [GET]
+- `Consumer Id`
+- `First name`
+- `Last name`
+- `Email address`
+- `Mobile`
+- `Gender`
+- `Title`
+- `Date of birth`
+- `Last active`
+- `Country code`
+- `Language code`
+- `Status `
+
++ Response 200
+
+### Delete a Consumer [DELETE]
+- `Consumer Id`
+- `First name`
+- `Last name`
+- `Email address`
+- `Mobile`
+- `Gender`
+- `Title`
+- `Date of birth`
+- `Last active`
+- `Country code`
+- `Language code`
+- `Status `
+
++ Response 200
+
+## Consumer Engagement Campaigns [/consumer/engagement/campaigns/{consumerId}]
+ + Parameters
+     + consumerId (string, required) ...
+
+### Create a Consumer engagement Campaign [POST]
+- `Campaign Id`
+- `Date of engagement`
+- `Unsubscribed`
+
++ Response 200
+
+### View a Consumer engagement Campaign [GET]
+- `Campaign Id`
+- `Date of engagement`
+- `Unsubscribed`
+
++ Response 200
+
+### Delete a Consumer engagement Campaign [DELETE]
+- `Campaign Id`
+- `Date of engagement`
+- `Unsubscribed`
+
++ Response 200
+
+## Consumer Fields [/consumer/{consumerId}/{fieldId}]
+Allows you to add, read or delete any meta data for a single consumer specified by fieldname
+ + Parameters
+     + consumerId (string, required) ...
+
+### Create a Consumer field [POST]
+- `Consumer Id`
+- `Field value`
+
++ Response 200
+
+### View a Consumer field [GET]
+- `Consumer Id`
+- `Field value`
+
++ Response 200
+
+### Delete a Consumer field [DELETE]
+- `Consumer Id`
+- `Field value`
+
++ Response 200
+
 # Group Consumers
+
+Generates a list of consumers by company, brand, campaign or program
+
+## Consumers Company List[/consumers/company/{companyId}]
+
+### View Consumers By Company [GET]
+
+- `Consumer Id`
+- `First name`
+- `Last name`
+- `Email address`
+- `Mobile`
+- `Gender`
+- `Title`
+- `Date of birth`
+- `Last active`
+- `Country code`
+- `Language code`
+- `All existing consumer meta data`
+
++ Response 200
+
+## Consumers Brand List[/consumers/brand/{brandId}]
+
+### View Consumers By Brand [GET]
+
+- `Consumer Id`
+- `First name`
+- `Last name`
+- `Email address`
+- `Mobile`
+- `Gender`
+- `Title`
+- `Date of birth`
+- `Last active`
+- `Country code`
+- `Language code`
+- `All existing consumer meta data`
+
++ Response 200
+
+## Consumers Campaign List[/consumers/campaign/{campaignId}]
+
+### View Consumers By Campaign [GET]
+
+- `Consumer Id`
+- `First name`
+- `Last name`
+- `Email address`
+- `Mobile`
+- `Gender`
+- `Title`
+- `Date of birth`
+- `Last active`
+- `Country code`
+- `Language code`
+- `All existing consumer meta data`
+
++ Response 200
+
+## Consumers Program List[/consumers/program/{programId}]
+
+### View Consumers By Program [GET]
+
+- `Consumer Id`
+- `First name`
+- `Last name`
+- `Email address`
+- `Mobile`
+- `Gender`
+- `Title`
+- `Date of birth`
+- `Last active`
+- `Country code`
+- `Language code`
+- `All existing consumer meta data`
+
++ Response 200
