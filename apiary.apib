@@ -1,19 +1,48 @@
 FORMAT: 1A
 HOST: http://www.google.com
 
-# KC DM
-KCDM API is a ...
+# KC Direct Messaging Platform
+This document describes the API for Kimberley-Clark's *Direct Messaging Platform*.
 
-## HTTP Operations
-Operation | Description
------------- | -------------
-**POST** | Add or Update values or objects
-**GET** | Retrieve values or objects
+## Platform Functionality
+
+It allows the business to segment their database of *consumers*, and create & track new marketing *campaigns* or *programs* aimed at those segments.
+
+Each campaign or program is allocated to a specific *brand*.
+The business can have multiple brands, and brands can have multiple campaigns & programs.
+
+----
+
+The system also allows the business (read: Admin users) to assign *users* to brands.
+
+These users can administrate their assigned brands' campaigns & programs, as well as administrate the database of users, but cannot (should not) be able to segment or edit users that have not been allocated to the user's assigned brand(s).
+
+
+### Campaigns
+
+Campaigns are...
+
+
+### Programs
+
+Programs are...
+
+----
+
+## API Ops & Response
+
+### HTTP Operations
+
+Operation  | ...
+---------  | -----------
+**POST**   | Add or Update values or objects
+**GET**    | Retrieve values or objects
 **DELETE** | Delete objects
 
-## HTTP Response codes
- Code | Description
---------|-----------
+### HTTP Response codes
+
+ Code   | ...
+------- | -----------
 **200** | Ok. Request processed.
 **201** | Created. The object has been created.
 **202** | Request accepted. The request has been accepted for processing, but the processing has not been completed.
@@ -26,28 +55,36 @@ Operation | Description
 **501** | Not Implemented. The server either does not recognise the request method, or it lacks the ability to fulfil the request. 
 **503** | Service Temporarily Unavailable.
 
+----
 
-# NOTES
+# End Points
+
+Please note:
 
 - All IDs (user, company, consumer, brand, etc) will be GUIDs to prevent ID spoofing.
-- Delete functions do not remove data they simply flag an item as deleted so as not to skew metrics and to keep an audit trail.
-
-# API END POINTS
+- Delete functions do not remove data they simply flag (date) an item as deleted so as not to skew metrics and to keep an audit trail.
 
 # Group Login
 
 ## Login [/login]
 
-Log the user into the system
-### Login [POST]
-This resource has the following attributes
+Atempt to log the user into the system
 
-- `Username` The Username of the user
-- `Password` The Password of the user
+### Login [POST]
+This resource has the following attributes:
+
+- `Username`
+- `Password`
+
 + Response 200
 
++ Response 401
+
+
 # Group Company
+
 ## Company [/company/{companyId}]
+
 + Parameters 
     + companyId (string, required) ... The Company ID
 
