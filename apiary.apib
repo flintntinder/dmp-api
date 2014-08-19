@@ -83,7 +83,7 @@ This resource has the following request parameters:
 
 + Request (application/json)
 
-    ```
+    ```json
     {
         "username": "john@example.com",
         "password": "YourPassword",
@@ -93,7 +93,7 @@ This resource has the following request parameters:
 
 + Response 200 (application/hal+json)
 
-    ```
+    ```json
     {
         "_link": {
             "next": {
@@ -124,7 +124,7 @@ It should return 200 if a user session exists, 401 otherwise.
 
 + Response 200 (application/hal+json)
 
-    ```
+    ```json
     {
         "_link": {
             "next": {
@@ -164,7 +164,7 @@ The Token is sent to the user via email, and will probably be a `GET` variable o
 
 + Request
 
-    ```
+    ```json
     {
         "token": "TheToken",
         "password": "NewPassword"
@@ -173,7 +173,7 @@ The Token is sent to the user via email, and will probably be a `GET` variable o
 
 + Response 200 (application/hal+json)
 
-    ```
+    ```json
     {
         "_link": {
             "next": {
@@ -197,7 +197,7 @@ Users are **not** Consumers; Users can log into the platform to manage and updat
 
     + Body
     
-        ```
+        ```json
         {
             "_links": {
                 "self": { "href": "/user/25892e17-80f6-415f-9c65-7395632f0223" },
@@ -272,7 +272,7 @@ This end-point requires the following parameters to be sent:
 
 + Request (application/json)
 
-    ```
+    ```json
     {
         "firstname": "John",
         "lastname": "Smith",
@@ -328,7 +328,7 @@ Deactivate a specific user.
 
 + Response 200 (application/json)
 
-    ```
+    ```json
     {
         "status": "success",
         "message": "User has been deactivated.",
@@ -369,7 +369,7 @@ Send a message to a user.
 
 + Request
 
-    ```
+    ```json
     {
         "title": "Message title",
         "content": "Message content to send to the selected user."
@@ -378,7 +378,7 @@ Send a message to a user.
 
 + Response 200 (application/json)
 
-    ```
+    ```json
     {
         "status": "success",
         "message": "Your message was sent."
@@ -403,7 +403,7 @@ Get all or one specific message that has been sent to a User.
 
 + Response 200 (application/hal+json)
 
-    ```
+    ```json
     {
         "_link": {
             "self": {
@@ -455,7 +455,7 @@ Get all or one specific message that has been sent to a User.
 
     + Body
     
-        ```
+        ```json
         {
             "_links": {
                 "self": { "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa" },
@@ -488,7 +488,7 @@ Only *super* accounts should be able to create new Companies.
 
 + Request
 
-    ```
+    ```json
     {
         "name": "New Company Name"
     }
@@ -496,7 +496,7 @@ Only *super* accounts should be able to create new Companies.
 
 + Response 200 (application/hal+json)
 
-    ```
+    ```json
     {
         "_link": {
             "self": {
@@ -536,7 +536,7 @@ Sets the Company `active` flag to `false`.
 
 + Response 200 (application/json)
 
-    ```
+    ```json
     {
         "status": "success",
         "message": "The Company has been deactivated."
@@ -551,7 +551,7 @@ Sets the Company `active` flag to `false`.
 
     + Body
     
-        ```
+        ```json
         {
             "_links": {
                 "self": { "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa" },
@@ -609,7 +609,7 @@ Sets the Company `active` flag to `false`.
 
     + Body
     
-        ```
+        ```json
         {
             "_links": {
                 "self": { "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e" },
