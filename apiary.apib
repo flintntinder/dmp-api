@@ -504,14 +504,18 @@ Only *super* accounts should be able to create new Companies.
     {
         "_link": {
             "self": {
-                "href": "/company/{guid}"
+                "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
             },
             "next": {
                 "href": "/brand/create"
             }
         },
         "status": "success",
-        "message": "{New Company Name} has been created. You can now add a brand to it!"
+        "message": "New Company Name has been created. You can now add a brand to it!",
+        "company": {
+            "id": "a53e98e4-0197-4513-be6d-49836e406aaa"
+            "name": "New Company Name"
+        }
     }
     ```
 
@@ -520,7 +524,7 @@ Only *super* accounts should be able to create new Companies.
 Get the properties of a certain company.
 
 + Parameters 
-    + guid (required, string) ... The Company GUID
+    + guid (required, string, `a53e98e4-0197-4513-be6d-49836e406aaa`) ... The Company GUID
 
 + Response 200
 
@@ -536,7 +540,7 @@ Only *super* accounts should be able to delete a company.
 Sets the Company `active` flag to `false`.
 
 + Parameters 
-    + guid (required, string) ... The Company GUID
+    + guid (required, string, `a53e98e4-0197-4513-be6d-49836e406aaa`) ... The Company GUID
 
 + Response 200 (application/json)
 
@@ -549,9 +553,11 @@ Sets the Company `active` flag to `false`.
 
 ## Company Metrics [/company/{guid}/metrics/]
 
+**WIP**
+
 + Model (application/hal+json)
 
-    HAL+JSON representation of the Company in the database.
+    HAL+JSON representation of the Company + it's metrics in the database.
 
     + Body
     
@@ -599,7 +605,7 @@ Sets the Company `active` flag to `false`.
 - `Number of active programs`
 
 + Parameters 
-    + guid (required, string) ... The Company GUID
+    + guid (required, string, `a53e98e4-0197-4513-be6d-49836e406aaa`) ... The Company GUID
 
 + Response 200
 
@@ -607,7 +613,7 @@ Sets the Company `active` flag to `false`.
 
 # Group Brand
 
-## Brand [/brand/{BrandID}]
+## Brand [/brand/{guid}]
 
 + Model (application/hal+json)
 
@@ -644,34 +650,161 @@ Only *super*, *admin* & *company* accounts should be able to create a new brand,
 
 Furthermore, *company* accounts should only be able to create brands for their own company.
 
-- `Brand Name`
-- `Company`
+- `Name` (string)
 
++ Request
 
-+ Response 200
+    ```json
+    {
+        "name": "New Brand Name"
+    }
+    ```
+
++ Response 200 (application/hal+json)
+
+    ```json
+    {
+        "_link": {
+            "self": {
+                "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e"
+            },
+            "campaign": {
+                "href": "/campaigns/create"
+            },
+            "program": {
+                "href": "/programs/create"
+            },
+            "company": {
+                "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
+            }
+        },
+        "status": "success",
+        "message": "{New Brand Name} has been created. You can now add create campaigns or programs for it!",
+        "brand": {
+            "id": "e33898de-6302-4756-8f0c-5f6c5218e02e"
+            "name": "New Brand Name"
+        }
+    }
+    ```
 
 
 ### View Brand [GET]
-Please update field names
 
-- `Brand ID`
-- `Name`
+Get the properties of a certain brand.
 
 + Parameters 
-    + BrandID (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The Brand GUID
+    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The Brand GUID
 
 + Response 200
 
-### Delete Brand[DELETE]
-Please update field names
+    [Brand][]
 
-- `Brand ID`
-- `Name`
-+ Response 200
+### Delete Brand [DELETE]
 
-## Brand Metrics [/brand/metrics/{BrandID}]
+This is an administrative task.
+
+Only *super*, *admin* & *company* accounts should be able to delete a brand.
+
+Sets the Brand `active` flag to `false`.
+
 + Parameters 
-    + BrandID (required, string) ... 
+    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The Company GUID
+
++ Response 200 (application/json)
+
+    ```json
+    {
+        "status": "success",
+        "message": "The Brand has been deactivated."
+    }
+    ```
+
+## Brand Metrics [/brand/metrics/{guid}]
+
+**WIP**
+
++ Model (application/hal+json)
+
+    HAL+JSON representation of the Brand + it's metrics in the database.
+
+    + Body
+    
+        ```json
+        {
+            "_links": {
+                "self": {
+                    "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e"
+                },
+                "parent": {
+                    "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
+                }
+            },
+            "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
+            "name": "Huggies",
+            "photo_url": "https:\/\/example.com\/huggies.jpg",
+            "created_at": "2014-04-14T02:15:15Z",
+            "users": [
+                {
+                    "id": "25892e17-80f6-415f-9c65-7395632f0223",
+                    "firstname": "John",
+                    "lastname": "Smith",
+                    "display_name": "John Smith",
+                    "photo_url": "https:\/\/example.com\/john.jpg"
+                },
+                {
+                    "id": "f162f68e-d15e-4a98-b5dc-fc6c578e2867",
+                    "firstname": "Jane",
+                    "lastname": "Doe",
+                    "display_name": "Jane D",
+                    "photo_url": "https:\/\/example.com\/jane.jpg"
+                }
+            ],
+            "subscribers": {
+                "complete": 12879,
+                "incomplete": 235
+            },
+            "campaigns": {
+                "active": [
+                    {
+                        "id": "da517c76-62f7-48ff-ba0a-05ca510b261e",
+                        "name": "Second Campaign",
+                        "subscribers": 879
+                    },
+                    {
+                        "id": "0bee7103-f80a-4393-9758-071e8ea4fc16",
+                        "name": "Third Campaign",
+                        "subscribers": 100
+                    }
+                ],
+                "inactive": [
+                    {
+                        "id": "88637c2d-2fa2-4e3e-8041-9998ccd8519d",
+                        "name": "First Campaign",
+                        "subscribers": 11000
+                    }
+                ]
+            },
+            "programs": {
+                "active": [
+                    {
+                        "id": "59b537de-faf5-4c4c-ab86-5a97db51a970",
+                        "name": "Second Program"
+                    },
+                    {
+                        "id": "c2c1881f-3fdf-4ef0-bad5-b724eed02515",
+                        "name": "Third Program"
+                    }
+                ],
+                "inactive": [
+                    {
+                        "id": "1bbb1547-6879-4b25-a40f-dd2d3f87694f",
+                        "name": "First Program"
+                    }
+                ]
+            },
+            "active": true
+        }
+        ```
 
 ### View Brand Metrics [GET]
 Please update field names
@@ -680,14 +813,17 @@ Please update field names
 - `Name`
 - `Number of users`
 - `Number of subscribers`
-- `Number of incomplete subscribers` This will be calculated as a subscriber that does not have all the prerequisite data fields (see subscriber)
+- `Number of incomplete subscribers` This will be calculated as a consumer that does not have all the prerequisite data fields (see `Consumer`)
 - `Number of active campaigns`
 - `Number of pending campaigns`
 - `Number of complete campaigns`
 - `Number of active programs`
 - `Number of pending programs`
 - `Number of complete programs`
+
 + Response 200
+
+    [Brand Metrics][]
 
 # Group Campaigns
 
@@ -1304,10 +1440,10 @@ Allows you to add, read or delete any meta data for a single consumer specified 
 
 
 
-## Consumers Brand List [/consumers/brand/{brandId}]
+## Consumers Brand List [/consumers/brand/{guid}]
 
 + Parameters
-    + brandId (string, required) ...
+    + guid (string, required, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The Brand GUID
 
 ### View Consumers By Brand [GET]
 
