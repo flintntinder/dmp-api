@@ -1,266 +1,488 @@
 FORMAT: 1A
 HOST: http://www.google.com
 
+
+
+
 # KC Direct Messaging Platform
+
+
+
 
 This document describes the API for Kimberly-Clark's *Direct Messaging Platform*.
 
+
+
+
 ## Platform Functionality
 
+
+
+
 It allows the business to segment their database of *consumers*, and create & track new marketing *campaigns* & *programs* aimed at those segments.
+
+
+
 
 Each campaign or program is allocated to a specific *brand*.
 The business can have multiple brands, and brands can have multiple campaigns & programs.
 
+
+
+
 ----
 
+
+
+
 The system also allows the business (read: Admin users) to assign *users* to brands.
+
+
+
 
 These users can administrate their assigned brands' campaigns & programs, as well as administrate the database of users, but should not be able to segment or edit users that have not been allocated to the user's assigned brand(s).
 
 
+
+
+
+
+
+
 ### Campaigns
+
+
+
 
 Campaigns are short lived communications to and from consumers.
 This can be setup in the following ways:
 
+
+
+
 - **Learn more about the consumer**
-    - Create a campaign where users can SMS a short code and or fill out web forms to tell us a bit more about them.
-    - This feeds the database with consumer details such as name, email, mobile, age, gender, *is a parent?*, marital status, location, *is pregnant?* and expected due date.
-    - Create an entry point to enter a competition or sign up for further communication (perhaps to tie into a program)
+    - Create a campaign where users can SMS a short code and or fill out web forms to tell us a bit more about them.
+    - This feeds the database with consumer details such as name, email, mobile, age, gender, *is a parent?*, marital status, location, *is pregnant?* and expected due date.
+    - Create an entry point to enter a competition or sign up for further communication (perhaps to tie into a program)
 - **Direct communication**
-    - Deploy an email
-    - Deploy an SMS
-    - Deploy both
+    - Deploy an email
+    - Deploy an SMS
+    - Deploy both
 - **Full campaign**
-    - Send out emails and SMS’s to consumers with a call to action driving to a web form
-    - Collect and track information from web form to tie back to consumer profile
+    - Send out emails and SMS’s to consumers with a call to action driving to a web form
+    - Collect and track information from web form to tie back to consumer profile
+
+
+
+
+
+
 
 
 ### Programs
 
+
+
+
 Programs are a series of communications that are distributed at regular intervals over a longer term. For example:
 
+
+
+
 - Post opt-in campaign users might be exposed to.
-    - Huggies Cadence Calendar – unlike a campaign that has a start and end date determined on communication a program works out when the mother that is expecting’s due date.  Thus calculate the nature of email communication required to the pregnancy due date and duly deploying weekly mailers specific to the development of the child.
-    - Kotex Period SMS Reminder – again calculate as to the female cycling in order to trigger an SMS to notify her about a defined time to expect her period.
+    - Huggies Cadence Calendar – unlike a campaign that has a start and end date determined on communication a program works out when the mother that is expecting’s due date.  Thus calculate the nature of email communication required to the pregnancy due date and duly deploying weekly mailers specific to the development of the child.
+    - Kotex Period SMS Reminder – again calculate as to the female cycling in order to trigger an SMS to notify her about a defined time to expect her period.
+
+
+
 
 ----
 
+
+
+
 ## Media Types
+
+
+
 
 Where applicable this API uses the [HAL+JSON](https://github.com/mikekelly/hal_specification/blob/master/hal_specification.md) media-type to represent resources, states and affordances.
 
+
+
+
 ## Response
+
+
+
 
 The common [HTTP Code System](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) should be used as response codes for requests.
 
+
+
+
 ## Notes
+
+
+
 
 - **F+T created the response objects, please adjust as needed.**
 - All IDs (user, company, consumer, brand, etc) will be GUIDs to prevent ID spoofing.
 - **DELETE** functions should not remove data they should **date-flag** an item as deleted so as not to skew metrics and to keep an audit trail.
 
 
+
+
+
+
+
+
 ----
+
+
+
+
+
+
+
+
+
 
 
 
 # Group Auth
 
+
+
+
 **CodeCafê needs to drive this.** Here's what they've given us so far.
+
+
+
 
 ## User Authentication [/account]
 ### Sign In [POST]
 
+
+
+
 Attempt to log the user into the system.
 
+
+
+
 This resource has the following request parameters:
+
+
+
 
 - `username` Registered email address
 - `password` DMP Password
 - `remember` [0, 1] Specifies whether to remember credentials
 
+
+
+
 + Request (application/json)
 
-    ```json
-    {
-        "username": "john@example.com",
-        "password": "YourPassword",
-        "remember": 1
-    }
-    ```
+
+
+
+    ```json
+    {
+        "username": "john@example.com",
+        "password": "YourPassword",
+        "remember": 1
+    }
+    ```
+
+
+
 
 + Response 200 (application/hal+json)
 
-    ```json
-    {
-        "_link": {
-            "next": {
-                "href": "/profile"
-            }
-        },
-        "status": "success",
-        "user": {
-            "id": "25892e17-80f6-415f-9c65-7395632f0223",
-            "firstname": "John",
-            "lastname": "Smith",
-            "display_name": "John Smith",
-            "photo_url": "https:\/\/example.com\/john.jpg"
-        }
-    }
-    ```
+
+
+
+    ```json
+    {
+        "_link": {
+            "next": {
+                "href": "/profile"
+            }
+        },
+        "status": "success",
+        "user": {
+            "id": "25892e17-80f6-415f-9c65-7395632f0223",
+            "firstname": "John",
+            "lastname": "Smith",
+            "display_name": "John Smith",
+            "photo_url": "https:\/\/example.com\/john.jpg"
+        }
+    }
+    ```
+
+
+
 
 + Response 401
+
+
+
+
+
+
 
 
 ### Sign Out [DELETE]
 
+
+
+
 **This end-point was not supplied in the original CodeCafê document, but is required.**
+
+
+
 
 This resource has no parameters, and will delete the current user session and sign the user out of the platform.
 
+
+
+
 It should return 200 if a user session exists, 401 otherwise.
+
+
+
 
 + Response 200 (application/hal+json)
 
-    ```json
-    {
-        "_link": {
-            "next": {
-                "href": "/"
-            }
-        },
-        "status": "success"
-    }
-    ```
+
+
+
+    ```json
+    {
+        "_link": {
+            "next": {
+                "href": "/"
+            }
+        },
+        "status": "success"
+    }
+    ```
+
+
+
 
 + Response 401
+
+
+
+
+
+
+
+
+
 
 
 
 ## Account Password [/account/password/{UserID}]
 
-+ Parameters 
-    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+
+
+
++ Parameters 
+    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+
+
+
 
 ### Reset Password [POST]
+
+
+
 
 This will generate a single use password change token. The token should ideally be sent directly to
 the user as part of a confirmation link.
 
+
+
+
 This should *not* deactivate the account or the current password, and the token should be cleared if the user signs in successfully with the current password.
+
+
+
 
 + Response 200
 
-### Change Account Password  [PUT]
+
+
+
+### Change Account Password  [PUT]
+
+
+
 
 This will change an account's password if the token is a match.
 
+
+
+
 The Token is sent to the user via email, and will probably be a `GET` variable on the 'change password' page.
+
+
+
 
 - `Token`
 - `New Password`
 
+
+
+
 + Request
 
-    ```json
-    {
-        "token": "TheToken",
-        "password": "NewPassword"
-    }
-    ```
+
+
+
+    ```json
+    {
+        "token": "TheToken",
+        "password": "NewPassword"
+    }
+    ```
+
+
+
 
 + Response 200 (application/hal+json)
 
-    ```json
-    {
-        "_link": {
-            "next": {
-                "href": "/"
-            }
-        },
-        "status": "success",
-        "message": "Password successfully changed. You can now sign in with your new password."
-    }
-    ```
+
+
+
+    ```json
+    {
+        "_link": {
+            "next": {
+                "href": "/"
+            }
+        },
+        "status": "success",
+        "message": "Password successfully changed. You can now sign in with your new password."
+    }
+    ```
+
+
+
 
 # Group User Functionality
 
+
+
+
 Users are **not** Consumers; Users can log into the platform to manage and update the platform.
+
+
+
 
 ## User [/user/{UserID}]
 
+
+
+
 + Model (application/hal+json)
 
-    HAL+JSON representation of the User in the database.
 
-    + Body
-    
-        ```json
-        {
-            "_links": {
-                "self": {
-                    "href": "/user/25892e17-80f6-415f-9c65-7395632f0223"
-                }
-            },
-            "id": "25892e17-80f6-415f-9c65-7395632f0223",
-            "firstname": "John",
-            "lastname": "Smith",
-            "display_name": "John Smith",
-            "email": "john@example.com",
-            "mobile": "123456789",
-            "photo_url": "https:\/\/example.com\/john.jpg",
-            "country": {
-                "name": "South Africa",
-                "code": "ZA",
-                "dialcode": "27"
-            },
-            "language": {
-                "name": "English",
-                "code": "en"
-            },
-            "created_at": "2014-04-14T02:15:15Z",
-            "last_active": "2014-04-14T02:15:15Z",
-            "account": {
-                "type": 1,
-                "super": true,
-                "admin": false,
-                "company": false,
-                "agency": false,
-                "active": true
-            },
-            "companies": [
-                {
-                    "id": "a53e98e4-0197-4513-be6d-49836e406aaa",
-                    "name": "Kimberly-Clark"
-                }
-            ],
-            "brands": [
-                {
-                    "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
-                    "name": "Huggies"
-                }
-            ]
-        }
-        ```
-        
-### Create User [POST]
+
+
+    HAL+JSON representation of the User in the database.
+
+
+
+
+    + Body
+    
+        ```json
+        {
+            "_links": {
+                "self": {
+                    "href": "/user/25892e17-80f6-415f-9c65-7395632f0223"
+                }
+            },
+            "id": "25892e17-80f6-415f-9c65-7395632f0223",
+            "firstname": "John",
+            "lastname": "Smith",
+            "display_name": "John Smith",
+            "email": "john@example.com",
+            "mobile": "123456789",
+            "photo_url": "https:\/\/example.com\/john.jpg",
+            "country": {
+                "name": "South Africa",
+                "code": "ZA",
+                "dialcode": "27"
+            },
+            "language": {
+                "name": "English",
+                "code": "en"
+            },
+            "created_at": "2014-04-14T02:15:15Z",
+            "last_active": "2014-04-14T02:15:15Z",
+            "account": {
+                "type": 1,
+                "super": true,
+                "admin": false,
+                "company": false,
+                "agency": false,
+                "active": true
+            },
+            "companies": [
+                {
+                    "id": "a53e98e4-0197-4513-be6d-49836e406aaa",
+                    "name": "Kimberly-Clark"
+                }
+            ],
+            "brands": [
+                {
+                    "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
+                    "name": "Huggies"
+                }
+            ]
+        }
+        ```
+        
+### Create a User [POST]
+
+
+
 
 This is an administrative function.
 
+
+
+
 Only *super*, *admin*, and *company* account types should be able to create new users, and only for account types lower in heirarchy than themselves.
+
+
+
 
 Account type | Number
 ------------ | ------
-**Super**    | 1
-**Admin**    | 2
-**Company**  | 3
-**Agency**   | 4
+**Super**    | 1
+**Admin**    | 2
+**Company**  | 3
+**Agency**   | 4
+
+
+
 
 401 should be returned if an attempt is made to create a user by an unauthorized account.
 
+
+
+
 This end-point requires the following parameters to be sent:
+
+
+
 
 - `firstname` (string)
 - `lastname` (string)
@@ -272,329 +494,566 @@ This end-point requires the following parameters to be sent:
 - `companies` (array of strings)
 - `brands` (array of strings)
 
+
+
+
 + Request (application/json)
 
-    ```json
-    {
-        "firstname": "John",
-        "lastname": "Smith",
-        "email": "john@example.com",
-        "mobile": "123456789",
-        "account": 1,
-        "country": {
-            "name": "South Africa",
-            "code": "ZA",
-            "dialcode": "27"
-        },
-        "language": {
-            "name": "English",
-            "code": "en"
-        },
-        "companies": ["a53e98e4-0197-4513-be6d-49836e406aaa"],
-        "brands": ["e33898de-6302-4756-8f0c-5f6c5218e02e"]
-    }
-    ```
+
+
+
+    ```json
+    {
+        "firstname": "John",
+        "lastname": "Smith",
+        "email": "john@example.com",
+        "mobile": "123456789",
+        "account": 1,
+        "country": {
+            "name": "South Africa",
+            "code": "ZA",
+            "dialcode": "27"
+        },
+        "language": {
+            "name": "English",
+            "code": "en"
+        },
+        "companies": ["a53e98e4-0197-4513-be6d-49836e406aaa"],
+        "brands": ["e33898de-6302-4756-8f0c-5f6c5218e02e"]
+    }
+    ```
+
+
+
 
 + Response 200 (application/hal+json)
 
-    [User][]
+
+
+
+    [User][]
+
+
+
 
 + Response 401
 
 
-### View User [GET]
+
+
+
+
+
+
+### View a User [GET]
+
+
+
 
 This is an administrative function.
+
+
+
 
 Only *super*, *admin*, and *company* account types should be able to view users, and only for account types lower in heirarchy than themselves.
 
+
+
+
 Get a specific User's details.
 
-+ Parameters 
-    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+
+
+
++ Parameters 
+    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+
+
+
 
 + Response 200
 
-    [User][]
 
-### Remove User [DELETE]
+
+
+    [User][]
+
+
+
+
+### Remove a User [DELETE]
+
+
+
 
 This is an administrative function.
 
+
+
+
 Only *super*, *admin*, and *company* account types should be able to remove users, and only for account types lower in heirarchy than themselves.
+
+
+
 
 Deactivate a specific user.
 
-+ Parameters 
-    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+
+
+
++ Parameters 
+    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+
+
+
 
 + Response 200 (application/json)
 
-    ```json
-    {
-        "status": "success",
-        "message": "User has been deactivated.",
-        "user": {
-            "firstname": "John",
-            "lastname": "Smith",
-            "display_name": "John Smith",
-            "photo_url": "https:\/\/example.com\/john.jpg"
-        }
-    }
-    ```
+
+
+
+    ```json
+    {
+        "status": "success",
+        "message": "User has been deactivated.",
+        "user": {
+            "firstname": "John",
+            "lastname": "Smith",
+            "display_name": "John Smith",
+            "photo_url": "https:\/\/example.com\/john.jpg"
+        }
+    }
+    ```
+
+
+
 
 ## User Metrics [/user/metrics/{UserID}]
 
+
+
+
 **NOTE [WL]**
+
+
+
 
 Not sure what metrics we'll need to capture per User. Need some more information here, please clarify.
 
-+ Parameters 
-    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+
+
+
++ Parameters 
+    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+
+
+
 
 ### Show User Metrics [GET]
 
+
+
+
 + Response 200
+
+
+
 
 # Group Messaging
 
+
+
+
 ## Send Message [/user/message/{UserID}]
-+ Parameters 
-    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
++ Parameters 
+    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+
+
+
 
 ### Send a message [POST]
 
+
+
+
 Send a message to a user.
+
+
+
 
 - `title`
 - `content`
 
+
+
+
 + Request
 
-    ```json
-    {
-        "title": "Message title",
-        "content": "Message content to send to the selected user."
-    }
-    ```
+
+
+
+    ```json
+    {
+        "title": "Message title",
+        "content": "Message content to send to the selected user."
+    }
+    ```
+
+
+
 
 + Response 200 (application/json)
 
-    ```json
-    {
-        "status": "success",
-        "message": "Your message was sent."
-    }
-    ```
+
+
+
+    ```json
+    {
+        "status": "success",
+        "message": "Your message was sent."
+    }
+    ```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 ## Get Message [/user/{UserID}/messages{?id}{&page}]
 
+
+
+
 Get all or one specific message that has been sent to a User.
+
+
+
 
 **We need to work out paging** - the below is probably not correct.
 
-+ Parameters 
-    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
-    + id (optional, string, `11cdd494-de5b-460e-9ddf-4e84bad6f596`) ... Message's GUID
-    + page (optional, string, `1`) ... Page number
+
+
+
++ Parameters 
+    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+    + id (optional, string, `11cdd494-de5b-460e-9ddf-4e84bad6f596`) ... Message's GUID
+    + page (optional, string, `1`) ... Page number
+
+
+
 
 ### Get Messages [GET]
 
+
+
+
 + Response 200 (application/hal+json)
 
-    ```json
-    {
-        "_link": {
-            "self": {
-                "href": "/user/{UserID}/messages?MessageID={MessageID}"
-            },
-            "next": {
-                "href": "/user/{UserID}/messages?MessageID={NextMessageID}"
-            },
-            "previous": {
-                "href": "/user/{UserID}/messages?MessageID={PreviousMessageID}"
-            }
-        },
-        "_paging": {
-            "next": {
-                "href": "/user/{UserID}/messages?page={page+1}"
-            },
-            "previous": {
-                "href": "/user/{UserID}/messages?page={page-1}"
-            }
-        },
-        "messages": [
-            {
-                "author": {
-                    "id": "deb17e15-d47c-449f-b1b0-4d55247d153f",
-                    "display_name": "Jane Doe",
-                    "photo_url": "https:\/\/example.com\/jane.jpg"
-                },
-                "title": "Message title",
-                "content": "Message content that was sent to user.",
-                "sent": "2014-04-14T02:15:15Z",
-                "opened": "2014-04-14T02:20:15Z",
-                "deleted": false
-            }
-        ],
-        "total": 1,
-        "current_page": 1,
-        "total_pages": 1
-    }
-    ```
+
+
+
+    ```json
+    {
+        "_link": {
+            "self": {
+                "href": "/user/{UserID}/messages?MessageID={MessageID}"
+            },
+            "next": {
+                "href": "/user/{UserID}/messages?MessageID={NextMessageID}"
+            },
+            "previous": {
+                "href": "/user/{UserID}/messages?MessageID={PreviousMessageID}"
+            }
+        },
+        "_paging": {
+            "next": {
+                "href": "/user/{UserID}/messages?page={page+1}"
+            },
+            "previous": {
+                "href": "/user/{UserID}/messages?page={page-1}"
+            }
+        },
+        "messages": [
+            {
+                "author": {
+                    "id": "deb17e15-d47c-449f-b1b0-4d55247d153f",
+                    "display_name": "Jane Doe",
+                    "photo_url": "https:\/\/example.com\/jane.jpg"
+                },
+                "title": "Message title",
+                "content": "Message content that was sent to user.",
+                "sent": "2014-04-14T02:15:15Z",
+                "opened": "2014-04-14T02:20:15Z",
+                "deleted": false
+            }
+        ],
+        "total": 1,
+        "current_page": 1,
+        "total_pages": 1
+    }
+    ```
+
+
+
+
+
+
 
 
 # Group Company
 
+
+
+
 ## Company [/company/{guid}]
+
+
+
 
 + Model (application/hal+json)
 
-    HAL+JSON representation of the Company in the database.
 
-    + Body
-    
-        ```json
-        {
-            "_links": {
-                "self": {
-                    "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
-                }
-            },
-            "id": "a53e98e4-0197-4513-be6d-49836e406aaa",
-            "name": "Kimberly-Clark",
-            "photo_url": "https:\/\/example.com\/kc.jpg",
-            "created_at": "2014-04-14T02:15:15Z",
-            "brands": [
-                {
-                    "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
-                    "name": "First Brand"
-                },
-                {
-                    "id": "8c3df7e7-bae8-4772-bb49-9629254f6198",
-                    "name": "Second Brand"
-                }
-            ],
-            "active": true
-        }
-        ```
+
+
+    HAL+JSON representation of the Company in the database.
+
+
+
+
+    + Body
+    
+        ```json
+        {
+            "_links": {
+                "self": {
+                    "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
+                }
+            },
+            "id": "a53e98e4-0197-4513-be6d-49836e406aaa",
+            "name": "Kimberly-Clark",
+            "photo_url": "https:\/\/example.com\/kc.jpg",
+            "created_at": "2014-04-14T02:15:15Z",
+            "brands": [
+                {
+                    "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
+                    "name": "First Brand"
+                },
+                {
+                    "id": "8c3df7e7-bae8-4772-bb49-9629254f6198",
+                    "name": "Second Brand"
+                }
+            ],
+            "active": true
+        }
+        ```
+
+
+
 
 ### Create a Company [POST]
 
+
+
+
 This is an administrative function.
+
+
+
 
 Only *super* accounts should be able to create new Companies.
 
+
+
+
 - `Name` (string)
+
+
+
 
 + Request
 
-    ```json
-    {
-        "name": "New Company Name"
-    }
-    ```
+
+
+
+    ```json
+    {
+        "name": "New Company Name"
+    }
+    ```
+
+
+
 
 + Response 200 (application/hal+json)
 
-    ```json
-    {
-        "_link": {
-            "self": {
-                "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
-            },
-            "next": {
-                "href": "/brand/create"
-            }
-        },
-        "status": "success",
-        "message": "New Company Name has been created. You can now add a brand to it!",
-        "company": {
-            "id": "a53e98e4-0197-4513-be6d-49836e406aaa"
-            "name": "New Company Name"
-        }
-    }
-    ```
+
+
+
+    ```json
+    {
+        "_link": {
+            "self": {
+                "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
+            },
+            "next": {
+                "href": "/brand/create"
+            }
+        },
+        "status": "success",
+        "message": "New Company Name has been created. You can now add a brand to it!",
+        "company": {
+            "id": "a53e98e4-0197-4513-be6d-49836e406aaa"
+            "name": "New Company Name"
+        }
+    }
+    ```
+
+
+
 
 ### View a Company [GET]
 
+
+
+
 Get the properties of a certain company.
 
-+ Parameters 
-    + guid (required, string, `a53e98e4-0197-4513-be6d-49836e406aaa`) ... The Company GUID
+
+
+
++ Parameters 
+    + guid (required, string, `a53e98e4-0197-4513-be6d-49836e406aaa`) ... The Company GUID
+
+
+
 
 + Response 200
 
-    [Company][]
+
+
+
+    [Company][]
+
+
+
+
+
+
 
 
 ### Delete Company [DELETE]
 
+
+
+
 This is an administrative task.
+
+
+
 
 Only *super* accounts should be able to delete a company.
 
+
+
+
 Sets the Company `active` flag to `false`.
 
-+ Parameters 
-    + guid (required, string, `a53e98e4-0197-4513-be6d-49836e406aaa`) ... The Company GUID
+
+
+
++ Parameters 
+    + guid (required, string, `a53e98e4-0197-4513-be6d-49836e406aaa`) ... The Company GUID
+
+
+
 
 + Response 200 (application/json)
 
-    ```json
-    {
-        "status": "success",
-        "message": "The Company has been deactivated."
-    }
-    ```
+
+
+
+    ```json
+    {
+        "status": "success",
+        "message": "The Company has been deactivated."
+    }
+    ```
+
+
+
 
 ## Company Metrics [/company/{guid}/metrics/]
 
+
+
+
 **WIP**
+
+
+
 
 + Model (application/hal+json)
 
-    HAL+JSON representation of the Company + it's metrics in the database.
 
-    + Body
-    
-        ```json
-        {
-            "_links": {
-                "self": {
-                    "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
-                }
-            },
-            "id": "a53e98e4-0197-4513-be6d-49836e406aaa",
-            "name": "Kimberly-Clark",
-            "photo_url": "https:\/\/example.com\/kc.jpg",
-            "created_at": "2014-04-14T02:15:15Z",
-            "brands": [
-                {
-                    "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
-                    "name": "First Brand",
-                    "users": 3,
-                    "subscribers": 12879,
-                    "campaigns": 23,
-                    "programs": 7
-                },
-                {
-                    "id": "8c3df7e7-bae8-4772-bb49-9629254f6198",
-                    "name": "Second Brand",
-                    "users": 5,
-                    "subscribers": 483628,
-                    "campaigns": 75,
-                    "programs": 15
-                }
-            ],
-            "active": true
-        }
-        ```
+
+
+    HAL+JSON representation of the Company + it's metrics in the database.
+
+
+
+
+    + Body
+    
+        ```json
+        {
+            "_links": {
+                "self": {
+                    "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
+                }
+            },
+            "id": "a53e98e4-0197-4513-be6d-49836e406aaa",
+            "name": "Kimberly-Clark",
+            "photo_url": "https:\/\/example.com\/kc.jpg",
+            "created_at": "2014-04-14T02:15:15Z",
+            "brands": [
+                {
+                    "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
+                    "name": "First Brand",
+                    "users": 3,
+                    "subscribers": 12879,
+                    "campaigns": 23,
+                    "programs": 7
+                },
+                {
+                    "id": "8c3df7e7-bae8-4772-bb49-9629254f6198",
+                    "name": "Second Brand",
+                    "users": 5,
+                    "subscribers": 483628,
+                    "campaigns": 75,
+                    "programs": 15
+                }
+            ],
+            "active": true
+        }
+        ```
+
+
+
 
 ### View Company Metrics [GET]
+
+
+
 
 - `Company ID`
 - `Name`
@@ -604,210 +1063,321 @@ Sets the Company `active` flag to `false`.
 - `Number of active campaigns`
 - `Number of active programs`
 
-+ Parameters 
-    + guid (required, string, `a53e98e4-0197-4513-be6d-49836e406aaa`) ... The Company GUID
+
+
+
++ Parameters 
+    + guid (required, string, `a53e98e4-0197-4513-be6d-49836e406aaa`) ... The Company GUID
+
+
+
 
 + Response 200
 
-    [Company Metrics][]
+
+
+
+    [Company Metrics][]
+
+
+
 
 # Group Brand
 
+
+
+
 ## Brand [/brand/{guid}]
+
+
+
 
 + Model (application/hal+json)
 
-    HAL+JSON representation of a Brand in the database.
 
-    + Body
-    
-        ```json
-        {
-            "_links": {
-                "self": {
-                    "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e"
-                }
-            },
-            "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
-            "name": "Huggies",
-            "photo_url": "https:\/\/example.com\/huggies.jpg",
-            "created_at": "2014-04-14T02:15:15Z",
-            "companies": [
-                {
-                    "id": "a53e98e4-0197-4513-be6d-49836e406aaa",
-                    "name": "Kimberly-Clark"
-                }
-            ],
-            "active": true
-        }
-        ```
+
+
+    HAL+JSON representation of a Brand in the database.
+
+
+
+
+    + Body
+    
+        ```json
+        {
+            "_links": {
+                "self": {
+                    "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e"
+                }
+            },
+            "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
+            "name": "Huggies",
+            "photo_url": "https:\/\/example.com\/huggies.jpg",
+            "created_at": "2014-04-14T02:15:15Z",
+            "companies": [
+                {
+                    "id": "a53e98e4-0197-4513-be6d-49836e406aaa",
+                    "name": "Kimberly-Clark"
+                }
+            ],
+            "active": true
+        }
+        ```
+
+
+
 
 ### Create Brand [POST]
 
+
+
+
 This is an administrative task.
+
+
+
 
 Only *super*, *admin* & *company* accounts should be able to create a new brand, and assign it to a company.
 
+
+
+
 Furthermore, *company* accounts should only be able to create brands for their own company.
+
+
+
 
 - `Name` (string)
 
+
+
+
 + Request
 
-    ```json
-    {
-        "name": "New Brand Name"
-    }
-    ```
+
+
+
+    ```json
+    {
+        "name": "New Brand Name"
+    }
+    ```
+
+
+
 
 + Response 200 (application/hal+json)
 
-    ```json
-    {
-        "_link": {
-            "self": {
-                "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e"
-            },
-            "campaign": {
-                "href": "/campaigns/create"
-            },
-            "program": {
-                "href": "/programs/create"
-            },
-            "company": {
-                "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
-            }
-        },
-        "status": "success",
-        "message": "{New Brand Name} has been created. You can now add create campaigns or programs for it!",
-        "brand": {
-            "id": "e33898de-6302-4756-8f0c-5f6c5218e02e"
-            "name": "New Brand Name"
-        }
-    }
-    ```
+
+
+
+    ```json
+    {
+        "_link": {
+            "self": {
+                "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e"
+            },
+            "campaign": {
+                "href": "/campaigns/create"
+            },
+            "program": {
+                "href": "/programs/create"
+            },
+            "company": {
+                "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
+            }
+        },
+        "status": "success",
+        "message": "{New Brand Name} has been created. You can now add create campaigns or programs for it!",
+        "brand": {
+            "id": "e33898de-6302-4756-8f0c-5f6c5218e02e"
+            "name": "New Brand Name"
+        }
+    }
+    ```
+
+
+
+
+
+
 
 
 ### View Brand [GET]
 
+
+
+
 Get the properties of a certain brand.
 
-+ Parameters 
-    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The Brand GUID
+
+
+
++ Parameters 
+    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The Brand GUID
+
+
+
 
 + Response 200
 
-    [Brand][]
+
+
+
+    [Brand][]
+
+
+
 
 ### Delete Brand [DELETE]
 
+
+
+
 This is an administrative task.
+
+
+
 
 Only *super*, *admin* & *company* accounts should be able to delete a brand.
 
+
+
+
 Sets the Brand `active` flag to `false`.
 
-+ Parameters 
-    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The Company GUID
+
+
+
++ Parameters 
+    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The Company GUID
+
+
+
 
 + Response 200 (application/json)
 
-    ```json
-    {
-        "status": "success",
-        "message": "The Brand has been deactivated."
-    }
-    ```
+
+
+
+    ```json
+    {
+        "status": "success",
+        "message": "The Brand has been deactivated."
+    }
+    ```
+
+
+
 
 ## Brand Metrics [/brand/metrics/{guid}]
 
+
+
+
 **WIP**
+
+
+
 
 + Model (application/hal+json)
 
-    HAL+JSON representation of the Brand + it's metrics in the database.
 
-    + Body
-    
-        ```json
-        {
-            "_links": {
-                "self": {
-                    "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e"
-                },
-                "parent": {
-                    "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
-                }
-            },
-            "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
-            "name": "Huggies",
-            "photo_url": "https:\/\/example.com\/huggies.jpg",
-            "created_at": "2014-04-14T02:15:15Z",
-            "users": [
-                {
-                    "id": "25892e17-80f6-415f-9c65-7395632f0223",
-                    "firstname": "John",
-                    "lastname": "Smith",
-                    "display_name": "John Smith",
-                    "photo_url": "https:\/\/example.com\/john.jpg"
-                },
-                {
-                    "id": "f162f68e-d15e-4a98-b5dc-fc6c578e2867",
-                    "firstname": "Jane",
-                    "lastname": "Doe",
-                    "display_name": "Jane D",
-                    "photo_url": "https:\/\/example.com\/jane.jpg"
-                }
-            ],
-            "subscribers": {
-                "complete": 12879,
-                "incomplete": 235
-            },
-            "campaigns": {
-                "active": [
-                    {
-                        "id": "da517c76-62f7-48ff-ba0a-05ca510b261e",
-                        "name": "Second Campaign",
-                        "subscribers": 879
-                    },
-                    {
-                        "id": "0bee7103-f80a-4393-9758-071e8ea4fc16",
-                        "name": "Third Campaign",
-                        "subscribers": 100
-                    }
-                ],
-                "inactive": [
-                    {
-                        "id": "88637c2d-2fa2-4e3e-8041-9998ccd8519d",
-                        "name": "First Campaign",
-                        "subscribers": 11000
-                    }
-                ]
-            },
-            "programs": {
-                "active": [
-                    {
-                        "id": "59b537de-faf5-4c4c-ab86-5a97db51a970",
-                        "name": "Second Program"
-                    },
-                    {
-                        "id": "c2c1881f-3fdf-4ef0-bad5-b724eed02515",
-                        "name": "Third Program"
-                    }
-                ],
-                "inactive": [
-                    {
-                        "id": "1bbb1547-6879-4b25-a40f-dd2d3f87694f",
-                        "name": "First Program"
-                    }
-                ]
-            },
-            "active": true
-        }
-        ```
+
+
+    HAL+JSON representation of the Brand + it's metrics in the database.
+
+
+
+
+    + Body
+    
+        ```json
+        {
+            "_links": {
+                "self": {
+                    "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e"
+                },
+                "parent": {
+                    "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
+                }
+            },
+            "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
+            "name": "Huggies",
+            "photo_url": "https:\/\/example.com\/huggies.jpg",
+            "created_at": "2014-04-14T02:15:15Z",
+            "users": [
+                {
+                    "id": "25892e17-80f6-415f-9c65-7395632f0223",
+                    "firstname": "John",
+                    "lastname": "Smith",
+                    "display_name": "John Smith",
+                    "photo_url": "https:\/\/example.com\/john.jpg"
+                },
+                {
+                    "id": "f162f68e-d15e-4a98-b5dc-fc6c578e2867",
+                    "firstname": "Jane",
+                    "lastname": "Doe",
+                    "display_name": "Jane D",
+                    "photo_url": "https:\/\/example.com\/jane.jpg"
+                }
+            ],
+            "subscribers": {
+                "complete": 12879,
+                "incomplete": 235
+            },
+            "campaigns": {
+                "active": [
+                    {
+                        "id": "da517c76-62f7-48ff-ba0a-05ca510b261e",
+                        "name": "Second Campaign",
+                        "subscribers": 879
+                    },
+                    {
+                        "id": "0bee7103-f80a-4393-9758-071e8ea4fc16",
+                        "name": "Third Campaign",
+                        "subscribers": 100
+                    }
+                ],
+                "inactive": [
+                    {
+                        "id": "88637c2d-2fa2-4e3e-8041-9998ccd8519d",
+                        "name": "First Campaign",
+                        "subscribers": 11000
+                    }
+                ]
+            },
+            "programs": {
+                "active": [
+                    {
+                        "id": "59b537de-faf5-4c4c-ab86-5a97db51a970",
+                        "name": "Second Program"
+                    },
+                    {
+                        "id": "c2c1881f-3fdf-4ef0-bad5-b724eed02515",
+                        "name": "Third Program"
+                    }
+                ],
+                "inactive": [
+                    {
+                        "id": "1bbb1547-6879-4b25-a40f-dd2d3f87694f",
+                        "name": "First Program"
+                    }
+                ]
+            },
+            "active": true
+        }
+        ```
+
+
+
 
 ### View Brand Metrics [GET]
 Please update field names
+
+
+
 
 - `Brand ID`
 - `Name`
@@ -821,19 +1391,110 @@ Please update field names
 - `Number of pending programs`
 - `Number of complete programs`
 
+
+
+
 + Response 200
 
-    [Brand Metrics][]
+
+
+
+    [Brand Metrics][]
+
+
+
 
 # Group Campaigns
 
-## Campaign [/campaigns/{campaignID}]
-+ Parameters 
-    + campaignID (required, string) ... 
+
+
+
+## Campaign [/campaigns/{guid}]
+
+
+
+
+**WIP - INCOMPLETE**
+
+
+
+
++ Model (application/hal+json)
+
+
+
+
+    HAL+JSON representation of a Campaign in the database.
+
+
+
+
+    + Body
+    
+        ```json
+        {
+            "_links": {
+                "self": {
+                    "href": "/campaign/da517c76-62f7-48ff-ba0a-05ca510b261e"
+                },
+                "segment": {
+                    "href": "/segment/da517c76-62f7-48ff-ba0a-05ca510b261e",
+                    "description": "A quick-link to view the database segment for this campaign."
+                }
+            },
+            "id": "da517c76-62f7-48ff-ba0a-05ca510b261e",
+            "name": "Campaign Name",
+            "description": "A description about this specific campaign.",
+            "photo_url": "https:\/\/example.com\/campaignthumb.jpg",
+            "created_at": "2014-04-14T02:15:15Z",
+            "start_date": "2014-04-16T08:00:00Z",
+            "end_date": "2015-01-12T16:00:00Z",
+            "active": true,
+            "archived": false,
+            "status": "[pending, checked, approved, paused, archived]",
+            "companies": [
+                {
+                    "id": "a53e98e4-0197-4513-be6d-49836e406aaa",
+                    "name": "Kimberly-Clark"
+                }
+            ],
+            "brands": [
+                {
+                    "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
+                    "name": "Huggies"
+                }
+            ],
+            "channels": {
+                "activation": {
+                    "sms": {
+
+
+
+
+                    },
+                    "email": true
+                },
+                "engagement": {
+                    "smsshortcode": false,
+                    "webform": true
+                }
+            },
+            "segment_rules": "< A JSON OBJECT ARRAY OF THE SEGMENTATION METRICS - STORED AS A STRING >",
+        }
+        ```
+
+
+
 
 ### Create Campaign [POST]
 
+
+
+
 Please update field names
+
+
+
 
 - `Campaign ID`
 - `Company ID`
@@ -852,11 +1513,18 @@ Please update field names
 - `Unsubscribe text` (optional)
 - `Status` (optional)
 
+
+
+
 + Response 200
+
+
+
 
 ### View Campaign [GET]
 
-Please update field names
+
+
 
 - `Campaign ID`
 - `Company ID`
@@ -874,11 +1542,30 @@ Please update field names
 - `View online text` (optional)
 - `Unsubscribe text` (optional)
 - `Status` (optional)
+
+
+
+
++ Parameters 
+    + guid (required, string, `da517c76-62f7-48ff-ba0a-05ca510b261e`) ... Campaign GUID
+
+
+
+
 + Response 200
+
+
+
 
 ### Delete Campaign [DELETE]
 
+
+
+
 Please update field names
+
+
+
 
 - `Campaign ID`
 - `Company ID`
@@ -898,87 +1585,237 @@ Please update field names
 - `Status` (optional)
 + Response 200
 
-## Campaign Assests [/campaigns/assets/{campaignID}]
+
+
+
+## Campaign Assests [/campaigns/assets/{guid}]
+
+
+
 
 Please update field names
 
+
+
+
 - `Asset file`. A zip file containing all your email assets, the zip file must contain at least `email.htm`, `unsubscribe.htm` and preferably `email.txt` for the plain text version.
-- Image assets should be packaged in the zip file in the root folder. The `unsubscribe.htm` is a page users will view when unsubscribing, and should contain your corporate IDentity.
+- Image assets should be packaged in the zip file in the root folder. The `unsubscribe.htm` is a page users will view when unsubscribing, and should contain your corporate identity.
 - Files with the same name will be automatically overwritten.
 
-+ Parameters 
-    + campaignID (required, string) ... 
+
+
+
++ Parameters 
+    + guid (required, string) ... 
+
+
+
+
+
+
 
 
 ### View Campaign Assets [POST]
 
+
+
+
 + Response 200
+
+
+
 
 ### View Campaign Assets [GET]
 
+
+
+
 + Response 200
+
+
+
 
 ### View Campaign Assets [DELETE]
 
+
+
+
 + Response 200
 
-## Campaign Subscriber [/campaigns/subscriber/{campaignID}]
-+ Parameters 
-    + campaignID (required, string) ... 
+
+
+
+## Campaign Subscriber [/campaigns/subscriber/{guid}]
++ Parameters 
+    + guid (required, string) ... 
+
+
+
 
 ### Create Campaign Subscriber [POST]
 
+
+
+
 Please update field names
+
+
+
 
 - `Subscriber ID`
 
+
+
+
 + Response 200
+
+
+
 
 ### Delete Campaign Subscriber [DELETE]
 
+
+
+
 Please update field names
+
+
+
 
 - `Subscriber ID`
 + Response 200
 
-## Campaign Subscribers [/campaigns/subscribers/{campaignID}]
+
+
+
+## Campaign Subscribers [/campaigns/subscribers/{guid}]
+
+
+
 
 This will add or remove multiple users to/from a campaign. A list of all currently assigned users may
 also be retrieved. A subscriber will only ever be added to a campaign once.
 
-+ Parameters 
-    + campaignID (required, string) ... 
+
+
+
++ Parameters 
+    + guid (required, string) ... 
+
+
+
+
+
+
 
 
 ### Create Campaign Subscribers [POST]
 
+
+
+
 Please update field names
+
+
+
 
 - `Subscriber ID`
 
+
+
+
 + Response 200
+
+
+
 
 ### View Campaign Subscribers [GET]
 
+
+
+
 Please update field names
+
+
+
 
 - `Subscriber ID`
 + Response 200
+
+
+
 
 ### Delete Campaign Subscribers [DELETE]
 
+
+
+
 Please update field names
+
+
+
 
 - `Subscriber ID`
 + Response 200
 
-## Campaign Metrics [/campaigns/metrics/{campaignID}]
-+ Parameters 
-    + campaignID (required, string) ... 
+
+
+
+## Campaign Responses [/campaigns/responses/{guid}]
+This will return the current metrics for a campaign.
+
+
+
+
+
+
+
+
++ Parameters
+    + guid (string,required) ...
+
+
+
+
+### View Campaign Responses [GET]
+
+
+
+
+Please update field names
+
+
+
+
+- `Date of response`
+- `Type of response` (email, sms or USSD)
+- `Consumer ID`
+- `Response data` (this will include all fields captured for the subscriber
+
+
+
+
++ Response 200
+
+
+
+
+## Campaign Metrics [/campaigns/metrics/{guid}]
++ Parameters 
+    + guid (required, string) ... 
+
+
+
 
 ### View Campaign Metrics [GET]
 
+
+
+
 Please update field names
+
+
+
 
 - `Total sent`
 - `Total bounced`
@@ -1001,36 +1838,39 @@ Please update field names
 - `SMSs percentage bounced`
 - `SMSs percentage unsubscribed`
 
-+ Response 200
-
-## Campaign Responses [/campaigns/responses/{campaignID}]
-This will return the current metrics for a campaign.
 
 
-+ Parameters
-    + campaignID (string,required) ...
-
-### View Campaign Responses [GET]
-
-Please update field names
-
-- `Date of response`
-- `Type of response` (email, sms or USSD)
-- `Consumer ID`
-- `Response data` (this will include all fields captured for the subscriber
 
 + Response 200
+
+
+
 
 # Group Programs
 
+
+
+
 ## Programs [/programs/{programID}]
 
+
+
+
 + Parameters
-    + programID (string,required) ...
+    + programID (string,required) ...
+
+
+
 
 ### Create a Program [POST]
 
+
+
+
 Please update field names
+
+
+
 
 - `Program ID`
 - `Company ID`
@@ -1044,11 +1884,23 @@ Please update field names
 - `1Cadence field`
 - `1Status (optional)`
 
-+ Response  200
+
+
+
++ Response  200
+
+
+
 
 ### View a Program [GET]
 
+
+
+
 Please update field names
+
+
+
 
 - `Program ID`
 - `Company ID`
@@ -1062,11 +1914,23 @@ Please update field names
 - `1Cadence field`
 - `1Status (optional)`
 
-+ Response  200
+
+
+
++ Response  200
+
+
+
 
 ### Delete a Program [DELETE]
 
+
+
+
 Please update field names
+
+
+
 
 - `Program ID`
 - `Company ID`
@@ -1080,45 +1944,102 @@ Please update field names
 - `1Cadence field`
 - `1Status (optional)`
 
-+ Response  200
+
+
+
++ Response  200
+
+
+
 
 ## Programs Messaging [/programs/message/{programID}]
 
+
+
+
 + Parameters
-    + programID (string,required) ...
+    + programID (string,required) ...
+
+
+
 
 ### Create Programs Message [POST]
 
+
+
+
 Please update fields
+
+
+
 
 - `Message ID`
 - `Program ID`
 - `Message number`
 - `Condition`
 
+
+
+
 + Response 200
+
+
+
 
 ### View Programs Message [GET]
 
+
+
+
 Please update fields
+
+
+
 
 - `Message ID`
 - `Program ID`
 - `Message number`
 - `Condition`
 
+
+
+
 + Response 200
+
+
+
 
 ### Delete Programs Message [DELETE]
 
+
+
+
 Please update fields
+
+
+
 
 - `Message ID`
 - `Program ID`
 - `Message number`
 - `Condition`
 
+
+
+
 + Response 200
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1126,23 +2047,56 @@ Please update fields
 ## Programs SMS [/programs/assets/sms/{messageID}]
 This adds a SMS message to a program message
 
- + Parameters 
-     + messageID (required, string) ... 
+
+
+
+ + Parameters 
+     + messageID (required, string) ... 
+
+
+
 
 ### Create Program Message [POST]
 
+
+
+
 - `SMS Message`
 + Response 200
+
+
+
 
 ### View Program Message [GET]
 
+
+
+
 - `SMS Message`
 + Response 200
+
+
+
 
 ### Delete Program Message [DELETE]
 
+
+
+
 - `SMS Message`
 + Response 200
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1150,16 +2104,28 @@ This adds a SMS message to a program message
 ## Programs Email Assets [/programs/assets/email/{messageID}]
 This adds email assets to a program message
 
- + Parameters 
-     + messageID (required, string) ... 
+
+
+
+ + Parameters 
+     + messageID (required, string) ... 
+
+
+
 
 ### Create Program Email Assets [POST]
 - `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "email.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
 + Response 200
 
+
+
+
 ### View Program Email Assets [GET]
 - `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "email.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
 + Response 200
+
+
+
 
 ### Delete Program Email Assets [DELETE]
 - `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "email.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
@@ -1168,19 +2134,43 @@ This adds email assets to a program message
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 ## Programs Unsubscribe [/programs/unsubscribe/{programID}]
 This adds an unsubscribe email message to a program
 
- + Parameters 
-     + programID (required, string) ... 
+
+
+
+ + Parameters 
+     + programID (required, string) ... 
+
+
+
 
 ### Unsubscribe from Program Email[POST]
 - `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "unsubscribe.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
 + Response 200
 
+
+
+
 ### View Unsubscribe from Program Email [GET]
 - `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "unsubscribe.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
 + Response 200
+
+
+
 
 ### Delete Unsubscribe from Program Email [DELETE]
 - `Asset file`. A zip file containing all your email assets, the zip file must contain at least "email.htm"and preferably "unsubscribe.txt" for the plain text version. Image assets should be packaged in the zip file in the root folder.
@@ -1189,15 +2179,36 @@ This adds an unsubscribe email message to a program
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 ## Programs Subscriber [/programs/subscriber/{programID}]
 This will add or remove a single user to a program. A subscriber will only ever be added to a program once.
 
- + Parameters 
-     + programID (required, string) ... 
+
+
+
+ + Parameters 
+     + programID (required, string) ... 
+
+
+
 
 ### Subscribe from Program[POST]
 - `Subscriber ID`
 + Response 200
+
+
+
 
 ### Delete Subscribe from Program [DELETE]
 - `Subscriber ID`
@@ -1207,19 +2218,46 @@ This will add or remove a single user to a program. A subscriber will only ever 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Programs Subscribers [/programs/subscribers/{programID}]
 This will add or remove multiple users to/from a program. A list of all currently assigned users may also be retrieved. A subscriber will only ever be added to a program once.
 
- + Parameters 
-     + programID (required, string) ... 
+
+
+
+ + Parameters 
+     + programID (required, string) ... 
+
+
+
 
 ### Create Program Subscribers[POST]
 - `Subscriber ID`
 + Response 200
 
+
+
+
 ### View Program Subscribers[GET]
 - `Subscriber ID`
 + Response 200
+
+
+
 
 ### Delete Program Subscribers[DELETE]
 - `Subscriber ID`
@@ -1228,13 +2266,34 @@ This will add or remove multiple users to/from a program. A list of all currentl
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 ## Program Metrics [/programs/metrics/{programID}]
+
+
+
 
 This will retrieve the overall metrics for a program
 + Parameters
-    + programID (string,required) ...
+    + programID (string,required) ...
+
+
+
 
 ### View Program Metrics[GET]
+
+
+
 
 - `Total sent`
 - `Total bounced`
@@ -1257,6 +2316,21 @@ This will retrieve the overall metrics for a program
 - `SMSs percentage bounced`
 - `SMSs percentage unsubscribed`
 + Response 200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1264,9 +2338,15 @@ This will retrieve the overall metrics for a program
 
 ## Program Message Metrics [/programs/metrics/message/{programID}]
 
+
+
+
 This will retrieve the metrics for an indivIDual program message.
 + Parameters
-    + programID (string,required) ...
+    + programID (string,required) ...
+
+
+
 
 ### View Program Metrics[GET]
 - `Total sent`
@@ -1290,7 +2370,25 @@ This will retrieve the metrics for an indivIDual program message.
 - `SMSs percentage bounced`
 - `SMSs percentage unsubscribed`
 
+
+
+
 + Response 200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1298,113 +2396,305 @@ This will retrieve the metrics for an indivIDual program message.
 
 # Group Consumer
 
-## Consumer [/consumer/{consumerID}]
 
-+ Parameters 
-    + consumerID (required, string) ...
+
+
+## Consumer [/consumer/{guid}]
+
+
+
+
++ Model (application/hal+json)
+
+
+
+
+    HAL+JSON representation of a basic Consumer in the database.
+
+
+
+
+    + Body
+    
+        ```json
+        {
+            "_links": {
+                "self": {
+                    "href": "/consumer/37a06561-dc91-48fc-a638-96ae97a4c8f3"
+                },
+                "fields": {
+                    "array": [ "base", "title", "dob", "consumerTier", "maritalStatus", "..etc" ],
+                    "description": "Other populated (or calculated) fields of meta-data that we have in the database about this particular consumer.\n\nTo GET this meta-data from the database, see the /consumer/{guid}/{fieldID} endpoint."
+                }
+            },
+            "id": "37a06561-dc91-48fc-a638-96ae97a4c8f3",
+            "firstname": "James",
+            "lastname": "Johnson",
+            "email": "james@example.com",
+            "mobile": "323456789",
+            "gender": "m",
+            "age": "31",
+            "last_active": "2014-04-16T09:12:00Z",
+            "created_at": "2014-04-14T02:15:15Z",
+            "status": true,
+            "country": {
+                "name": "South Africa",
+                "code": "ZA",
+                "dialcode": "27"
+            },
+            "language": {
+                "name": "English",
+                "code": "en"
+            }
+        }
+        ```
+
+
+
 
 ### Create a Consumer [POST]
-- `Consumer ID`
-- `First name`
-- `Last name`
-- `Email address`
-- `Mobile`
-- `Gender`
-- `Title`
-- `Date of birth`
-- `Last active`
-- `Country code`
-- `Language code`
-- `Status `
+
+
+
+
+- `firstname` *
+- `lastname` *
+- `email` **
+- `mobile` **
+- `gender` (nullable)
+- `age` (nullable)
+- `last_active` (default: NOW())
+- `country` (default: See Response)
+- `language` (default: See Response)
+
+
+
+
++ Request (application/json)
+
+
+
+
+```json
+{
+    "firstname": "James",
+    "lastname": "Johnson",
+    "email": "james@example.com",
+    "mobile": "323456789",
+    "gender": "m",
+    "age": "31"
+}
+```
+
+
+
 
 + Response 200
+
+
+
+
+    [Consumer][]
+
+
+
 
 ### View a Consumer [GET]
-- `Consumer ID`
-- `First name`
-- `Last name`
-- `Email address`
-- `Mobile`
-- `Gender`
-- `Title`
-- `Date of birth`
-- `Last active`
-- `Country code`
-- `Language code`
-- `Status `
 
-+ Response 200
 
-### Delete a Consumer [DELETE]
-- `Consumer ID`
-- `First name`
-- `Last name`
-- `Email address`
-- `Mobile`
-- `Gender`
-- `Title`
-- `Date of birth`
-- `Last active`
-- `Country code`
-- `Language code`
-- `Status `
+
+
+Get a basic view of any specific Consumer.
+
+
+
+
++ Parameters 
+    + guid (required, string, `37a06561-dc91-48fc-a638-96ae97a4c8f3`) ... The Consumer GUID
+
+
+
 
 + Response 200
 
 
 
 
+    [Consumer][]
 
-## Consumer Engagement Campaigns [/consumer/engagement/campaigns/{consumerID}]
- + Parameters
-     + consumerID (required, string) ...
+
+
+
+### Deactivate a Consumer [DELETE]
+
+
+
+
+Get a basic view of any specific Consumer.
+
+
+
+
++ Parameters 
+    + guid (required, string, `37a06561-dc91-48fc-a638-96ae97a4c8f3`) ... The Consumer GUID
+
+
+
+
++ Response 200 (application/json)
+
+
+
+
+    ```json
+    {
+        "status": "success",
+        "message": "Consumer has been deactivated.",
+        "user": {
+            "firstname": "James",
+            "lastname": "Johnson"
+        }
+    }
+    ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Consumer Engagement Campaigns [/consumer/engagement/campaigns/{guid}]
+ + Parameters
+     + guid (required, string) ...
+
+
+
 
 ### Create a Consumer engagement Campaign [POST]
 - `Campaign ID`
 - `Date of engagement`
 - `Unsubscribed`
 
+
+
+
 + Response 200
+
+
+
 
 ### View a Consumer engagement Campaign [GET]
 - `Campaign ID`
 - `Date of engagement`
 - `Unsubscribed`
 
+
+
+
 + Response 200
+
+
+
 
 ### Delete a Consumer engagement Campaign [DELETE]
 - `Campaign ID`
 - `Date of engagement`
 - `Unsubscribed`
 
+
+
+
 + Response 200
 
 
 
 
-## Consumer Fields [/consumer/{consumerID}/{fieldID}]
+
+
+
+
+
+
+
+
+
+
+
+
+## Consumer Fields [/consumer/{guid}/{fieldID}]
 Allows you to add, read or delete any meta data for a single consumer specified by fieldname
- + Parameters
-     + consumerID (required, string) ...
+ + Parameters
+     + guid (required, string) ...
+
+
+
 
 ### Create a Consumer field [POST]
 - `Consumer ID`
 - `Field value`
 
+
+
+
 + Response 200
+
+
+
 
 ### View a Consumer field [GET]
 - `Consumer ID`
 - `Field value`
 
+
+
+
 + Response 200
+
+
+
 
 ### Delete a Consumer field [DELETE]
 - `Consumer ID`
 - `Field value`
 
+
+
+
 + Response 200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1414,27 +2704,41 @@ Allows you to add, read or delete any meta data for a single consumer specified 
 
 # Group Consumers
 
-## Consumers Company List [/consumers/company/{companyId}]
 
-+ Parameters
-     + companyId (string, required) ...
+
+
+## Consumers Company List [/consumers/company/{guid}]
+
+
+
 
 ### View Consumers By Company [GET]
 
-- `Consumer Id`
-- `First name`
-- `Last name`
-- `Email address`
-- `Mobile`
-- `Gender`
-- `Title`
-- `Date of birth`
-- `Last active`
-- `Country code`
-- `Language code`
-- `All existing consumer meta data`
+
+
+
++ Parameters
+     + guid (string, required, `a53e98e4-0197-4513-be6d-49836e406aaa`) ... The Company GUID
+
+
+
 
 + Response 200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1442,11 +2746,20 @@ Allows you to add, read or delete any meta data for a single consumer specified 
 
 ## Consumers Brand List [/consumers/brand/{guid}]
 
+
+
+
 + Parameters
-    + guid (string, required, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The Brand GUID
+    + guid (string, required, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The Brand GUID
+
+
+
 
 ### View Consumers By Brand [GET]
 
+
+
+
 - `Consumer Id`
 - `First name`
 - `Last name`
@@ -1460,18 +2773,42 @@ Allows you to add, read or delete any meta data for a single consumer specified 
 - `Language code`
 - `All existing consumer meta data`
 
+
+
+
 + Response 200
 
 
 
 
-## Consumers Campaign List [/consumers/campaign/{campaignId}]
+
+
+
+
+
+
+
+
+
+
+
+
+## Consumers Campaign List [/consumers/campaign/{guid}]
+
+
+
 
 + Parameters
-    + campaignId (string, required) ...
+    + guid (string, required) ... The Campaign GUID
+
+
+
 
 ### View Consumers By Campaign [GET]
 
+
+
+
 - `Consumer Id`
 - `First name`
 - `Last name`
@@ -1485,17 +2822,41 @@ Allows you to add, read or delete any meta data for a single consumer specified 
 - `Language code`
 - `All existing consumer meta data`
 
+
+
+
 + Response 200
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 ## Consumers Program List [/consumers/program/{programId}]
 
+
+
+
 + Parameters
-    + programId (string, required) ...
+    + programId (string, required) ...
+
+
+
 
 ### View Consumers By Program [GET]
+
+
+
 
 - `Consumer Id`
 - `First name`
@@ -1509,5 +2870,8 @@ Allows you to add, read or delete any meta data for a single consumer specified 
 - `Country code`
 - `Language code`
 - `All existing consumer meta data`
+
+
+
 
 + Response 200
