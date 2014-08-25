@@ -13,6 +13,10 @@ Where applicable this API uses the [HAL+JSON](https://github.com/mikekelly/hal_s
 
 The common [HTTP Code System](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) should be used as response codes for requests.
 
+## Account Types
+
+Please see the Account Types document on the Github repo, [here](http://goo.gl/gVFTsJ).
+
 ## Notes
 
 - **F+T created the response objects, please adjust as needed.**
@@ -207,14 +211,7 @@ Users are **not** Consumers; Users can log into the platform to manage and updat
 
 This is an administrative function.
 
-Only *super*, *admin*, and *company* account types should be able to create new users, and only for account types lower in heirarchy than themselves.
-
-Account type | Number
------------- | ------
-**Super**    | 1
-**Admin**    | 2
-**Company**  | 3
-**Agency**   | 4
+Only [account types](http://goo.gl/gVFTsJ) [1, 2, 3] should be able to create new users, and only for account types lower in heirarchy than themselves.
 
 401 should be returned if an attempt is made to create a user by an unauthorized account.
 
@@ -264,7 +261,7 @@ This end-point requires the following parameters to be sent:
 
 This is an administrative function.
 
-Only *super*, *admin*, and *company* account types should be able to view users, and only for account types lower in heirarchy than themselves.
+Only [account types](http://goo.gl/gVFTsJ) [1, 2, 3] should be able to view users, and only for account types lower in heirarchy than themselves.
 
 Get a specific User's details.
 
@@ -279,7 +276,7 @@ Get a specific User's details.
 
 This is an administrative function.
 
-Only *super*, *admin*, and *company* account types should be able to remove users, and only for account types lower in heirarchy than themselves.
+Only [account types](http://goo.gl/gVFTsJ) [1, 2, 3] should be able to remove users, and only for account types lower in heirarchy than themselves.
 
 Deactivate a specific user.
 
@@ -444,7 +441,7 @@ Get all or one specific message that has been sent to a User.
 
 This is an administrative function.
 
-Only *super* accounts should be able to create new Companies.
+Only [Super Adminstrators](http://goo.gl/gVFTsJ) should be able to create new Companies.
 
 - `Name` (string)
 
@@ -492,7 +489,7 @@ Get the properties of a certain company.
 
 This is an administrative task.
 
-Only *super* accounts should be able to delete a company.
+Only [Super Adminstrators](http://goo.gl/gVFTsJ) accounts should be able to delete a company.
 
 Sets the Company `active` flag to `false`.
 
@@ -603,7 +600,7 @@ Sets the Company `active` flag to `false`.
 
 This is an administrative task.
 
-Only *super*, *admin* & *company* accounts should be able to create a new brand, and assign it to a company.
+Only [account types](http://goo.gl/gVFTsJ) [1, 2, 3] should be able to create a new brand, and assign it to a company.
 
 Furthermore, *company* accounts should only be able to create brands for their own company.
 
@@ -660,7 +657,7 @@ Get the properties of a certain brand.
 
 This is an administrative task.
 
-Only *super*, *admin* & *company* accounts should be able to delete a brand.
+Only [account types](http://goo.gl/gVFTsJ) [1, 2, 3] should be able to delete a brand.
 
 Sets the Brand `active` flag to `false`.
 
