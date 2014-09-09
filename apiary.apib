@@ -41,7 +41,7 @@ This resource has the following request parameters:
 
 - `username` Registered email address
 - `password` DMP Password
-- `remember` [0, 1] Specifies whether to remember credentials
+- `remember` [string bool] Specifies whether to remember credentials
 
 + Request (application/json)
 
@@ -49,19 +49,14 @@ This resource has the following request parameters:
     {
         "username": "john@example.com",
         "password": "YourPassword",
-        "remember": 1
+        "remember": "true"
     }
     ```
 
-+ Response 200 (application/hal+json)
++ Response 200 (application/json)
 
     ```
     {
-        "_link": {
-            "next": {
-                "href": "/profile"
-            }
-        },
         "status": "success",
         "user": {
             "id": "25892e17-80f6-415f-9c65-7395632f0223",
@@ -69,7 +64,7 @@ This resource has the following request parameters:
             "lastname": "Smith",
             "display_name": "John Smith",
             "photo_url": "https:\/\/example.com\/john.jpg",
-            "role": "basic"
+            "role": "admin"
         }
     }
     ```
