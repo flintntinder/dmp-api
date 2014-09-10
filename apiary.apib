@@ -147,6 +147,68 @@ The Token is sent to the user via email, and will probably be a `GET` variable o
 
 Users are **not** Consumers; Users can log into the platform to manage and update the platform.
 
+## User List [/users/]
+
+### Get a list of all platform users [GET]
+
++ Response 200 (application/json;charset=UTF-8)
+
+    ```
+    {
+        "users": [{
+            "firstname": "Casper",
+            "lastname": "Odendaal",
+            "email": "casper@flintntinder.com",
+            "mobile": "123456789",
+            "title": "Web Designer",
+            "role": "super",
+            "avatar": "https:\/\/example.com\/casper.jpg",
+            "companies": ["a53e98e4-0197-4513-be6d-49836e406aaa"],
+            "brands": ["e33898de-6302-4756-8f0c-5f6c5218e02e"]
+        }, {
+            "firstname": "Emmanuel",
+            "lastname": "Matsiyana",
+            "email": "emmanuel@flintntinder.com",
+            "mobile": "123456789",
+            "title": "Web Designer",
+            "role": "admin",
+            "avatar": "https:\/\/example.com\/emmanuel.jpg",
+            "companies": ["a53e98e4-0197-4513-be6d-49836e406aaa"],
+            "brands": ["e33898de-6302-4756-8f0c-5f6c5218e02e"]
+        }, {
+            "firstname": "Willem",
+            "lastname": "Labu",
+            "email": "willem@flintntinder.com",
+            "mobile": "123456789",
+            "title": "TD",
+            "role": "company",
+            "avatar": "https:\/\/example.com\/willem.jpg",
+            "companies": ["a53e98e4-0197-4513-be6d-49836e406aaa"],
+            "brands": ["e33898de-6302-4756-8f0c-5f6c5218e02e"]
+        }, {
+            "firstname": "Lianie",
+            "lastname": "Potgieter",
+            "email": "lianie@flintntinder.com",
+            "mobile": "123456789",
+            "title": "Art Director",
+            "role": "brand",
+            "avatar": "https:\/\/example.com\/lianie.jpg",
+            "companies": ["a53e98e4-0197-4513-be6d-49836e406aaa"],
+            "brands": ["e33898de-6302-4756-8f0c-5f6c5218e02e"]
+        }, {
+            "firstname": "Nimay",
+            "lastname": "Parekh",
+            "email": "nimay@flintntinder.com",
+            "mobile": "123456789",
+            "title": "MD",
+            "role": "basic",
+            "avatar": "https:\/\/example.com\/nimay.jpg",
+            "companies": ["a53e98e4-0197-4513-be6d-49836e406aaa"],
+            "brands": ["e33898de-6302-4756-8f0c-5f6c5218e02e"]
+        }]
+    }
+    ```
+
 ## User [/user/{UserID}]
 
 + Model (application/hal+json)
