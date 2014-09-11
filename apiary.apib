@@ -749,9 +749,8 @@ Please update field names
 + Response 200 (application/json;charset=UTF-8)
 
     ```
-
-    {
-        "brand": [{
+        {
+        "brand": {
         "id": "WEE444-TRTRTX-4XEXER-34RXWE43-3FXHUXJCIUJ-2132",
         "name": "Baby Soft",
         "subscribers": "987",
@@ -763,130 +762,60 @@ Please update field names
         "pendingprograms": "3",
         "completeprograms": "2",
 
-        "genders": [{
-                "sex": "female",
-                "percentage": "23"
-                }, {
-                "sex": "unknown",
-                "percentage": "45"
-                }, {
-                "sex": "male",
-                "percentage": "15"
-                }],
-        "ages": [{
-                "agegroup": "16-24",
-                "percentage": "23"
-                }, {
-                "agegroup": "25-34",
-                "percentage": "45"
-                }, {
-                "agegroup": "35-44",
-                "percentage": "15"
-                }, {
-                "agegroup": "45 +",
-                "percentage": "10"
-                }, {
-                "agegroup": "unknown",
-                "percentage": "7"
-                }],
-        "locations": [{
-                "name": "limpopo",
-                "percentage": "23"
-                }, {
-                "name": "mpumalanga",
-                "percentage": "20"
-                }, {
-                "name": "gauteng",
-                "percentage": "7"
-                }, {
-                "name": "western cape",
-                "percentage": "13"
-                }, {
-                "name": "northern cape",
-                "percentage": "17"
-                }, {
-                "name": "eastern cape",
-                "percentage": "15"
-                }, {
-                "name": "kwazulu natal",
-                "percentage": "5"
-                }, {
-                "name": "free state",
-                "percentage": "18"
-                }, {
-                "name": "north west",
-                "percentage": "24"
-                }, {
-                "name": "unknown",
-                "percentage": "3"
-                }],
-        "status": [{
-                "name": "married couples",
-                "total": "23"
-                }, {
-                "name": "married with kids",
-                "total": "20"
-                }, {
-                "name": "single",
-                "total": "7"
-                }, {
-                "name": "single parent",
-                "total": "13"
-                }, {
-                "name": "pregnant",
-                "total": "17"
-                }, {
-                "name": "unknown",
-                "total": "15"
-                }],
-        "activationchannel": [{
-                "name": "email",
-                "percentage": "63"
-                }, {
-                "name": "sms",
-                "percentage": "37"
-                }],
-        "responsechannel": [{
-                "name": "email",
-                "percentage": "50"
-                }, {
-                "name": "sms",
-                "percentage": "63"
-                }],
-        "activity": [{
-                "name": "growth",
-                "total": "2.3"
-                }, {
-                "name": "active",
-                "total": "20.9"
-                }, {
-                "name": "inactive",
-                "total": "0.7"
-                }, {
-                "name": "new",
-                "total": "630"
-                }, {
-                "name": "dupes",
-                "total": "17"
-                }, {
-                "name": "unsubs",
-                "total": "5"
-                }],
-        "tiers": [{
-                "name": "A",
-                "percentage": "9"
-                }, {
-                "name": "B",
-                "percentage": "22"
-                }, {
-                "name": "C",
-                "percentage": "56"
-                }, {
-                "name": "undefined",
-                "percentage": "13"
-                }]
-                }]    
-    }
+        "genders": {
+                "female": "23",
+                "unknown": "45",
+                "male": "15"
+                },
+        "ages": {
+                "16-24": "23",
+                "25-34": "45",
+                "35-44": "15",
+                "45 +": "10",
+                "unknown": "7"
+                },
+        "locations": {
+                "limpopo": "23",
+                "mpumalanga": "20",
+                "gauteng": "7",
+                "western cape": "13",
+                "northern cape": "17", "eastern cape": "15",
+                "kwazulu natal": "5",
+                "free state": "18",
+                "north west": "24",
+                "unknown": "3"
+                },
+        "status": { 
+                "married couples": "23",
+                "married with kids": "20", 
+                "single": "7", 
+                "single parent": "13",
+                "pregnant": "17", 
+                "unknown": "15"
+                },
+        "activationchannel": {
+                "email": "63",
+                "sms": "37"
+                },
+        "responsechannel": {
+                "email": "50",
+                "sms": "63"
+                },
+        "activity": {
+                "growth": "2.3",
+                "active": "20.9",
+                "inactive": "0.7",
+                "new": "630",
+                "dupes": "17",
+                "unsubs": "5"
+                },
+        "tiers": {
+                 "A": "9", "B": "22",
+                  "C": "56",
+                  "undefined": "13"
+                }
+            }
+        }
     ```
     
 
