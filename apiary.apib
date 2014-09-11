@@ -169,7 +169,7 @@ Users are **not** Consumers; Users can log into the platform to manage and updat
             "lastname": "Matsiyana",
             "email": "emmanuel@flintntinder.com",
             "mobile": "123456789",
-            "title": "Web Developer",
+            "title": "Web Designer",
             "role": "admin",
             "avatar": "images\/avatars\/emmanuel.jpg",
             "brands": ["d262e101-d37d-47aa-b0f2-7200da6e43f1", "40c03869-6424-4fab-b56a-797eb603e7fa"]
@@ -730,88 +730,6 @@ Sets the Brand `active` flag to `false`.
 
 **WIP**
 
-+ Model (application/hal+json)
-
-    HAL+JSON representation of the Brand + it's metrics in the database.
-
-    + Body
-    
-        ```
-        {
-            "_links": {
-                "self": {
-                    "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e"
-                },
-                "parent": {
-                    "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
-                }
-            },
-            "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
-            "name": "Huggies",
-            "photo_url": "https:\/\/example.com\/huggies.jpg",
-            "created_at": "2014-04-14T02:15:15Z",
-            "users": [
-                {
-                    "id": "25892e17-80f6-415f-9c65-7395632f0223",
-                    "firstname": "John",
-                    "lastname": "Smith",
-                    "display_name": "John Smith",
-                    "photo_url": "https:\/\/example.com\/john.jpg"
-                },
-                {
-                    "id": "f162f68e-d15e-4a98-b5dc-fc6c578e2867",
-                    "firstname": "Jane",
-                    "lastname": "Doe",
-                    "display_name": "Jane D",
-                    "photo_url": "https:\/\/example.com\/jane.jpg"
-                }
-            ],
-            "subscribers": {
-                "complete": 12879,
-                "incomplete": 235
-            },
-            "campaigns": {
-                "active": [
-                    {
-                        "id": "da517c76-62f7-48ff-ba0a-05ca510b261e",
-                        "name": "Second Campaign",
-                        "subscribers": 879
-                    },
-                    {
-                        "id": "0bee7103-f80a-4393-9758-071e8ea4fc16",
-                        "name": "Third Campaign",
-                        "subscribers": 100
-                    }
-                ],
-                "inactive": [
-                    {
-                        "id": "88637c2d-2fa2-4e3e-8041-9998ccd8519d",
-                        "name": "First Campaign",
-                        "subscribers": 11000
-                    }
-                ]
-            },
-            "programs": {
-                "active": [
-                    {
-                        "id": "59b537de-faf5-4c4c-ab86-5a97db51a970",
-                        "name": "Second Program"
-                    },
-                    {
-                        "id": "c2c1881f-3fdf-4ef0-bad5-b724eed02515",
-                        "name": "Third Program"
-                    }
-                ],
-                "inactive": [
-                    {
-                        "id": "1bbb1547-6879-4b25-a40f-dd2d3f87694f",
-                        "name": "First Program"
-                    }
-                ]
-            },
-            "active": true
-        }
-        ```
 
 ### View Brand Metrics [GET]
 Please update field names
@@ -828,9 +746,151 @@ Please update field names
 - `Number of pending programs`
 - `Number of complete programs`
 
-+ Response 200
++ Response 200 (application/hal+json)
 
-    [Brand Metrics][]
+        ```
+        {
+            "brand":{
+            'id': 'WEE444-TRTRTX-4XEXER-34RXWE43-3FXHUXJCIUJ-2132',
+            'name': 'Baby Soft',
+            'subscribers': '987',
+            'incompletesubscribers': '34',
+            'activecampaigns': '4',
+            'pendingcampaigns': '3',
+            'completecampaigns': '2',
+            'activeprograms': '4',
+            'pendingprograms': '3',
+            'completeprograms': '2',
+
+            genders: [{
+                sex: 'female',
+                percentage: '23'
+            }, {
+                sex: 'unknown',
+                percentage: '45'
+            }, {
+                sex: 'male',
+                percentage: '15'
+            }],
+            ages: [{
+                    agegroup: '16-24',
+                    percentage: '23'
+                }, {
+                    agegroup: '25-34',
+                    percentage: '45'
+                }, {
+                    agegroup: '35-44',
+                    percentage: '15'
+                },
+
+                {
+                    agegroup: '45 +',
+                    percentage: '10'
+                }, {
+                    agegroup: 'unknown',
+                    percentage: '7'
+                }
+            ],
+            locations: [{
+                name: 'limpopo',
+                percentage: '23'
+            }, {
+                name: 'mpumalanga',
+                percentage: '20'
+            }, {
+                name: 'gauteng',
+                percentage: '7'
+            }, {
+                name: 'western cape',
+                percentage: '13'
+            }, {
+                name: 'northern cape',
+                percentage: '17'
+            }, {
+                name: 'eastern cape',
+                percentage: '15'
+            }, {
+                name: 'kwazulu natal',
+                percentage: '5'
+            }, {
+                name: 'free state',
+                percentage: '18'
+            }, {
+                name: 'north west',
+                percentage: '24'
+            }, {
+                name: 'unknown',
+                percentage: '3'
+            }],
+            status: [{
+                name: 'married couples',
+                total: '23'
+            }, {
+                name: 'married with kids',
+                total: '20'
+            }, {
+                name: 'single',
+                total: '7'
+            }, {
+                name: 'single parent',
+                total: '13'
+            }, {
+                name: 'pregnant',
+                total: '17'
+            }, {
+                name: 'unknown',
+                total: '15'
+            }],
+            activationchannel: [{
+                name: 'email',
+                percentage: '63'
+            }, {
+                name: 'sms',
+                percentage: '37'
+            }],
+            responsechannel: [{
+                name: 'email',
+                percentage: '50'
+            }, {
+                name: 'sms',
+                percentage: '63'
+            }],
+            activity: [{
+                name: 'growth',
+                total: '2.3'
+            }, {
+                name: 'active',
+                total: '20.9'
+            }, {
+                name: 'inactive',
+                total: '0.7'
+            }, {
+                name: 'new',
+                total: '630'
+            }, {
+                name: 'dupes',
+                total: '17'
+            }, {
+                name: 'unsubs',
+                total: '5'
+            }],
+            tiers: [{
+                name: 'A',
+                percentage: '9'
+            }, {
+                name: 'B',
+                percentage: '22'
+            }, {
+                name: 'C',
+                percentage: '56'
+            }, {
+                name: 'undefined',
+                percentage: '13'
+            }]
+        }
+        }
+        ```
+    
 
 # Group Campaigns
 
