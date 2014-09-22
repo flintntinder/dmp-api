@@ -208,7 +208,7 @@ Users are **not** Consumers; Users can log into the platform to manage and updat
 
 ## User [/user/{UserID}]
 
-+ Model (application/hal+json)
++ Model (application/hal+json;charset=UTF-8)
 
     HAL+JSON representation of the User in the database.
 
@@ -282,7 +282,7 @@ This end-point requires the following parameters to be sent:
 - `companies` (array of strings)
 - `brands` (array of strings)
 
-+ Request (application/json)
++ Request (application/json;charset=UTF-8)
 
     ```
     {
@@ -305,7 +305,7 @@ This end-point requires the following parameters to be sent:
     }
     ```
 
-+ Response 200 (application/hal+json)
++ Response 200
 
     [User][]
 
@@ -1493,16 +1493,16 @@ This will retrieve the metrics for an indivIDual program message.
 
 + Request (application/json)
 
-```
-{
-    "firstname": "James",
-    "lastname": "Johnson",
-    "email": "james@example.com",
-    "mobile": "323456789",
-    "gender": "m",
-    "age": "31"
-}
-```
+    ```
+    {
+        "firstname": "James",
+        "lastname": "Johnson",
+        "email": "james@example.com",
+        "mobile": "323456789",
+        "gender": "m",
+        "age": "31"
+    }
+    ```
 
 + Response 200
 
