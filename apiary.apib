@@ -1288,6 +1288,24 @@ Please update field names
 
 + Response  200 (application/json;charset=UTF-8)
 
+### View a Program [GET]
+
+Please update field names
+
+- `Program ID`
+- `Company ID`
+- `Brand ID`
+- `Name`
+- `Description`
+- `Start date & time`
+- `End date & time (optional)`
+- `Engagement channels`
+- `SMS opt-out (optional)`
+- `1Cadence field`
+- `1Status (optional)`
+
++ Response  200 (application/json;charset=UTF-8)
+
     ```
         {
         "id": "xxx-xxxxx-xx-xx-x-x-xxxx-xxxx-xxx-x",
@@ -1318,24 +1336,6 @@ Please update field names
         }
         
     ```
-
-### View a Program [GET]
-
-Please update field names
-
-- `Program ID`
-- `Company ID`
-- `Brand ID`
-- `Name`
-- `Description`
-- `Start date & time`
-- `End date & time (optional)`
-- `Engagement channels`
-- `SMS opt-out (optional)`
-- `1Cadence field`
-- `1Status (optional)`
-
-+ Response  200
 
 ### Delete a Program [DELETE]
 
@@ -1587,7 +1587,7 @@ Please update field names
                 "id": "xxxxx-1",
                 "name": "Program number 1",
                 "status":"live",
-                "description": "",
+                "description": "Another description",
                 "keyfield": "Divorce",
                 "requiresoptin": "yes",
                 "rounds": "13",
@@ -1600,7 +1600,7 @@ Please update field names
                 "id": "xxxxx-2",
                 "name": "Programme 2",
                 "status":"live",
-                "description": "",
+                "description": "New description for testing",
                 "keyfield": "Death",
                 "requiresoptin": "yes",
                 "rounds": "14",
@@ -1613,7 +1613,7 @@ Please update field names
                 "id": "xxxx-3",
                 "name": "Program 3",
                 "status":"Abduction",
-                "description": "",
+                "description": "Proper new description",
                 "keyfield": "Select a field",
                 "requiresoptin": "yes",
                 "rounds": "21",
