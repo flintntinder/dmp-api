@@ -1182,8 +1182,8 @@ Please update field names
                 "id": "xxxxx-1",
                 "name": "Campaign 1",
                 "description": "This is the description of this campaign from the test API whoo",
-                "activationchannels": ["Sms","Email"],
-                "engagementchannels": ["Webform", "SMS Shortcode"],
+                "activationchannels": ["SMS","EMAIL"],
+                "engagementchannels": ["WEBFORM", "SMS SHORTCODE"],
                 "launchbase": "987",
                 "openrate": "68",
                 "responserate": "51",
@@ -1202,8 +1202,8 @@ Please update field names
                 "id": "xxxxx-2",
                 "name": "Campaign number 2",
                 "description": "This is the description campaign number 2 from the test API whoo",
-                "activationchannels": ["Email"],
-                "engagementchannels": ["Webform"],
+                "activationchannels": ["EMAIL"],
+                "engagementchannels": ["WEBFORM"],
                 "launchbase": "43532",
                 "openrate": "60",
                 "responserate": "90",
@@ -1223,7 +1223,7 @@ Please update field names
                 "name": "YOLO campaign",
                 "description": "This is the description for the YOLO campaign from the test API whoo",
                 "activationchannels": ["SMS"],
-                "engagementchannels": ["SMS Shortcode"],
+                "engagementchannels": ["SMS SHORTCODE"],
                 "launchbase": "232",
                 "openrate": "47",
                 "responserate": "67",
@@ -1242,8 +1242,8 @@ Please update field names
                 "id": "xxxx-3",
                 "name": "Thursday Whopper",
                 "description": "This is the description for the Thursday Whopper campaign from the test API",
-                "activationchannels": ["SMS", "Email"],
-                "engagementchannels": ["Webform"],
+                "activationchannels": ["SMS", "EMAIL"],
+                "engagementchannels": ["WEBFORM"],
                 "launchbase": "2356",
                 "openrate": "90",
                 "responserate": "81",
@@ -1304,38 +1304,7 @@ Please update field names
 - `1Cadence field`
 - `1Status (optional)`
 
-+ Response  200 (application/json;charset=UTF-8)
-
-    ```
-        {
-        "id": "xxx-xxxxx-xx-xx-x-x-xxxx-xxxx-xxx-x",
-        "name": "Baby Soft",
-        "brandname": "Baby Soft",
-        "brandid": "xxx-xxxxxxx-xx-xxxxx-xx",  
-        "activationchannels": ["SMS","EMAIL"],
-        "creatorid": "3",
-        "datecreated": "2",
-        "datelaunched": "2",
-        "startdate": "Monday 1 September",
-        "enddate": "Friday 12 September",
-        "keyfield":"Pregnancy Due Date",
-        "frequency":"Weekly",
-        "communications":"5",
-        "description": "This is the programs description from the API Mock",
-        "status": "live",
-        "channels":{
-        
-            "sms":{
-                "last30":"245",
-                "total":"3000"
-            },
-            "email":{
-                "last30":"70",
-                "total":"300"}
-        }
-        }
-        
-    ```
++ Response  200
 
 ### Delete a Program [DELETE]
 
@@ -1623,31 +1592,6 @@ Please update field names
         }
     ```
     
-## Programs [/programs/communications/{programID}]
-   
-### View a Programs Communications [GET]
-
-Please update field names
-
-+ Response  200 (application/json;charset=UTF-8)
-
-    ```
-        {
-            "communications": [
-            {
-                "id": "xx-xxxd1",
-                "name": "Communication 1",
-                "channel": "SMS",
-                "description": "New description  for comms VoilaaH!!!"
-            },
-            {
-                "id": "2xx-xxxd1",
-                "name": "Communication 2",
-                "channel": "EMAIL",
-                "description": "Second description"
-            }]
-        }
-    ``` 
 
 
 # Group Consumer
