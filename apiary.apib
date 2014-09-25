@@ -1158,6 +1158,91 @@ Please update field names
         }
     ```
 
+
+
+
+
+## Campaign Brand [/campaigns/brand/{brandguid}]
+
+**WIP**
+
+
+### View campaigns by brands [GET]
+Please update field names
+
+
++ Response 200 (application/json;charset=UTF-8)
+
+    ```
+        {
+       "campaigns": [
+            {
+                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
+                "userid": "",
+                "id": "xxxxx-1",
+                "name": "Campaign 1",
+                "description": "This is the description of this campaign from the test API whoo",
+                "activationchannels": ["Sms","Email"],
+                "engagementchannels": ["Webform", "SMS Shortcode"],
+                "launchbase": "987",
+                "openrate": "68",
+                "responserate": "51",
+                "compentries": "35",
+                "emailsent": "698",
+                "emaildelivered": "681",
+                "smssent": "289",
+                "smsdelivered": "261",
+                "startdate": "Friday 26 September",
+                "enddate": "Thursday 2 October",
+                "status":"live"
+            },            
+            {
+                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
+                "userid": "",
+                "id": "xxxxx-2",
+                "name": "Campaign number 2",
+                "description": "This is the description campaign number 2 from the test API whoo",
+                "activationchannels": ["Email"],
+                "engagementchannels": ["Webform"],
+                "launchbase": "43532",
+                "openrate": "60",
+                "responserate": "90",
+                "compentries": "14245",
+                "emailsent": "40000",
+                "emaildelivered": "39999",
+                "smssent": "0",
+                "smsdelivered": "0",
+                "startdate": "Friday 3 October",
+                "enddate": "Monday 6 October",
+                "status":"live"
+            },
+            {
+                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
+                "userid": "",
+                "id": "xxxx-3",
+                "name": "YOLO campaign",
+                "description": "This is the description for the YOLO campaign from the test API whoo",
+                "activationchannels": ["SMS"],
+                "engagementchannels": ["SMS Shortcode"],
+                "launchbase": "232",
+                "openrate": "47",
+                "responserate": "67",
+                "compentries": "32",
+                "emailsent": "0",
+                "emaildelivered": "0",
+                "smssent": "232",
+                "smsdelivered": "224",
+                "startdate": "Friday 10 October",
+                "enddate": "Friday 17 October",
+                "status":"inactive"
+            }]
+        }
+    ```
+    
+
+
+
+
 # Group Programs
 
 ## Programs [/programs/{programID}]
