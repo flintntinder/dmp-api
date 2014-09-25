@@ -1304,7 +1304,38 @@ Please update field names
 - `1Cadence field`
 - `1Status (optional)`
 
-+ Response  200
++ Response  200 (application/json;charset=UTF-8)
+
+    ```
+        {
+        "id": "xxx-xxxxx-xx-xx-x-x-xxxx-xxxx-xxx-x",
+        "name": "Baby Soft",
+        "brandname": "Baby Soft",
+        "brandid": "xxx-xxxxxxx-xx-xxxxx-xx",  
+        "activationchannels": ["SMS","EMAIL"],
+        "creatorid": "3",
+        "datecreated": "2",
+        "datelaunched": "2",
+        "startdate": "Monday 1 September",
+        "enddate": "Friday 12 September",
+        "keyfield":"Pregnancy Due Date",
+        "frequency":"Weekly",
+        "communications":"5",
+        "description": "This is the programs description from the API Mock",
+        "status": "live",
+        "channels":{
+        
+            "sms":{
+                "last30":"245",
+                "total":"3000"
+            },
+            "email":{
+                "last30":"70",
+                "total":"300"}
+        }
+        }
+        
+    ```
 
 ### Delete a Program [DELETE]
 
