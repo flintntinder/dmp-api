@@ -728,99 +728,6 @@ Sets the Brand `active` flag to `false`.
     }
     ```
 
-## Brand Metrics [/brand/metrics/{guid}]
-
-**WIP**
-
-
-### View Brand Metrics [GET]
-Please update field names
-
-- `Brand ID`
-- `Name`
-- `Number of users`
-- `Number of subscribers`
-- `Number of incomplete subscribers` This will be calculated as a consumer that does not have all the prerequisite data fields (see `Consumer`)
-- `Number of active campaigns`
-- `Number of pending campaigns`
-- `Number of complete campaigns`
-- `Number of active programs`
-- `Number of pending programs`
-- `Number of complete programs`
-
-+ Response 200 (application/json;charset=UTF-8)
-
-    ```
-        {
-        "brand": {
-        "id": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
-        "name": "Baby Soft",
-        "consumers": 987,
-        "incompleteconsumers": 34,
-        "activecampaigns": 4,
-        "pendingcampaigns": 3,
-        "completecampaigns": 2,
-        "activeprograms": 4,
-        "pendingprograms": 3,
-        "completeprograms": 2,
-
-        "genders": {
-                "female": 23,
-                "unknown": 45,
-                "male": 15
-                },
-        "ages": {
-                "1624": 23,
-                "2534": 45,
-                "3544": 15,
-                "45": 10,
-                "unknown": 7
-                },
-        "locations": {
-                "limpopo": 23,
-                "mpumalanga": 20,
-                "gauteng": 7,
-                "westerncape": 13,
-                "northerncape": 17, 
-                "easterncape": 15,
-                "kwazulunatal": 5,
-                "freestate": 18,
-                "northwest": 24,
-                "unknown": 3
-                },
-        "status": { 
-                "marriedcouples": 23,
-                "marriedwithkids": 20, 
-                "single": 7, 
-                "singleparent": 13,
-                "pregnant": 17, 
-                "unknown": 15
-                },
-        "activationchannel": {
-                "email": 63,
-                "sms": 37
-                },
-        "responsechannel": {
-                "email": 50,
-                "sms": 63
-                },
-        "activity": {
-                "growth": 2.3,
-                "active": 20.9,
-                "inactive": 0.7,
-                "new": 630,
-                "dupes": 17,
-                "unsubs": 5
-                },
-        "tiers": {
-                 "A": 9, "B": 22,
-                  "C": 56,
-                  "undefined": 13
-                }
-            }
-        }
-    ```
-    
 
 # Group Campaigns
 
@@ -1941,3 +1848,86 @@ Allows you to add, read or delete any meta data for a single consumer specified 
 - `All existing consumer meta data`
 
 + Response 200
+
+
+## Consumer Brand Metrics [/consumers/brand/metrics/{guid}]
+
+**WIP**
+
+
+### View Consumers Metrics by Brand[GET]
+Please update field names
+
++ Response 200 (application/json;charset=UTF-8)
+
+    ```
+        {
+        "brand": {
+        "id": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
+        "name": "Baby Soft",
+        "consumers": 987,
+        "incompleteconsumers": 34,
+        "activecampaigns": 4,
+        "pendingcampaigns": 3,
+        "completecampaigns": 2,
+        "activeprograms": 4,
+        "pendingprograms": 3,
+        "completeprograms": 2,
+
+        "genders": {
+                "female": 23,
+                "unknown": 45,
+                "male": 15
+                },
+        "ages": {
+                "1624": 23,
+                "2534": 45,
+                "3544": 15,
+                "45": 10,
+                "unknown": 7
+                },
+        "locations": {
+                "limpopo": 23,
+                "mpumalanga": 20,
+                "gauteng": 7,
+                "westerncape": 13,
+                "northerncape": 17, 
+                "easterncape": 15,
+                "kwazulunatal": 5,
+                "freestate": 18,
+                "northwest": 24,
+                "unknown": 3
+                },
+        "status": { 
+                "marriedcouples": 23,
+                "marriedwithkids": 20, 
+                "single": 7, 
+                "singleparent": 13,
+                "pregnant": 17, 
+                "unknown": 15
+                },
+        "activationchannel": {
+                "email": 63,
+                "sms": 37
+                },
+        "responsechannel": {
+                "email": 50,
+                "sms": 63
+                },
+        "activity": {
+                "growth": 2.3,
+                "active": 20.9,
+                "inactive": 0.7,
+                "new": 630,
+                "dupes": 17,
+                "unsubs": 5
+                },
+        "tiers": {
+                 "A": 9, "B": 22,
+                  "C": 56,
+                  "undefined": 13
+                }
+            }
+        }
+    ```
+    
