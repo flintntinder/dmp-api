@@ -1138,8 +1138,7 @@ Sets the Brand `active` flag to `false`.
 
 Please update field names
 
-- `Campaign ID`
-- `Company ID`
+
 - `Brand ID`
 - `Name`
 - `Description`
@@ -1158,13 +1157,13 @@ Please update field names
 
 + Request (application/json)
 
-
         {
-        "id":"XXXX-XXX-XXXXXX-01",
+        "brand_id":"XXXX-XXX-XXXXXX-01",
         "name":"",
+        "description":"",
         "startdate":"",
         "enddate":"",
-        "description":"",
+        "status": "1",
         "activationchannels":{
                         "sms":{
                             "activationmessage":"",
