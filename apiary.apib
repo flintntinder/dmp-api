@@ -1118,17 +1118,16 @@ Sets the Brand `active` flag to `false`.
     ```
         {
         "name":"",
-        "brand_id":"",
         "userid":""
         }
     ```
 
-+ Response 200
++ Response 200 (application/hal+json)
 
     ```
-    {
-    "id":""
-    }
+        {
+        "id":""
+        }
     ```
 
 ## Campaign [/campaign/{guid}]
@@ -1138,7 +1137,8 @@ Sets the Brand `active` flag to `false`.
 
 Please update field names
 
-
+- `Campaign ID`
+- `Company ID`
 - `Brand ID`
 - `Name`
 - `Description`
@@ -1157,13 +1157,13 @@ Please update field names
 
 + Request (application/json)
 
+
         {
-        "brand_id":"XXXX-XXX-XXXXXX-01",
+        "id":"XXXX-XXX-XXXXXX-01",
         "name":"",
-        "description":"",
         "startdate":"",
         "enddate":"",
-        "status": "1",
+        "description":"",
         "activationchannels":{
                         "sms":{
                             "activationmessage":"",
@@ -1183,7 +1183,7 @@ Please update field names
         "engagementchannels":{
                         "smsshortcode": {
                             "shortcode": "",
-                            "keyword": "",
+                            "keyword"': "",
                             "responsemessage": "",
                             "capturefield": []                            
                         },
