@@ -1,6 +1,6 @@
 # Account Types
 
-_This is a living document._
+_This is a **draft** document._
 
 There are 5 account types, each with different permissions on the platform.
 
@@ -11,8 +11,8 @@ Account Type | Number | Permissions
 Super Administrator | 1 | 0
 Administrator | 2 | 2, 3, 4, 5, 6, 7
 Company | 3 | 2, 3, 4, 5, 6, 7
-Manager | 4 | 3, 4, 5, 6, 7
-Brand | 5 | 5, 6, 7
+Brand | 4 | 3, 4, 5, 6, 7
+Basic | 5 | 5, 6, 7
 
 
 Below is a reference list of all the account permissions for the above account types.
@@ -22,8 +22,8 @@ Number | Details
 0 | All Access (Only Super Administrators)
 1 | [Create, Edit, Remove, View] Company
 2 | [Create, Edit, Remove, View] User
-3 | [Create, Edit, Remove, View] Consumer
-4 | [Create, Edit, Remove, View] Brand
+3 | [Create, Edit, Remove, View] Brands
+4 | [Create, Edit, Remove, View] Consumer
 5 | [Create, Edit, Remove, View] Campaign
 6 | [Create, Edit, Remove, View] Program
-7 | View Reports
+7 | [Create, Edit, Remove, View] Program Communication

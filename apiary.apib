@@ -23,6 +23,9 @@ Please see the Account Types document on the Github repo, [here](http://goo.gl/g
 - All IDs (user, company, consumer, brand, etc) will be GUIDs to prevent ID spoofing.
 - **DELETE** functions should not remove data they should **date-flag** an item as deleted so as not to skew metrics and to keep an audit trail.
 
+- Most requests will need to have a security token in the request header called "Authorization"
+- This security token is created and returned when requesting a login an will be used extensively throughout.
+
 
 ----
 
@@ -41,15 +44,14 @@ This resource has the following request parameters:
 
 - `username` Registered email address
 - `password` DMP Password
-- `remember` [string bool] Specifies whether to remember credentials
+
 
 + Request (application/json;charset=UTF-8)
 
     ```
     {
         "username": "john@example.com",
-        "password": "YourPassword",
-        "remember": "true"
+        "password": "YourPassword"
     }
     ```
 
@@ -62,23 +64,42 @@ This resource has the following request parameters:
             "id": "25892e17-80f6-415f-9c65-7395632f0223",
             "firstname": "John",
             "lastname": "Smith",
-            "display_name": "John Smith",
-            "photo_url": "images\/avatars\/john.jpg",
+            "email": "john@flintntinder.com",
+            "mobile": "123456789",
+            "title": "Tea guy",
             "role": "admin",
-            "company": "XXXX-KimberlyClark-COMPANY-ID",
-            "brands":[ "d262e101-d37d-47aa-b0f2-7200da6e43f1","469bbea6-2532-4bf1-84b2-af656da10325"]
-        }
+            "photo_url": "images\/avatars\/john.jpg",
+            "brands": [
+                {
+                    "id": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
+                    "name": "Huggies"
+                },
+                {
+                    "id": "469bbea6-2532-4bf1-84b2-af656da10325",
+                    "name": "Kotex"
+                }
+            ]
+            
+        },
+        "securitytoken" : "F19706EF-DF60-4D7A-A295-F25D4CC4A688",
+        "encrypted_password" : "SjETpA5U7Cscv65tDu82zLqPc65dak5tdXQ5dsB4/bU="
     }
     ```
 
 + Response 401
 
+## User Authentication [/account/signout/{UserID}]
 
-### Sign Out [DELETE]
++ Parameters 
+    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+    
+### Sign Out [POST]
 
 **This end-point was not supplied in the original CodeCafé document, but is required.**
 
-This resource has no parameters, and will delete the current user session and sign the user out of the platform.
+This resource has the user's id as a parameter, and will delete the current user session and sign the user out of the platform.
+
+The login token will expire.
 
 It should return 200 if a user session exists, 401 otherwise.
 
@@ -98,6 +119,138 @@ It should return 200 if a user session exists, 401 otherwise.
 + Response 401
 
 
+## Account Creation [/account/save]
+### Create a new account [POST]
+
+Attempt to create a new account for a user
+
+This resource has the following request parameters:
+
+- `userid` The user guid. The account will be created for this user.
+- `role` The role id of this account
+- `company` The company guid. Which company this account will be for.
+- `active` "1" or "0". Defaults to active
+- `brands` (array of strings) Which brands this account will have access to
+
+
++ Request (application/json;charset=UTF-8)
+
+    ```
+    {
+       "userid": '0248b1e7-da23-4319-bfa3-d1ea4be47786',
+        "role": "3",
+        "company": "516A1A7A-2C2G-3A0A-A55A-71A09643E94B1",
+        "active": "1",
+        "brands": [
+            {
+                    "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
+                    "name": "Huggies"
+            }
+        ]
+            
+    }
+    ```
+
++ Response 200 (application/json)
+
+    ```
+    {
+        "status": "success",
+        "user": {
+            "id": "25892e17-80f6-415f-9c65-7395632f0223",
+            "firstname": "John",
+            "lastname": "Smith",
+            "email": "john@flintntinder.com",
+            "mobile": "123456789",
+            "title": "Tea guy",
+            "role": "admin",
+            "photo_url": "images\/avatars\/john.jpg",
+            "brands": [
+                {
+                    "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
+                    "name": "Huggies"
+                },
+                {
+                    "id": "469bbea6-2532-4bf1-84b2-af656da10325",
+                    "name": "Kotex"
+                }
+            ]
+            
+        }
+    }
+    ```
+
++ Response 401
+
+
+## Account Edit [/account/save/{UserID}]
+
++ Parameters 
+    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+    
+### Edit an existing account [POST]
+
+
+Attempt to edit an existing account for a user
+
+This resource has the following request parameters:
+
+- `userid` The user guid. The account will be created for this user.
+- `role` The role id of this account
+- `company` The company guid. Which company this account will be for.
+- `active` "1" or "0". Defaults to active
+- `brands` (array of strings) Which brands this account will have access to
+
+
++ Request (application/json;charset=UTF-8)
+
+    ```
+    {
+       "userid": '0248b1e7-da23-4319-bfa3-d1ea4be47786',
+        "role": "3",
+        "company": "516A1A7A-2C2G-3A0A-A55A-71A09643E94B1",
+        "active": "1",
+        "brands": [
+            {
+                    "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
+                    "name": "Huggies"
+            }
+        ]
+            
+    }
+    ```
+
++ Response 200 (application/json)
+
+    ```
+    {
+        "status": "success",
+        "user": {
+            "id": "25892e17-80f6-415f-9c65-7395632f0223",
+            "firstname": "John",
+            "lastname": "Smith",
+            "email": "john@flintntinder.com",
+            "mobile": "123456789",
+            "title": "Tea guy",
+            "role": "admin",
+            "photo_url": "images\/avatars\/john.jpg",
+            "brands": [
+                {
+                    "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
+                    "name": "Huggies"
+                },
+                {
+                    "id": "469bbea6-2532-4bf1-84b2-af656da10325",
+                    "name": "Kotex"
+                }
+            ]
+            
+        }
+    }
+    ```
+
++ Response 401
+
 
 ## Account Password [/account/password/{UserID}]
 
@@ -113,8 +266,11 @@ This should *not* deactivate the account or the current password, and the token 
 
 + Response 200
 
-### Change Account Password  [PUT]
 
+
+## Account Password [/account/password/change/]
+### Change Account Password  [POST]
+    
 This will change an account's password if the token is a match.
 
 The Token is sent to the user via email, and will probably be a `GET` variable on the 'change password' page.
@@ -158,55 +314,125 @@ Users are **not** Consumers; Users can log into the platform to manage and updat
     ```
     {
         "users": [{
+            "id": "25892e17-80f6-415f-9c65-7395632f0224",
             "firstname": "Casper",
             "lastname": "Odendaal",
             "email": "casper@flintntinder.com",
             "mobile": "123456789",
             "title": "Web Designer",
             "role": "super",
-            "avatar": "images\/avatars\/casper.jpg",
-            "brands": ["469bbea6-2532-4bf1-84b2-af656da10325","d262e101-d37d-47aa-b0f2-7200da6e43f1"]
+            "photo_url": "images\/avatars\/casper.jpg",
+            "brands": [
+                {
+                    "id": "469bbea6-2532-4bf1-84b2-af656da10325",
+                    "name": "Kotex"
+                },
+                {
+                    "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
+                    "name": "Huggies"
+                }
+            ]
+            
+            
         }, {
+            "id": "25892e17-80f6-415f-9c65-7395632f0223",
+            "firstname": "John",
+            "lastname": "Smith",
+            "email": "john@flintntinder.com",
+            "mobile": "123456789",
+            "title": "Tea guy",
+            "role": "admin",
+            "photo_url": "images\/avatars\/john.jpg",
+            "brands": [
+                {
+                    "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
+                    "name": "Huggies"
+                },
+                {
+                    "id": "469bbea6-2532-4bf1-84b2-af656da10325",
+                    "name": "Kotex"
+                }
+            ]
+            
+        }, {
+            "id": "25892e17-80f6-415f-9c65-7395632f0225",
             "firstname": "Emmanuel",
             "lastname": "Matsiyana",
             "email": "emmanuel@flintntinder.com",
             "mobile": "123456789",
             "title": "Web Designer",
             "role": "admin",
-            "avatar": "images\/avatars\/emmanuel.jpg",
-            "brands": ["d262e101-d37d-47aa-b0f2-7200da6e43f1", "40c03869-6424-4fab-b56a-797eb603e7fa"]
+            "photo_url": "images\/avatars\/emmanuel.jpg",
+            "brands": [
+                {
+                    "id": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
+                    "name": "Huggies"
+                },
+                {
+                    "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
+                    "name": "Baby Soft"
+                }
+            ]
         }, {
+            "id": "25892e17-80f6-415f-9c65-7395632f0226",
             "firstname": "Willem",
             "lastname": "Labu",
             "email": "willem@flintntinder.com",
             "mobile": "123456789",
             "title": "TD",
             "role": "company",
-            "avatar": "images\/avatars\/willem.jpg",
-            "brands": ["40c03869-6424-4fab-b56a-797eb603e7fa"]
+            "photo_url": "images\/avatars\/willem.jpg",
+            "brands": [
+                {
+                    "id": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
+                    "name": "Baby Soft"
+                }
+            ]
         }, {
+            "id": "25892e17-80f6-415f-9c65-7395632f0227",
             "firstname": "Lianie",
             "lastname": "Potgieter",
             "email": "lianie@flintntinder.com",
             "mobile": "123456789",
             "title": "Art Director",
             "role": "brand",
-            "avatar": "images\/avatars\/lianie.jpg",
-            "brands": ["40c03869-6424-4fab-b56a-797eb603e7fa", "d262e101-d37d-47aa-b0f2-7200da6e43f1"]
+            "photo_url": "images\/avatars\/lianie.jpg",
+            "brands": [
+                {
+                    "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
+                    "name": "Baby Soft"
+                },
+                {
+                    "id": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
+                    "name": "Huggies"
+                }
+            ]
+            
+            
+            
         }, {
+            "id": "25892e17-80f6-415f-9c65-7395632f0228",
             "firstname": "Nimay",
             "lastname": "Parekh",
             "email": "nimay@flintntinder.com",
             "mobile": "123456789",
             "title": "MD",
             "role": "basic",
-            "avatar": "images\/avatars\/nimay.jpg",
-            "brands": ["469bbea6-2532-4bf1-84b2-af656da10325"]
-        }]
+            "photo_url": "images\/avatars\/nimay.jpg",
+            
+            "brands": [
+                {
+                    "id": "469bbea6-2532-4bf1-84b2-af656da10325",
+                    "name": "Kotex"
+                }
+            ]
+        }
+        
+        ]
     }
     ```
 
-## User [/user/{UserID}]
+## User [/user/]
 
 + Model (application/hal+json;charset=UTF-8)
 
@@ -224,10 +450,12 @@ Users are **not** Consumers; Users can log into the platform to manage and updat
             "id": "25892e17-80f6-415f-9c65-7395632f0223",
             "firstname": "John",
             "lastname": "Smith",
-            "display_name": "John Smith",
-            "email": "john@example.com",
+            "email": "john@flintntinder.com",
             "mobile": "123456789",
-            "photo_url": "https:\/\/example.com\/john.jpg",
+            "title": "Tea guy",
+            "role": "admin",
+            "photo_url": "images\/avatars\/john.jpg",
+            
             "country": {
                 "name": "South Africa",
                 "code": "ZA",
@@ -239,26 +467,7 @@ Users are **not** Consumers; Users can log into the platform to manage and updat
             },
             "created_at": "2014-04-14T02:15:15Z",
             "last_active": "2014-04-14T02:15:15Z",
-            "account": {
-                "type": 1,
-                "super": true,
-                "admin": false,
-                "company": false,
-                "agency": false,
-                "active": true
-            },
-            "companies": [
-                {
-                    "id": "a53e98e4-0197-4513-be6d-49836e406aaa",
-                    "name": "Kimberly-Clark"
-                }
-            ],
-            "brands": [
-                {
-                    "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
-                    "name": "Huggies"
-                }
-            ]
+            
         }
         ```
         
@@ -274,13 +483,12 @@ This end-point requires the following parameters to be sent:
 
 - `firstname` (string)
 - `lastname` (string)
+- `Display Name` (string)
 - `email` (string)
 - `mobile` (string)
-- `account` (number)
+- `photo url` (string)
 - `country` (object of strings)
 - `language` (object of strings)
-- `companies` (array of strings)
-- `brands` (array of strings)
 
 + Request (application/json;charset=UTF-8)
 
@@ -288,9 +496,10 @@ This end-point requires the following parameters to be sent:
     {
         "firstname": "John",
         "lastname": "Smith",
+        "display_name": "John Smith",
         "email": "john@example.com",
         "mobile": "123456789",
-        "account": 1,
+        "photo_url": "https:\/\/example.com\/john.jpg",
         "country": {
             "name": "South Africa",
             "code": "ZA",
@@ -300,8 +509,60 @@ This end-point requires the following parameters to be sent:
             "name": "English",
             "code": "en"
         },
-        "companies": ["a53e98e4-0197-4513-be6d-49836e406aaa"],
-        "brands": ["e33898de-6302-4756-8f0c-5f6c5218e02e"]
+       
+    }
+    ```
+
++ Response 200
+
+    [User][]
+
++ Response 401
+
+
+## User [/user/{UserID}]
+
+### Save a User [POST]
+
+This is an administrative function.
+
+This is for updating an existing user.
+
+Only [account types](http://goo.gl/gVFTsJ) [1, 2, 3] should be able to create new users, and only for account types lower in heirarchy than themselves.
+
+401 should be returned if an attempt is made to create a user by an unauthorized account.
+
+This end-point requires the following parameters to be sent:
+
+- `firstname` (string)
+- `lastname` (string)
+- `Display Name` (string)
+- `email` (string)
+- `mobile` (string)
+- `photo url` (string)
+- `country` (object of strings)
+- `language` (object of strings)
+
++ Request (application/json;charset=UTF-8)
+
+    ```
+    {
+        "firstname": "John",
+        "lastname": "Smith",
+        "display_name": "John Smith",
+        "email": "john@example.com",
+        "mobile": "123456789",
+        "photo_url": "https:\/\/example.com\/john.jpg",
+        "country": {
+            "name": "South Africa",
+            "code": "ZA",
+            "dialcode": "27"
+        },
+        "language": {
+            "name": "English",
+            "code": "en"
+        },
+       
     }
     ```
 
@@ -327,7 +588,12 @@ Get a specific User's details.
 
     [User][]
 
-### Remove a User [DELETE]
+## User [/user/delete/{UserID}]
+
++ Parameters 
+    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
+    
+### Remove a User [POST]
 
 This is an administrative function.
 
@@ -335,8 +601,6 @@ Only [account types](http://goo.gl/gVFTsJ) [1, 2, 3] should be able to remove us
 
 Deactivate a specific user.
 
-+ Parameters 
-    + UserID (required, string, `25892e17-80f6-415f-9c65-7395632f0223`) ... User's GUID
 
 + Response 200 (application/json)
 
@@ -499,12 +763,14 @@ This is an administrative function.
 Only [Super Adminstrators](http://goo.gl/gVFTsJ) should be able to create new Companies.
 
 - `Name` (string)
+- `Photo Url` (string)
 
 + Request
 
     ```
     {
-        "name": "New Company Name"
+        "name": "New Company Name",
+        "photo_url" : ""
     }
     ```
 
@@ -540,7 +806,9 @@ Get the properties of a certain company.
 [Company][]
 
 
-### Delete Company [DELETE]
+## Company [/company/delete/{guid}]
+
+### Delete Company [POST]
 
 This is an administrative task.
 
@@ -559,6 +827,64 @@ Sets the Company `active` flag to `false`.
         "message": "The Company has been deactivated."
     }
     ```
+
+## Company List [/company]
+
+### Get a list of all active companies [GET]
+
++ Response 200 (application/json;charset=UTF-8)
+
+    ```
+    {
+      [
+  {
+    "_link":{
+      "self":{
+        "href":"/company/516A1A7A-2C2G-3A0A-A55A-71A09643E94B1"
+      }
+    },
+    "active":true,
+    "brands":[
+      {
+        "id":"Test Brand Id",
+        "name":"Test Brand Name"
+      },
+      {
+        "id":"Test Brand Id 2",
+        "name":"Test Brand Name 2"
+      }
+    ],
+    "created_at":"2014-09-26 01:30:18 PM",
+    "id":"516A1A7A-2C2G-3A0A-A55A-71A09643E94B1",
+    "name":"This is a test company!",
+    "photo_url":""
+  },
+  {
+    "_link":{
+      "self":{
+        "href":"/company/BC7D47AB-5244-432E-A0C8-F5D7E0245CA6"
+      }
+    },
+    "active":true,
+    "brands":[
+      {
+        "id":"Test Brand Id",
+        "name":"Test Brand Name"
+      },
+      {
+        "id":"Test Brand Id 2",
+        "name":"Test Brand Name 2"
+      }
+    ],
+    "created_at":"2014-09-29 12:14:44 PM",
+    "id":"BC7D47AB-5244-432E-A0C8-F5D7E0245CA6",
+    "name":"Code Cafe",
+    "photo_url":""
+  }
+]
+    }
+    ```
+
 
 ## Company Metrics [/company/{guid}/metrics/]
 
@@ -622,7 +948,7 @@ Sets the Company `active` flag to `false`.
 
 # Group Brand
 
-## Brand [/brand/{guid}]
+## Brand [/brand/]
 
 + Model (application/hal+json)
 
@@ -660,12 +986,14 @@ Only [account types](http://goo.gl/gVFTsJ) [1, 2, 3] should be able to create a 
 Furthermore, *company* accounts should only be able to create brands for their own company.
 
 - `Name` (string)
+- `Photo Url` (string)
 
 + Request
 
     ```
     {
-        "name": "New Brand Name"
+        "name": "New Brand Name",
+        "photo_url": ""
     }
     ```
 
@@ -696,6 +1024,54 @@ Furthermore, *company* accounts should only be able to create brands for their o
     }
     ```
 
+## Brand [/brand/{guid}]
+
+### Save Brand [POST]
+
+This is an administrative task.
+
+Only [account types](http://goo.gl/gVFTsJ) [1, 2, 3] should be able to save a new brand, and assign it to a company.
+
+Furthermore, *company* accounts should only be able to save brands for their own company.
+
+- `Name` (string)
+- `Photo Url` (string)
+
++ Request
+
+    ```
+    {
+        "name": "New Brand Name",
+        "photo_url": ""
+    }
+    ```
+
++ Response 200 (application/hal+json)
+
+    ```
+    {
+        "_link": {
+            "self": {
+                "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e"
+            },
+            "campaign": {
+                "href": "/campaigns/create"
+            },
+            "program": {
+                "href": "/programs/create"
+            },
+            "company": {
+                "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
+            }
+        },
+        "status": "success",
+        "message": "{New Brand Name} has been created. You can now add create campaigns or programs for it!",
+        "brand": {
+            "id": "e33898de-6302-4756-8f0c-5f6c5218e02e"
+            "name": "New Brand Name"
+        }
+    }
+    ```
 
 ### View Brand [GET]
 
@@ -708,7 +1084,9 @@ Get the properties of a certain brand.
 
     [Brand][]
 
-### Delete Brand [DELETE]
+## Brand [/brand/delete/{guid}]
+
+### Delete Brand [POST]
 
 This is an administrative task.
 
@@ -731,66 +1109,28 @@ Sets the Brand `active` flag to `false`.
 
 # Group Campaigns
 
-## Campaign [/campaigns/{guid}]
-
-**WIP - INCOMPLETE**
-
-+ Model (application/hal+json)
-
-    HAL+JSON representation of a Campaign in the database.
-
-    + Body
-    
-        ```
-        {
-            "_links": {
-                "self": {
-                    "href": "/campaign/da517c76-62f7-48ff-ba0a-05ca510b261e"
-                },
-                "segment": {
-                    "href": "/segment/da517c76-62f7-48ff-ba0a-05ca510b261e",
-                    "description": "A quick-link to view the database segment for this campaign."
-                }
-            },
-            "id": "da517c76-62f7-48ff-ba0a-05ca510b261e",
-            "name": "Campaign Name",
-            "description": "A description about this specific campaign.",
-            "photo_url": "https:\/\/example.com\/campaignthumb.jpg",
-            "created_at": "2014-04-14T02:15:15Z",
-            "start_date": "2014-04-16T08:00:00Z",
-            "end_date": "2015-01-12T16:00:00Z",
-            "active": true,
-            "archived": false,
-            "status": "[pending, checked, approved, paused, archived]",
-            "companies": [
-                {
-                    "id": "a53e98e4-0197-4513-be6d-49836e406aaa",
-                    "name": "Kimberly-Clark"
-                }
-            ],
-            "brands": [
-                {
-                    "id": "e33898de-6302-4756-8f0c-5f6c5218e02e",
-                    "name": "Huggies"
-                }
-            ],
-            "channels": {
-                "activation": {
-                    "sms": {
-
-                    },
-                    "email": true
-                },
-                "engagement": {
-                    "smsshortcode": false,
-                    "webform": true
-                }
-            },
-            "segment_rules": "< A JSON OBJECT ARRAY OF THE SEGMENTATION METRICS - STORED AS A STRING >",
-        }
-        ```
-
+## Campaign [/campaign/create/]
 ### Create Campaign [POST]
+
++ Request (application/json)
+    
+    ```
+        {
+        "name":"",
+        "userid":""
+        }
+    ```
+
++ Response 200
+
+    ```
+    {
+    "id":""
+    }
+    ```
+
+## Campaign [/campaign/edit/{guid}]
+### Edit Campaign [POST]
 
 Please update field names
 
@@ -811,31 +1151,162 @@ Please update field names
 - `Unsubscribe text` (optional)
 - `Status` (optional)
 
++ Request (application/json)
+
+
+        {
+        "id":"XXXX-XXX-XXXXXX-01",
+        "name":"",
+        "startdate":"",
+        "enddate":"",
+        "description":"",
+        "activationchannels":{
+                        "sms":{
+                            "activationmessage":"",
+                            "deploymentdate": ""
+                            },
+                        "email":{
+                            "title":"",
+                            "subjectline": "",
+                            "emailfrom": "",
+                            "viewonlinetitle": "",
+                            "unsubscribelink": "",
+                            "zipfilename": "",
+                            "deploymentdate": "",
+                            "clickthroughurl": ""
+                            }
+                            },
+        "engagementchannels":{
+                        "smsshortcode": {
+                            "shortcode": "",
+                            "keyword"': "",
+                            "responsemessage": "",
+                            "capturefield": []                            
+                        },
+                        "webform": {
+                            "capturefields": [],
+                            "captureurl": ""                           
+                        }
+                    }
+            }
+    
+
+
 + Response 200
+
+
+## Campaign [/campaign/{guid}]
++ Parameters 
+    + guid (required, string) ... 
 
 ### View Campaign [GET]
 
-- `Campaign ID`
-- `Company ID`
-- `Brand ID`
-- `Name`
-- `Description`
-- `Start date & time`
-- `End date & time` (optional)
-- `Activation channels`
-- `Engagement channels`
-- `SMS message` (optional)
-- `SMS response message` (optional)
-- `SMS opt-out` (optional)
-- `Email Subject line` (optional)
-- `View online text` (optional)
-- `Unsubscribe text` (optional)
-- `Status` (optional)
+Please update field names
 
-+ Parameters 
-    + guid (required, string, `da517c76-62f7-48ff-ba0a-05ca510b261e`) ... Campaign GUID
+- `Total sent`
+- `Total bounced`
+- `Total unique opens`
+- `Total clicks`
+- `Total unique clicks`
+- `Total modified`
+- `Total unsubscribed`
+- `Total delivered`
+- `Percentage bounced`
+- `Percentage delivered`
+- `Percentage opened`
+- `Percentage clicked`
+- `Percentage clicked to open`
+- `Percentage modified`
+- `Percentage unsubscribed`
+- `SMSs sent`
+- `SMSs bounced`
+- `SMSs unsubscribed`
+- `SMSs percentage bounced`
+- `SMSs percentage unsubscribed`
 
-+ Response 200
++ Response 200 (application/json;charset=UTF-8)
+
+    ```
+        {
+        "id": "xxx-xxxxx-xx-xx-x-x-xxxx-xxxx-xxx-x",
+        "name": "Campaign Name 1",
+        "brandname": "Baby Soft",
+        "brandid": "xxx-xxxxxxx-xx-xxxxx-xx",  
+        "launchbase": "987",
+        "activationchannels": ["SMS","EMAIL"],
+        "engagementchannels": ["WEBFORM"],
+        "openrate": "68",
+        "responserate": "51",
+        "compentries": "35",
+        "emailsent": "698",
+        "emaildelivered": "681",
+        "smssent": "289",
+        "smsdelivered": "261",
+        "creatorid": "3",
+        "datecreated": "2",
+        "datelaunched": "2",
+        "startdate": "Monday 1 September",
+        "enddate": "Friday 12 September",
+        "description": "This is the campaign description from the API Mock",
+        "mode": "LIVE",                         
+
+        "genders": {
+                "female": "23",
+                "unknown": "45",
+                "male": "15"
+                },
+        "ages": {
+                "1624": "23",
+                "2534": "45",
+                "3544": "15",
+                "45": "10",
+                "unknown": "7"
+                },
+        "locations": {
+                "limpopo": "23",
+                "mpumalanga": "20",
+                "gauteng": "7",
+                "westerncape": "13",
+                "northerncape": "17",
+                "easterncape": "15",
+                "kwazulunatal": "5",
+                "freestate": "18",
+                "northwest": "24",
+                "unknown": "3"
+                },
+        "status": { 
+                "marriedcouples": "23",
+                "marriedwithkids": "20", 
+                "single": "7", 
+                "singleparent": "13",
+                "pregnant": "17", 
+                "unknown": "15"
+                },
+        "activationchannel": {
+                "email": "63",
+                "sms": "37"
+                },
+        "responsechannel": {
+                "email": "50",
+                "sms": "63"
+                },
+        "activity": {
+                "growth": "2.3",
+                "active": "20.9",
+                "inactive": "0.7",
+                "new": "630",
+                "dupes": "17",
+                "unsubs": "5"
+                },
+        "tiers": {
+                 "A": "9", 
+                 "B": "22",
+                  "C": "56",
+                  "undefined": "13"
+                }
+            }
+    ```
+
 
 ### Delete Campaign [DELETE]
 
@@ -951,224 +1422,6 @@ Please update field names
 
 + Response 200
 
-## Campaign Metrics [/campaigns/metrics/{guid}]
-+ Parameters 
-    + guid (required, string) ... 
-
-### View Campaign Metrics [GET]
-
-Please update field names
-
-- `Total sent`
-- `Total bounced`
-- `Total unique opens`
-- `Total clicks`
-- `Total unique clicks`
-- `Total modified`
-- `Total unsubscribed`
-- `Total delivered`
-- `Percentage bounced`
-- `Percentage delivered`
-- `Percentage opened`
-- `Percentage clicked`
-- `Percentage clicked to open`
-- `Percentage modified`
-- `Percentage unsubscribed`
-- `SMSs sent`
-- `SMSs bounced`
-- `SMSs unsubscribed`
-- `SMSs percentage bounced`
-- `SMSs percentage unsubscribed`
-
-+ Response 200 (application/json;charset=UTF-8)
-
-    ```
-        {
-        "campaign": {
-        "id": "xxx-xxxxx-xx-xx-x-x-xxxx-xxxx-xxx-x",
-        "name": "Baby Soft",
-        "brandname": "Baby Soft",
-        "brandid": "xxx-xxxxxxx-xx-xxxxx-xx",  
-        "launchbase": "987",
-        "activationchannels": ["SMS","EMAIL"],
-        "engagementchannels": ["WEBFORM"],
-        "openrate": "68",
-        "responserate": "51",
-        "compentries": "35",
-        "emailsent": "698",
-        "emaildelivered": "681",
-        "smssent": "289",
-        "smsdelivered": "261",
-        "creatorid": "3",
-        "datecreated": "2",
-        "datelaunched": "2",
-        "startdate": "Monday 1 September",
-        "enddate": "Friday 12 September",
-        "description": "This is the campaign description from the API Mock",
-        "mode": "LIVE",                         
-
-        "genders": {
-                "female": "23",
-                "unknown": "45",
-                "male": "15"
-                },
-        "ages": {
-                "1624": "23",
-                "2534": "45",
-                "3544": "15",
-                "45": "10",
-                "unknown": "7"
-                },
-        "locations": {
-                "limpopo": "23",
-                "mpumalanga": "20",
-                "gauteng": "7",
-                "westerncape": "13",
-                "northerncape": "17",
-                "easterncape": "15",
-                "kwazulunatal": "5",
-                "freestate": "18",
-                "northwest": "24",
-                "unknown": "3"
-                },
-        "status": { 
-                "marriedcouples": "23",
-                "marriedwithkids": "20", 
-                "single": "7", 
-                "singleparent": "13",
-                "pregnant": "17", 
-                "unknown": "15"
-                },
-        "activationchannel": {
-                "email": "63",
-                "sms": "37"
-                },
-        "responsechannel": {
-                "email": "50",
-                "sms": "63"
-                },
-        "activity": {
-                "growth": "2.3",
-                "active": "20.9",
-                "inactive": "0.7",
-                "new": "630",
-                "dupes": "17",
-                "unsubs": "5"
-                },
-        "tiers": {
-                 "A": "9", 
-                 "B": "22",
-                  "C": "56",
-                  "undefined": "13"
-                }
-            }
-        }
-    ```
-
-
-
-
-
-## Campaign Brand [/campaigns/brand/{brandguid}]
-
-**WIP**
-
-
-### View campaigns by brands [GET]
-Please update field names
-
-
-+ Response 200 (application/json;charset=UTF-8)
-
-    ```
-        {
-       "campaigns": [
-            {
-                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
-                "userid": "",
-                "id": "xxxxx-1",
-                "name": "Campaign 1",
-                "description": "This is the description of this campaign from the test API whoo",
-                "activationchannels": ["SMS","EMAIL"],
-                "engagementchannels": ["WEBFORM", "SMS SHORTCODE"],
-                "launchbase": "987",
-                "openrate": "68",
-                "responserate": "51",
-                "smssent": "289",
-                "smsdelivered": "261",
-                "emailsent": "698",
-                "emaildelivered": "681",
-                "compentries": "35",
-                "startdate": "Friday 26 September",
-                "enddate": "Thursday 2 October",
-                "status": "live"
-            },            
-            {
-                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
-                "userid": "",
-                "id": "xxxxx-2",
-                "name": "Campaign number 2",
-                "description": "This is the description campaign number 2 from the test API whoo",
-                "activationchannels": ["EMAIL"],
-                "engagementchannels": ["WEBFORM"],
-                "launchbase": "43532",
-                "openrate": "60",
-                "responserate": "90",
-                "smssent": "0",
-                "smsdelivered": "0",
-                "emailsent": "40000",
-                "emaildelivered": "39999",
-                "compentries": "14245",
-                "startdate": "Friday 3 October",
-                "enddate": "Monday 6 October",
-                "status": "live"
-            },
-            {
-                "brandid": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
-                "userid": "",
-                "id": "xxxx-3",
-                "name": "YOLO campaign",
-                "description": "This is the description for the YOLO campaign from the test API whoo",
-                "activationchannels": ["SMS"],
-                "engagementchannels": ["SMS SHORTCODE"],
-                "launchbase": "232",
-                "openrate": "47",
-                "responserate": "67",
-                "smssent": "232",
-                "smsdelivered": "224",
-                "emailsent": "0",
-                "emaildelivered": "0",
-                "compentries": "32",
-                "startdate": "Friday 10 October",
-                "enddate": "Friday 17 October",
-                "status": "live"
-            },
-            {
-                "brandid": "40c03869-6424-4fab-b56a-797eb603e7fa",
-                "userid": "",
-                "id": "xxxx-3",
-                "name": "Thursday Whopper",
-                "description": "This is the description for the Thursday Whopper campaign from the test API",
-                "activationchannels": ["SMS", "EMAIL"],
-                "engagementchannels": ["WEBFORM"],
-                "launchbase": "2356",
-                "openrate": "90",
-                "responserate": "81",
-                "smssent": "934",
-                "smsdelivered": "224",
-                "emailsent": "1198",
-                "emaildelivered": "1159",
-                "compentries": "2210",
-                "startdate": "Monday 20 October",
-                "enddate": "Thursday 23 October",
-                "status": "inactive"
-            }]
-        }
-    ```
-    
-
-
-
 
 # Group Programs
 
@@ -1216,7 +1469,7 @@ Please update field names
     ```
         {
         "id": "xxx-xxxxx-xx-xx-x-x-xxxx-xxxx-xxx-x",
-        "name": "Baby Soft",
+        "name": "Program name 1",
         "brand":{
                 "name": "Baby Soft",
                  "id": "xxx-xxxxxxx-xx-xxxxx-xx"
@@ -1475,64 +1728,7 @@ This will retrieve the metrics for an indivIDual program message.
 + Response 200
 
 
-
-## Program Brand [/programs/brand/{brandguid}]
-
-**WIP**
-
-
-### View Programs by brands [GET]
-Please update field names
-
-
-+ Response 200 (application/json;charset=UTF-8)
-
-    ```
-        {
-       "programs": [
-            {
-                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
-                "userid": "",
-                "id": "xxxxx-1",
-                "name": "Program number 1",
-                "status":"live",
-                "description": "Another description",
-                "keyfield": "Divorce",
-                "requiresoptin": "yes",
-                "rounds": "13",
-                "frequency": "Monthly",
-                "channels":["sms","email"]
-            },            
-            {
-                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
-                "userid": "",
-                "id": "xxxxx-2",
-                "name": "Programme 2",
-                "status":"live",
-                "description": "New description for testing",
-                "keyfield": "Death",
-                "requiresoptin": "yes",
-                "rounds": "14",
-                "frequency": "Weekly",
-                "channels":["sms"]
-            },
-            {
-                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
-                "userid": "",
-                "id": "xxxx-3",
-                "name": "Program 3",
-                "status":"Abduction",
-                "description": "Proper new description",
-                "keyfield": "Select a field",
-                "requiresoptin": "yes",
-                "rounds": "21",
-                "frequency": "Daily",
-                "channels":["email"]
-            }]
-        }
-    ```
-
-## Programs [/programs/communications/{programID}]
+## Programs [/programs/{programID}/communications/]
     
 ### View a Programs Communications [GET]
  
@@ -1757,11 +1953,6 @@ Allows you to add, read or delete any meta data for a single consumer specified 
 + Response 200
 
 
-
-
-
-
-
 # Group Consumers
 
 ## Consumers Company List [/consumers/company/{guid}]
@@ -1850,11 +2041,15 @@ Allows you to add, read or delete any meta data for a single consumer specified 
 + Response 200
 
 
-## Consumer Brand Metrics [/consumers/brand/metrics/{guid}]
+# Group Metrics
+
+## Consumers Brand Metrics [/metrics/consumers/brand/{brandId}]
 
 **WIP**
 
-
++ Parameters
+    + brandId (string, required) ...
+    
 ### View Consumers Metrics by Brand[GET]
 Please update field names
 
@@ -1931,3 +2126,163 @@ Please update field names
         }
     ```
     
+
+
+
+
+## Campaign Brand [/metrics/campaigns/brand/{brandguid}]
+
+**WIP**
+
+
+### View campaigns by brands [GET]
+Please update field names
+
+
++ Response 200 (application/json;charset=UTF-8)
+
+    ```
+        {
+       "campaigns": [
+            {
+                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
+                "userid": "",
+                "id": "xxxxx-1",
+                "name": "Campaign 1",
+                "description": "This is the description of this campaign from the test API whoo",
+                "activationchannels": ["SMS","EMAIL"],
+                "engagementchannels": ["WEBFORM", "SMS SHORTCODE"],
+                "launchbase": "987",
+                "openrate": "68",
+                "responserate": "51",
+                "smssent": "289",
+                "smsdelivered": "261",
+                "emailsent": "698",
+                "emaildelivered": "681",
+                "compentries": "35",
+                "startdate": "Friday 26 September",
+                "enddate": "Thursday 2 October",
+                "status": "live"
+            },            
+            {
+                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
+                "userid": "",
+                "id": "xxxxx-2",
+                "name": "Campaign number 2",
+                "description": "This is the description campaign number 2 from the test API whoo",
+                "activationchannels": ["EMAIL"],
+                "engagementchannels": ["WEBFORM"],
+                "launchbase": "43532",
+                "openrate": "60",
+                "responserate": "90",
+                "smssent": "0",
+                "smsdelivered": "0",
+                "emailsent": "40000",
+                "emaildelivered": "39999",
+                "compentries": "14245",
+                "startdate": "Friday 3 October",
+                "enddate": "Monday 6 October",
+                "status": "live"
+            },
+            {
+                "brandid": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
+                "userid": "",
+                "id": "xxxx-3",
+                "name": "YOLO campaign",
+                "description": "This is the description for the YOLO campaign from the test API whoo",
+                "activationchannels": ["SMS"],
+                "engagementchannels": ["SMS SHORTCODE"],
+                "launchbase": "232",
+                "openrate": "47",
+                "responserate": "67",
+                "smssent": "232",
+                "smsdelivered": "224",
+                "emailsent": "0",
+                "emaildelivered": "0",
+                "compentries": "32",
+                "startdate": "Friday 10 October",
+                "enddate": "Friday 17 October",
+                "status": "live"
+            },
+            {
+                "brandid": "40c03869-6424-4fab-b56a-797eb603e7fa",
+                "userid": "",
+                "id": "xxxx-3",
+                "name": "Thursday Whopper",
+                "description": "This is the description for the Thursday Whopper campaign from the test API",
+                "activationchannels": ["SMS", "EMAIL"],
+                "engagementchannels": ["WEBFORM"],
+                "launchbase": "2356",
+                "openrate": "90",
+                "responserate": "81",
+                "smssent": "934",
+                "smsdelivered": "224",
+                "emailsent": "1198",
+                "emaildelivered": "1159",
+                "compentries": "2210",
+                "startdate": "Monday 20 October",
+                "enddate": "Thursday 23 October",
+                "status": "inactive"
+            }]
+        }
+    ```
+
+
+## Program Brand [/metrics/programs/brand/{brandguid}]
+
+**WIP**
+
+
+### View Programs Metrics by brand [GET]
+Please update field names
+
+
++ Response 200 (application/json;charset=UTF-8)
+
+    ```
+        {
+       "programs": [
+            {
+                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
+                "userid": "",
+                "id": "xxxxx-1",
+                "name": "Program number 1",
+                "status":"live",
+                "description": "Another description",
+                "keyfield": "Divorce",
+                "requiresoptin": "yes",
+                "rounds": "13",
+                "frequency": "Monthly",
+                "channels":["sms","email"]
+            },            
+            {
+                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
+                "userid": "",
+                "id": "xxxxx-2",
+                "name": "Programme 2",
+                "status":"live",
+                "description": "New description for testing",
+                "keyfield": "Death",
+                "requiresoptin": "yes",
+                "rounds": "14",
+                "frequency": "Weekly",
+                "channels":["sms"]
+            },
+            {
+                "brandid": "469bbea6-2532-4bf1-84b2-af656da10325",
+                "userid": "",
+                "id": "xxxx-3",
+                "name": "Program 3",
+                "status":"inactive",
+                "description": "Proper new description",
+                "keyfield": "Select a field",
+                "requiresoptin": "yes",
+                "rounds": "21",
+                "frequency": "Daily",
+                "channels":["email"]
+            }]
+        }
+    ```
+    
+
+
