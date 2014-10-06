@@ -1109,7 +1109,8 @@ Sets the Brand `active` flag to `false`.
 
 # Group Campaigns
 
-## Campaign [/campaign/create/]
+## Campaign [/campaign/]
+
 ### Create Campaign [POST]
 
 + Request (application/json)
@@ -1129,8 +1130,10 @@ Sets the Brand `active` flag to `false`.
     }
     ```
 
-## Campaign [/campaign/edit/{guid}]
+## Campaign [/campaign/{guid}]
 ### Edit Campaign [POST]
+
+
 
 Please update field names
 
@@ -1150,6 +1153,7 @@ Please update field names
 - `View online text` (optional)
 - `Unsubscribe text` (optional)
 - `Status` (optional)
+
 
 + Request (application/json)
 
@@ -1194,11 +1198,9 @@ Please update field names
 
 + Response 200
 
-
-## Campaign [/campaign/{guid}]
 + Parameters 
-    + guid (required, string) ... 
-
+    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The campaign GUID
+    
 ### View Campaign [GET]
 
 Please update field names
@@ -1307,27 +1309,18 @@ Please update field names
             }
     ```
 
++ Parameters 
+    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The campaign GUID
+    
+## Campaign [/campaign/delete/{guid}]
+### Delete Campaign [POST]
 
-### Delete Campaign [DELETE]
+Sets the campaign `active` flag to `false`.
 
-Please update field names
++ Parameters 
+    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The campaign GUID
+    
 
-- `Campaign ID`
-- `Company ID`
-- `Brand ID`
-- `Name`
-- `Description`
-- `Start date & time`
-- `End date & time` (optional)
-- `Activation channels`
-- `Engagement channels`
-- `SMS message` (optional)
-- `SMS response message` (optional)
-- `SMS opt-out`
-- `Email Subject line` (optional)
-- `View online text` (optional)
-- `Unsubscribe text` (optional)
-- `Status` (optional)
 + Response 200
 
 ## Campaign Assests [/campaigns/assets/{guid}]
