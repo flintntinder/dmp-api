@@ -1379,6 +1379,52 @@ Sets the campaign `active` flag to `false`.
 
 + Response 200
 
+
+## Campaign Default fields [/campaigns/defaultfields/]
+
+### Get Campaign default fields [GET]
+
++ Response 200
+
+    ```
+        {
+        [
+
+            {
+                "name": "First name",
+                "title": "firstname",
+                "type": "String (text up to 500 characters )"
+            }, {
+                "name": "Last name",
+                "title": "lastname",
+                "type": "String (text up to 500 characters )"
+            }, {
+                "name": "Email",
+                "title": "email",
+                "type": "String (text up to 500 characters )"
+            }, {
+                "name": "Mobile",
+                "title": "mobile",
+                "type": "String (text up to 500 characters )"
+            }, {
+                "name": "Birth date",
+                "title": "dob",
+                "type": "String (text up to 500 characters )"
+            }, {
+                "name": "Gender",
+                "title": "gender",
+                "type": "String (text up to 500 characters )"
+            }, {
+                "name": "Location (Province)",
+                "title": "province",
+                "type": "String (text up to 500 characters )"
+            }
+        ]
+        }
+    ```
+
+
+
 ## Campaign Assests [/campaigns/assets/{guid}]
 
 Please update field names
