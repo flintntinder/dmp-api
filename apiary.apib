@@ -1379,6 +1379,95 @@ Sets the campaign `active` flag to `false`.
 
 + Response 200
 
+## Campaign Edit details [/campaigns/edit/{guid}]
+
++ Parameters 
+    + guid (required, string) ... 
+    
+### Get Campaign Edit details [GET]
+
++ Response 200
+
+    ```
+        {
+        "brand_id":"XXXX-XXX-XXXXXX-01",
+        "name":"My new campaign",
+        "description":"",
+        "startdate":"",
+        "enddate":"",
+        "status": "1",
+        "campaign_type": "2",
+        "activationchannels":{
+                        "sms":{
+                            "active": true,
+                            "activationmessage":"",
+                            "deploymentdate": ""
+                            },
+                        "email":{
+                            "active": false,
+                            "title":"",
+                            "subjectline": "",
+                            "emailfrom": "",
+                            "viewonlinetitle": "",
+                            "unsubscribelink": "",
+                            "zipfilename": "",
+                            "deploymentdate": "",
+                            "clickthroughurl": ""
+                            }
+                            },
+        "engagementchannels":{
+                        "smsshortcode": {
+                            "active": true,
+                            "shortcode": "",
+                            "keyword": "",
+                            "responsemessage": "",
+                            "capturefield": [
+                                        {  
+                                          "name":"First name",
+                                          "title":"firstname",
+                                          "type":"String (text up to 500 characters )"
+                                        }]                            
+                        },
+                        "webform": {
+                            "active": true,
+                            "capturefields": [  
+                                        {  
+                                          "name":"First name",
+                                          "title":"firstname",
+                                          "type":"String (text up to 500 characters )"
+                                        },
+                                        {  
+                                          "name":"Last name",
+                                          "title":"lastname",
+                                          "type":"String (text up to 500 characters )"
+                                        },
+                                        {  
+                                          "name":"Email",
+                                          "title":"email",
+                                          "type":"String (text up to 500 characters )"
+                                        },
+                                        {  
+                                          "name":"Field 2",
+                                          "title":"field2",
+                                          "type":"Integer (whole number)"
+                                        },
+                                        {  
+                                          "name":"Field 3",
+                                          "title":"field3",
+                                          "type":"String (text up to 500 characters )"
+                                        },
+                                        {  
+                                          "name":"Field 4",
+                                          "title":"field4",
+                                          "type":"Boolean (true/false)"
+                                        }
+                                        ],
+                            "captureurl": "http://www.urldotcom.com?feild1=field1"                           
+                        }
+                    }
+            }
+    ```
+
 
 ## Campaign Default fields [/campaigns/defaultfields/]
 
