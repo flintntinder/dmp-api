@@ -1205,12 +1205,15 @@ Please update field names
         "startdate":"",
         "enddate":"",
         "status": "1",
+        "campaign_type": "2",
         "activationchannels":{
                         "sms":{
+                            "active": true,
                             "activationmessage":"",
                             "deploymentdate": ""
                             },
                         "email":{
+                            "active": false,
                             "title":"",
                             "subjectline": "",
                             "emailfrom": "",
@@ -1223,12 +1226,14 @@ Please update field names
                             },
         "engagementchannels":{
                         "smsshortcode": {
+                            "active": false,
                             "shortcode": "",
                             "keyword": "",
                             "responsemessage": "",
                             "capturefield": []                            
                         },
                         "webform": {
+                            "active": true,
                             "capturefields": [],
                             "captureurl": ""                           
                         }
