@@ -1235,63 +1235,80 @@ Please update field names
 + Request (application/json)
 
         {
-        "brand_id":"XXXX-XXX-XXXXXX-01",
-        "name":"",
-        "description":"",
-        "startdate":"",
-        "enddate":"",
-        "status": "1",
-        "campaign_type": "2",
-        "activationchannels":{
-                        "sms":{
-                            "active": true,
-                            "activationmessage":"",
-                            "deploymentdate": ""
+                        "brand_id": "XXXX-XXX-XXXXXX-01",
+                        "name": "My new campaign",
+                        "description": "The campaign description was entered here",
+                        "startdate": "",
+                        "enddate": "",
+                        "status": "1",
+                        "campaign_type": "3",
+                        "activationchannels": {
+                            "sms": {
+                                "active": true,
+                                "activationmessage": "Please come back to us",
+                                "deploymentdate": ""
                             },
-                        "email":{
-                            "active": false,
-                            "title":"",
-                            "subjectline": "",
-                            "emailfrom": "",
-                            "viewonlinetitle": "",
-                            "unsubscribelink": "",
-                            "zipfilename": "",
-                            "deploymentdate": "",
-                            "clickthroughurl": ""
+                            "email": {
+                                "active": false,
+                                "title": "the Title we have",
+                                "subjectline": "the Subject line we have",
+                                "emailfrom": "info@kc.co.za",
+                                "viewonlinetitle": "Lets view this online here",
+                                "unsubscribelink": "http://www.undone.com/",
+                                "zipfilename": "",
+                                "deploymentdate": "",
+                                "clickthroughurl": "http://clicker.com"
                             }
-                            },
-        "engagementchannels":{
-                        "smsshortcode": {
-                            "active": false,
-                            "shortcode": "",
-                            "keyword": "",
-                            "responsemessage": "",
-                            "capturefield": [ 
-                                                {
-                                                    "name":"fieldname",
-                                                    "title":"Field name",
-                                                    "type":"String (text up to 500 characters )"
-                                                }
-                                            ]                            
                         },
-                        "webform": {
-                            "active": true,
-                            "capturefields": [
-                                                {
-                                                    "name":"fieldname1",
-                                                    "title":"Field name 1",
-                                                    "type":"String (text up to 500 characters )"
-                                                },
-                                                {
-                                                    "name":"fieldname2",
-                                                    "title":"Field name 2",
-                                                    "type":"Integer (whole number)"
-                                                }
-                                            ],
-                            "captureurl": ""                           
+                        "engagementchannels": {
+                            "smsshortcode": {
+                                "active": true,
+                                "shortcode": "34761",
+                                "keyword": "Happy",
+                                "responsemessage": "The SMS short code response message goes here",
+                                "capturefield": [{
+                                    "name": "firstname",
+                                    "title": "First name",
+                                    "type": "String (text up to 500 characters )"
+                                }]
+                            },
+                            "webform": {
+                                "active": true,
+                                "capturefields": [{
+                                    "name": "firstname",
+                                    "title": "First name",
+                                    "type": "String (text up to 500 characters )"
+                                }, {
+                                    "name": "lastname",
+                                    "title": "Last name",
+                                    "type": "String (text up to 500 characters )"
+                                }, {
+                                    "name": "email",
+                                    "title": "Email",
+                                    "type": "String (text up to 500 characters )"
+                                }, {
+                                    "name": "field2",
+                                    "title": "Field 2",
+                                    "type": "Integer (whole number)"
+                                }, {
+                                    "name": "field3",
+                                    "title": "Field 3",
+                                    "type": "String (text up to 500 characters )"
+                                }, {
+                                    "name": "field4",
+                                    "title": "Field 4",
+                                    "type": "Boolean (true/false)"
+                                },
+                                {
+                                    "is_default":false,
+                                    "name":"customfield12",
+                                    "title":"Custom Field",
+                                    "type":"String"
+                                }],
+                                "captureurl": "http://www.urldotcom.com?feild1=field1"
+                            }
                         }
                     }
-            }
     
 
 
