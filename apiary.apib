@@ -2548,3 +2548,126 @@ Please update field names
     
 
 
+
+
+# Group Capture Fields
+
+With this, the default capture fields will be saved and listed. All new capture fields will be regarded as "Not default"
+We should define auth levels for this.
+
+I've left the "is_default" field in even though it isn't entirely needed right now. Can easily be removed.
+
+## Capture Field list custom [/capturefield/custom]
+
+### Get a list of all the custom capture fields regardless of campaigns [GET]
+
+
++ Response 200 (application/json;charset=UTF-8)
+
+    ``` 
+        {
+        "capture_items":[
+            {
+              "is_default":false,
+              "name":"customfield12",
+              "title":"Custom Field",
+              "type":"String"
+            },
+            {
+              "is_default":false,
+              "name":"customfield13",
+              "title":"Another Custom Field",
+              "type":"String"
+            }]
+        }
+    ```
+    
+## Capture Field list default [/capturefield/default]
+
+### Get a list of all the default capture fields regardless of campaigns [GET]
+
++ Response 200 (application/json;charset=UTF-8)
+
+   ``` 
+        {
+        "capture_items":[
+            {
+              "is_default":true,
+              "name":"firstname",
+              "title":"First name",
+              "type":"String"
+            },
+            {
+              "is_default":true,
+              "name":"lastname",
+              "title":"Last name",
+              "type":"String"
+            },
+            {
+              "is_default":true,
+              "name":"email",
+              "title":"Email",
+              "type":"String"
+            },
+            {
+              "is_default":true,
+              "name":"mobile",
+              "title":"Mobile",
+              "type":"String"
+            },
+            {
+              "is_default":true,
+              "name":"dob",
+              "title":"Birth Date",
+              "type":"String"
+            },
+            {
+              "is_default":true,
+              "name":"gender",
+              "title":"Gender",
+              "type":"Boolean"
+            },
+            {
+              "is_default":true,
+              "name":"location",
+              "title":"Location",
+              "type":"String"
+            }
+            ]
+        }
+    ```
+    
+        
+### Create a custom capture field. [POST]
+
+
+This end-point requires the following parameters to be sent:
+
+- `name` (string) "code" the spaceless variable
+- `title` (string)
+- `type` (string)
+
++ Request (application/json;charset=UTF-8)
+
+    ```
+    {
+        "name": "customfield",
+        "title": "A Custom field",
+        "type": "String (text up to 500 characters )",
+       
+    }
+    ```
+
++ Response 200
+
+ ```
+    {
+        "name": "customfield",
+        "title": "A Custom field",
+        "type": "String (text up to 500 characters )",
+       
+    }
+    ```
+
++ Response 401
+
