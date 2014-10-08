@@ -1114,7 +1114,42 @@ Furthermore, *company* accounts should only be able to save brands for their own
     }
     ```
 
+## Brand [/brand]
+### List Brand [GET]
+
+Gets a list of all available brands, returning the id (guid) and the name.
+
+
++ Response 200 (application/hal+json)
+
+    ```
+    {[
+        {
+            "_link":{
+                "self":{
+                "href":"/brand/469bbea6-2532-4bf1-84b2-af656da10325"
+                }
+            },
+            "id":"469bbea6-2532-4bf1-84b2-af656da10325",
+            "name":"Kotex",
+        },
+        
+        {
+            "_link":{
+                "self":{
+                "href":"/brand/9E12A814-D283-4050-BA74-8549701E5B12"
+                }
+            },
+            "id":"9E12A814-D283-4050-BA74-8549701E5B12",
+            "name":"Nike Updated",
+
+        }
+    ]}
+    ```
+
+## Brand [/brand/{guid}/]
 ### View Brand [GET]
+
 
 Get the properties of a certain brand.
 
@@ -1124,6 +1159,7 @@ Get the properties of a certain brand.
 + Response 200
 
     [Brand][]
+
 
 ## Brand [/brand/delete/{guid}]
 
