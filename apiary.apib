@@ -1565,6 +1565,93 @@ Sets the campaign `active` flag to `false`.
         }
     ```
 
+## Campaign [/campaign/targeted_consumers/{guid}]
+
+### Create Campaign targeted Consumers [POST]
+
++ Request (application/json)
+    
+    ```
+       {
+            "brand": "Baby soft",
+            "product": [
+                        "Washlets", 
+                        "Enviro-roll",
+                        "Mini",
+                        "Gold",
+                        "Newborn"
+            ],
+            "province": [ 
+                        "Gauteng",
+                        "Eastern Cape",
+                        "Western Cape",
+                        "Limpopo",
+                        "Mpumalanga",
+                        "North West",
+                        "Free State",
+                        "Northern Cape",
+                        "Unknown" 
+                    ],
+            "age": [               
+                        "sixteen_twentyfour",
+                        "twentyfive_thirtyfour",
+                        "thirtyfive_fortyfive",
+                        "fortyfive_plus",
+                        "unknown"
+                            ],
+            "gender": [
+                        "Male",
+                        "Female",
+                        "Unknown"
+                    ],
+            "maritalStatus": [
+                        "Married Couples",
+                        "Married with Kids",
+                        "Single",
+                        "Single parent",
+                        "Expecting parent",
+                        "Unknown"
+                    ],
+            "consumerTier": [
+                        "A",
+                        "B",
+                        "C"
+            ],
+            "commsPreference": [
+                        "SMS",
+                        "EMAIL",
+                        "UNKOWN"
+            ],
+            "customFields": [
+                        {
+                        "name": "Field 1",
+                        "operator": "Equals",
+                        "value": "111"
+                        },
+                        {
+                        "name": "Field 3",
+                        "operator": "Between",
+                        "value": {
+                            "first": "3",
+                            "second": "7"
+                            }
+                        }
+            ]
+        }
+    ```
+
++ Response 200 (application/json)
+
+    ```
+        {
+        "message":"Success"
+        }
+    ```
+
++ Parameters 
+    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The campaign GUID
+    
+
 
 
 ## Campaign Assests [/campaigns/assets/{guid}]
