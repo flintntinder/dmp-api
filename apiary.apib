@@ -2817,7 +2817,8 @@ I've left the "is_default" field in even though it isn't entirely needed right n
         }
     ```
     
-        
+## Capture Field creation [/capturefield/]  
+
 ### Create a custom capture field. [POST]
 
 
@@ -2903,6 +2904,37 @@ Here, we will have any functions that don't quite apply to any other group speci
                 "guid":"AA2FBB58-ECC4-416F-8669-B0DD9A86334B",
                 "name":"Western Cape"
             }
+            ]
+        }
+    ```
+    
+## Marital status list [/marital_status/]
+
+### Get a list of all the marital statuses with specific guids in order to standardise this process [GET]
+
+
++ Response 200 (application/json;charset=UTF-8)
+
+    ``` 
+        {  
+        "provinces":[  
+            {  
+                "guid":"AF3331E6-FE07-44E9-9F60-B6D0F7A07CDB",
+                "name":"Married"
+            },
+            {  
+                "guid":"D2869401-2270-45EB-B658-5DF41F01E1F4",
+                "name":"Single"
+            },
+            {  
+                "guid":"A2D17E45-EB89-40B2-BA04-FDD226B30919",
+                "name":"Divorced"
+            },
+            {  
+                "guid":"9D4A6F8B-1773-47A7-91B5-936F28AEE801",
+                "name":"Widowed"
+            },
+           
             ]
         }
     ```
