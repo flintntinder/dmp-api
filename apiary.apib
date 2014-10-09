@@ -2314,10 +2314,79 @@ Please update field names
 
 ## Consumer [/consumer/{guid}]
 
-### Save a consumer
+### Save a consumer [POST]
 
-Update an existing consumer 
+Update an existing consumer.
 
+- `firstname` `*`
+- `lastname` `*`
+- `email` `**`
+- `mobile` `**`
+- `gender` (nullable)
+- `dateofbirth` (nullable)
+- `last_active` (default: NOW())
+- `country` (not required, has default: See API Response)
+- `province` (nullable)
+- `language` (not required, has default: See API Response)
+- `maritalstatus` (nullable)
+- `pregnancyduedate` (not required, has default: See API Response)
+- `numberofchildren` (nullable)
+- `commpreference` (nullable)
+
+`*` Required
+`**` _Either or both_ `email` or `mobile` is required. Both cannot be blank.
+
++ Request
+
+    ```
+    {
+        "firstname": "James",
+        "lastname": "Johnson",
+        "email": "james@example.com",
+        "mobile": "323456789",
+        "gender": "m",
+        "dateofbirth": "1989-10-27",
+        "country": "South Africa",
+        "province": "Gauteng",
+        "language": "English",
+        "maritalstatus": "Single",
+        "pregnancyduedate": "2014-12-25",
+        "numberofchildren": "1",
+        "commpreference": "sms & email",
+        "brands": 
+        [
+            {
+                "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
+                "name": "Baby Soft"
+            },
+            {
+                "id": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
+                "name": "Huggies"
+            },
+            
+        ]
+    }
+    ```
+
++ Response 200 (application/hal+json)
+
+    ```
+    {
+        "_link": {
+            "self": {
+                "href": "/consumer/37a06561-dc91-48fc-a638-96ae97a4c8f3"
+            }
+        },
+        "status": "success",
+        "message": "Updated Consumer Name has been updated!",
+        "consumer": {
+            "id": "37a06561-dc91-48fc-a638-96ae97a4c8f3"
+            "name": "New Consumer Name"
+        }
+    }
+    ```
+
+## Consumer [/consumer/{guid}/]
 ### View a Consumer [GET]
 
 Get a basic view of any specific Consumer.
@@ -2329,7 +2398,17 @@ Get a basic view of any specific Consumer.
 
     [Consumer][]
 
-### Deactivate a Consumer [DELETE]
+## Consumer [/consumer/]
+### View a list of Consumers [GET]
+
+Get a list view of all Consumers.
+
++ Response 200
+
+    [Consumer][]
+    
+## Consumer [/consumer/delete/{guid}]
+### Deactivate a Consumer [POST]
 
 Get a basic view of any specific Consumer.
 
