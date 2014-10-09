@@ -2851,3 +2851,60 @@ This end-point requires the following parameters to be sent:
 
 + Response 401
 
+
+# Group Miscellaneous functions
+
+Here, we will have any functions that don't quite apply to any other group specifically.
+
+
+## Province list [/province/]
+
+### Get a list of all the provinces with specific guids in order to standardise this process [GET]
+
+
++ Response 200 (application/json;charset=UTF-8)
+
+    ``` 
+        {  
+        "provinces":[  
+            {  
+                "guid":"243B41F9-CBB2-4C69-8C45-96C71346AE91",
+                "name":"Eastern Cape"
+            },
+            {  
+                "guid":"774BC20D-4764-428B-B15C-B8D659BDB2C5",
+                "name":"Free State"
+            },
+            {  
+                "guid":"B866AF00-AA57-4EC7-ABC4-59674D5E646B",
+                "name":"Gauteng"
+            },
+            {  
+                "guid":"528B818A-5AAF-443D-A866-79FBDA4C8EA6",
+                "name":"Kwazulu Natal"
+            },
+            {  
+                "guid":"9ACE0CE8-ADCD-4C32-A8A4-6758AF5CED33",
+                "name":"Limpopo"
+            },
+            {  
+                "guid":"CB849904-4162-4EC3-8E1C-71D3685A44A3",
+                "name":"Mpumalanga"
+            },
+            {  
+                "guid":"8C74CD9D-8C9D-4509-B1BF-8CA02F2988D5",
+                "name":"Northern Cape"
+            },
+            {  
+                "guid":"69B438A0-E65A-49A2-8A15-139C58DE0566",
+                "name":"North West"
+            },
+            {  
+                "guid":"AA2FBB58-ECC4-416F-8669-B0DD9A86334B",
+                "name":"Western Cape"
+            }
+            ]
+        }
+    ```
+    
+    
