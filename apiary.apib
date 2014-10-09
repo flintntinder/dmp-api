@@ -2939,4 +2939,38 @@ Here, we will have any functions that don't quite apply to any other group speci
         }
     ```
     
-    
+# Group Capture Points
+
+The consumer capture points
+
+
+## Province list [/capture/{campaignguid}/]
+
+### Submits consumer data to the campaign  [POST]
+This returns status 200 if the data was submitted with no issues
+Status 206 is returned if one or more look up fields where incorrectly passed (e.g. marital status, province, etc). The record is still saved but without the offending value.
+Status 400 is returned if one or more mandatory fields are missing (campaign guid, email or mobile).
+Status 500 is returned if the user cannot be saved due to a server error
+
++ Response 200 (application/json;charset=UTF-8)
++ Response 206 (application/json;charset=UTF-8)
+
+    ``` 
+        {  
+        "FailReason":Meaningful fail message, listing missing content"
+        }
+
++ Response 400 (application/json;charset=UTF-8)
+
+    ``` 
+        {  
+        "FailReason":Message lists missing field"
+
+        }
++ Response 500 (application/json;charset=UTF-8)
+
+    ``` 
+        {  
+        "FailReason":Meaningful fail message"
+
+        }
