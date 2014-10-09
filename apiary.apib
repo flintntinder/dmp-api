@@ -2210,7 +2210,7 @@ Please update field names
 
 # Group Consumer
 
-## Consumer [/consumer/{guid}]
+## Consumer [/consumer]
 
 + Model (application/hal+json)
 
@@ -2235,10 +2235,14 @@ Please update field names
             "email": "james@example.com",
             "mobile": "323456789",
             "gender": "m",
-            "age": "31",
+            "dateofbirth": "1989-10-27",
             "last_active": "2014-04-16T09:12:00Z",
             "created_at": "2014-04-14T02:15:15Z",
             "status": true,
+            "maritalstatus": "Single",
+            "numberofchildren": "1",
+            "commpreference": "sms & email",
+            "province": "Gauteng",
             "country": {
                 "name": "South Africa",
                 "code": "ZA",
@@ -2247,7 +2251,19 @@ Please update field names
             "language": {
                 "name": "English",
                 "code": "en"
-            }
+            },
+            "brands": 
+            [
+                {
+                    "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
+                    "name": "Baby Soft"
+                },
+                {
+                    "id": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
+                    "name": "Huggies"
+                },
+                
+            ]
         }
         ```
 
@@ -2282,6 +2298,12 @@ Please update field names
 + Response 200
 
     [Consumer][]
+
+## Consumer [/consumer/{guid}]
+
+### Save a consumer
+
+Update an existing consumer 
 
 ### View a Consumer [GET]
 
