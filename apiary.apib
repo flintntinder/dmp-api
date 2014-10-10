@@ -1652,49 +1652,6 @@ Sets the campaign `active` flag to `false`.
     ```
 
 
-## Campaign Default fields [/campaigns/defaultfields/]
-
-### Get Campaign default fields [GET]
-
-+ Response 200
-
-    ```
-        {
-        [
-
-            {
-                "name": "First name",
-                "title": "firstname",
-                "type": "String (text up to 500 characters )"
-            }, {
-                "name": "Last name",
-                "title": "lastname",
-                "type": "String (text up to 500 characters )"
-            }, {
-                "name": "Email",
-                "title": "email",
-                "type": "String (text up to 500 characters )"
-            }, {
-                "name": "Mobile",
-                "title": "mobile",
-                "type": "String (text up to 500 characters )"
-            }, {
-                "name": "Birth date",
-                "title": "dob",
-                "type": "String (text up to 500 characters )"
-            }, {
-                "name": "Gender",
-                "title": "gender",
-                "type": "String (text up to 500 characters )"
-            }, {
-                "name": "Location (Province)",
-                "title": "province",
-                "type": "String (text up to 500 characters )"
-            }
-        ]
-        }
-    ```
-
 ## Campaign [/campaign/targeted_consumers/{guid}]
 
 ### Create Campaign targeted Consumers [POST]
@@ -1886,15 +1843,28 @@ Please update field names
 
 + Response 200
 
-## Campaign Subscriber [/campaigns/subscriber/{guid}]
+
+# Group Campaign Subscribers
+
+## Campaign Subscriber [/campaign_subscriber/{guid}]
 + Parameters 
-    + guid (required, string) ... 
+    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The campaign GUID
 
 ### Create Campaign Subscriber [POST]
 
-Please update field names
+- `Consumer ID` (the consumer guid) 
 
-- `Subscriber ID`
+The campaign guid will be passed as a paramater and the consumer guid as a json object.
+This will then attach a consumer to a campaign, thereby making that consumber a subscriber to the campaign.
+
+
++ Request (application/json)
+    
+    ```
+       {
+            "consumer": "B7A1AD92-5DE8-437C-94A3-A9EE4009C91E"
+        }
+    ```
 
 + Response 200
 
@@ -1905,7 +1875,7 @@ Please update field names
 - `Subscriber ID`
 + Response 200
 
-## Campaign Subscribers [/campaigns/subscribers/{guid}]
+## Campaign Subscribers [/campaign_subscribers/{guid}]
 
 This will add or remove multiple users to/from a campaign. A list of all currently assigned users may
 also be retrieved. A subscriber will only ever be added to a campaign once.
@@ -3150,7 +3120,7 @@ Here, we will have any functions that don't quite apply to any other group speci
 
     ``` 
         {  
-        "provinces":[  
+        "statuses":[  
             {  
                 "guid":"AF3331E6-FE07-44E9-9F60-B6D0F7A07CDB",
                 "name":"Married"
@@ -3177,7 +3147,7 @@ Here, we will have any functions that don't quite apply to any other group speci
 The consumer capture points
 
 
-## Province list [/capture/{campaignguid}/]
+## Capture point [/capture/{campaignguid}/]
 
 ### Submits consumer data to the campaign  [POST]
 This returns status 200 if the data was submitted with no issues
