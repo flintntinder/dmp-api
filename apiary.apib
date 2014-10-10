@@ -1860,18 +1860,30 @@ This will then attach a consumer to a campaign, thereby making that consumber a 
 + Request (application/json)
     
     ```
-       {
+        {
             "consumer": "B7A1AD92-5DE8-437C-94A3-A9EE4009C91E"
         }
     ```
 
 + Response 200
 
-### Delete Campaign Subscriber [DELETE]
+## Campaign Subscriber [/campaign_subscriber/delete/{guid}]
 
-Please update field names
++ Parameters 
+    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The campaign GUID
+    
+### Delete Campaign Subscriber [POST]
 
-- `Subscriber ID`
+- `Consumer ID` (the consumer guid) 
+
++ Request (application/json)
+    
+    ```
+        {
+            "consumer": "B7A1AD92-5DE8-437C-94A3-A9EE4009C91E"
+        }
+    ```
+    
 + Response 200
 
 ## Campaign Subscribers [/campaign_subscribers/{guid}]
