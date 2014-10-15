@@ -1936,12 +1936,34 @@ Please update field names
 
 # Group Programs
 
+## Program [/program/]
+
+### Create Program [POST]
+
++ Request (application/json)
+    
+    ```
+        {
+        "name":"",
+        "brand_id":"",
+        "userid":""
+        }
+    ```
+
++ Response 200 (application/json)
+
+    ```
+        {
+        "id":"xxxx-xxxxx-xxxx-xxxxx-01"
+        }
+    ```
+
 ## Programs [/programs/{programID}]
 
 + Parameters
     + programID (string,required) ...
 
-### Create a Program [POST]
+### Save a Program [POST]
 
 Please update field names
 
@@ -1956,6 +1978,36 @@ Please update field names
 - `SMS opt-out (optional)`
 - `1Cadence field`
 - `1Status (optional)`
+
++ Request (application/json)
+
+        {
+            "brandid": "",
+            "userid": "",
+            "id": "",
+            "name": "",
+            "description": "',
+            "when": "Before",
+            "keyfield": "Select a field",
+            "requiresoptin": "no",
+            "rounds": "',
+            "frequency": "Select frequency",
+            "channel": {
+                "sms": {
+                    "active": true,
+                    "useroptin": "",
+                    "useroptout": ""
+                },
+                "email": {
+                    "active": true,
+                    "title": "",
+                    "subjectline": "",
+                    "emailfrom": "Select an address",
+                    "viewonlinelink": "",
+                    "unsubscribelink": ""
+                }
+            }
+        }
 
 + Response  200 (application/json;charset=UTF-8)
 
@@ -2027,6 +2079,47 @@ Please update field names
 - `1Status (optional)`
 
 + Response  200
+
+## Program Edit details [/programs/edit/{guid}]
+
++ Parameters 
+    + guid (required, string) ... 
+    
+### Get Campaign Edit details [GET]
+
++ Response 200
+
+    ```
+        {
+            "brandid": "xxx-00xxxx-1",
+            "userid": "xxx-xxx-a-xx-x-xx-xxxx-b-xxx-x-x",
+            "id": "X-xxx-xx-x-x-xx-x-0",
+            "name": "SMS Communication",
+            "description": "Description ",
+            "when": "Before",
+            "keyfield": "Select a field",
+            "requiresoptin": "no",
+            "rounds": "',
+            "frequency": "Select frequency",
+            "channel": {
+                "sms": {
+                    "active": true,
+                    "useroptin": "",
+                    "useroptout": ""
+                },
+                "email": {
+                    "active": true,
+                    "title": "",
+                    "subjectline": "",
+                    "emailfrom": "Select an address",
+                    "viewonlinelink": "",
+                    "unsubscribelink": ""
+                }
+            }
+        }
+
+    ```
+
 
 ## Programs Messaging [/programs/message/{programID}]
 
@@ -2169,39 +2262,6 @@ This will add or remove multiple users to/from a program. A list of all currentl
 
 ### Delete Program Subscribers[DELETE]
 - `Subscriber ID`
-+ Response 200
-
-
-
-
-## Program Metrics [/programs/metrics/{programID}]
-
-This will retrieve the overall metrics for a program
-+ Parameters
-    + programID (string,required) ...
-
-### View Program Metrics[GET]
-
-- `Total sent`
-- `Total bounced`
-- `Total unique opens`
-- `Total clicks`
-- `Total unique clicks`
-- `Total modified`
-- `Total unsubscribed`
-- `Total delivered`
-- `Percentage bounced`
-- `Percentage delivered`
-- `Percentage opened`
-- `Percentage clicked`
-- `Percentage clicked to open`
-- `Percentage modified`
-- `Percentage unsubscribed`
-- `SMSs sent`
-- `SMSs bounced`
-- `SMSs unsubscribed`
-- `SMSs percentage bounced`
-- `SMSs percentage unsubscribed`
 + Response 200
 
 
