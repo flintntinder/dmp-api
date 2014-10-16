@@ -1982,32 +1982,37 @@ Please update field names
 + Request (application/json)
 
         {
-            "brandid": "",
-            "userid": "",
-            "id": "",
-            "name": "",
-            "description": "',
-            "when": "Before",
-            "keyfield": "Select a field",
-            "requiresoptin": "no",
-            "rounds": "',
-            "frequency": "Select frequency",
-            "channel": {
-                "sms": {
-                    "active": true,
-                    "useroptin": "",
-                    "useroptout": ""
-                },
-                "email": {
-                    "active": true,
-                    "title": "",
-                    "subjectline": "",
-                    "emailfrom": "Select an address",
-                    "viewonlinelink": "",
-                    "unsubscribelink": ""
+                    "brandid": "xxx-00xxxx-1",
+                    "userid": "xxx-xxx-a-xx-x-xx-xxxx-b-xxx-x-x",
+                    "id": "X-xxx-xx-x-x-xx-x-0",
+                    "name": "SMS Communication",
+                    "description": "Description ",
+                    "when": "Before",
+                    "keyfield": "Select a field",
+                    "requiresoptin": {
+                        "status": true,
+                        "campaign": "Select a campaign",
+                        "field": "Select a field"
+                    },
+                    "rounds": 7,
+                    "frequency": "Select frequency",
+                    "channel": {
+                        "sms": {
+                            "active": true,
+                            "optin": "Thank you for opting into our Program",
+                            "optout": "We will miss you"
+                        },
+                        "email": {
+                            "active": false,
+                            "title": "",
+                            "subjectline": "",
+                            "emailfrom": "Select an address",
+                            "viewonlinelink": "",
+                            "unsubscribelink": ""
+                        },
+                        "emailpackage":""
+                    }
                 }
-            }
-        }
 
 + Response  200 (application/json;charset=UTF-8)
 
@@ -2091,34 +2096,39 @@ Please update field names
 
     ```
         {
-            "brandid": "xxx-00xxxx-1",
-            "userid": "xxx-xxx-a-xx-x-xx-xxxx-b-xxx-x-x",
-            "id": "X-xxx-xx-x-x-xx-x-0",
-            "name": "SMS Communication",
-            "description": "Description ",
-            "when": "Before",
-            "keyfield": "Select a field",
-            "requiresoptin": "no",
-            "rounds": "",
-            "frequency": "Select frequency",
-            "channel": {
-                "sms": {
-                    "active": true,
-                    "useroptin": "",
-                    "useroptout": ""
-                },
-                "email": {
-                    "active": true,
-                    "title": "",
-                    "subjectline": "",
-                    "emailfrom": "Select an address",
-                    "viewonlinelink": "",
-                    "unsubscribelink": ""
+                    "brandid": "xxx-00xxxx-1",
+                    "userid": "xxx-xxx-a-xx-x-xx-xxxx-b-xxx-x-x",
+                    "id": "X-xxx-xx-x-x-xx-x-0",
+                    "name": "SMS Communication",
+                    "description": "Description ",
+                    "when": "Before",
+                    "keyfield": "Select a field",
+                    "requiresoptin": {
+                        "status": true,
+                        "campaign": "Select a campaign",
+                        "field": "Select a field"
+                    },
+                    "rounds": 7,
+                    "frequency": "Select frequency",
+                    "channel": {
+                        "sms": {
+                            "active": true,
+                            "optin": "Thank you for opting into our Program",
+                            "optout": "We will miss you"
+                        },
+                        "email": {
+                            "active": false,
+                            "title": "",
+                            "subjectline": "",
+                            "emailfrom": "Select an address",
+                            "viewonlinelink": "",
+                            "unsubscribelink": ""
+                        },
+                        "emailpackage":""
+                    }
                 }
-            }
-        }
-
     ```
+
 
 
 ## Programs Messaging [/programs/message/{programID}]
