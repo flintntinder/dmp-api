@@ -2788,6 +2788,32 @@ Allows you to add, read or delete any meta data for a single consumer specified 
             }
     ```
 
+
+
+## Consumers Profile Completion Data [/consumers/profile_status/brand/{brandId}]
+
++ Parameters
+    + brandId (string, required) ...
+
+### View Consumers Profile completetion statistics by Brand [GET]
+
++ Response 200
+    
+    ```
+    {
+        [
+         {
+            "key": "Completed",
+            "value': 78
+         }, {
+            "key": "Incomplete",
+            "value": 22
+         }
+        ]
+    }
+    ```
+
+
 # Group Metrics
 
 ## Consumers Brand Metrics [/metrics/consumers/brand/{brandId}]
