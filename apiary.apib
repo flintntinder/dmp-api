@@ -1823,22 +1823,54 @@ Please update field names
 - Image assets should be packaged in the zip file in the root folder. The `unsubscribe.htm` is a page users will view when unsubscribing, and should contain your corporate identity.
 - Files with the same name will be automatically overwritten.
 
+
+
 + Parameters 
     + guid (required, string) ... 
 
 ### Save Campaign Assets [POST]
 
+Here the request will contain the actual file
+
 + Response 200
+
+  ```
+        {
+                "status":"200",
+                "message":"Success!"
+        }
+  ```
 
 ### View Campaign Assets [GET]
 
 + Response 200
 
+ ```
+    {
+        "Files":[
+            "asset.zip",
+            "coolimage.jpg",
+            "email.html",
+            "email.txt"
+        ],
+        "hasEmailHtml":true,
+        "hasEmailText":true,
+        "hasUnsubscribe":false
+    }
+ ```
+ 
 ## Campaign Assests [/campaign_assets/delete/{guid}]
 
-### View Campaign Assets [POST]
+### Delete Campaign Assets [POST]
 
 + Response 200
+
+     ```
+            {
+                    "status":"200",
+                    "message":"Success!"
+            }
+     ```
 
 
 # Group Campaign Subscribers
