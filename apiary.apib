@@ -2484,10 +2484,101 @@ Please update field names
              }]
          }
      ``` 
+     
+     
+## Program [/program/communication/]
+    
+### Create a Program Communication [POST]
+ 
+Please update field names
+ 
++ Request (application/json;charset=UTF-8)
+ 
+         {
+            "communication": 
+            {
+                "programid": "XXXX-X-Program-ID",
+                "id": "xx-xxxd1",
+                "title": "Communication 1",
+                "description": "New description for communication",
+                "time": "",
+                "keyfield": "pregnancy due date",
+                "when": "After",
+                "times": 24,
+                "frequency": "weeks",
+                "type": 
+                {
+                    "sms": {
+                        "active":false,
+                        "message": ""
+                    },
+                    "email": {
+                        "active":true,
+                        "title": "The title goes here",
+                        "subjectline": "User created subject line",
+                        "emailfrom": "info@kc.co.za",
+                        "viewonlinelink": "View link is inserted here",
+                        "unsubscribelink": "unsubscribe link value lies here",
+                        "clickthroughurl": "click through URL value here",
+                        "emailpackage":""
+                    }
+                }
+            }
+         }
+
++ Response  200 (application/json;charset=UTF-8)
+ 
+     ```
+         {
+         "id":"xxx-xxx-01"
+         }
+     ```
+
 
 ## Program [/program/communication/{commsID}]
     
-### View a Program Communication [GET]
+### Save a Program Communication [POST]
+ 
+Please update field names
+ 
++ Request (application/json;charset=UTF-8)
+
+         {
+            "communication": 
+            {
+                "programid": "XXXX-X-Program-ID",
+                "id": "xx-xxxd1",
+                "title": "Communication 1",
+                "description": "New description  for communication",
+                "time": "",
+                "keyfield": "pregnancy due date",
+                "when": "After",
+                "times": 25,
+                "frequency": "weeks",
+                "type": 
+                {
+                    "sms": {
+                        "active":false,
+                        "message": ""
+                    },
+                    "email": {
+                        "active":true,
+                        "title": "The title goes here",
+                        "subjectline": "User created subject line",
+                        "emailfrom": "info@kc.co.za",
+                        "viewonlinelink": "View link is inserted here",
+                        "unsubscribelink": "unsubscribe link value lies here",
+                        "clickthroughurl": "click through URL value here",
+                        "emailpackage":""
+                    }
+                }
+            }
+         }
+         
++ Response  200 (application/json;charset=UTF-8)
+
+
+### View a Program Communication for Edit[GET]
  
 Please update field names
  
@@ -2504,18 +2595,23 @@ Please update field names
                 "time": "",
                 "keyfield": "pregnancy due date",
                 "when": "After",
-                "times": 69,
+                "times": 24,
                 "frequency": "weeks",
                 "type": 
                 {
-                    "sms": {},
+                    "sms": {
+                        "active":false,
+                        "message": ""
+                    },
                     "email": {
+                        "active":true,
                         "title": "The title goes here",
                         "subjectline": "User created subject line",
                         "emailfrom": "info@kc.co.za",
                         "viewonlinelink": "View link is inserted here",
                         "unsubscribelink": "unsubscribe link value lies here",
-                        "clickthroughurl": "click through URL value here"
+                        "clickthroughurl": "click through URL value here",
+                        "emailpackage":""
                     }
                 }
             }
