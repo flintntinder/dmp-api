@@ -2186,51 +2186,50 @@ Please update field names
 
     ```
         {
-        "id": "xxx-xxxxx-xx-xx-x-x-xxxx-xxxx-xxx-x",
-        "name": "Program name 1",
-        "brand":{
-                "name": "Baby Soft",
-                 "id": "xxx-xxxxxxx-xx-xxxxx-xx"
-                 },
-        "activationchannels": ["SMS","EMAIL"],
-        "user_id": "3",
-        "datecreated": "2",
-        "datelaunched": "2",
-        "startdate": "Monday 1 September",
-        "enddate": "Friday 12 September",
-        "keyfield":"Pregnancy Due Date",
-        "frequency":"Weekly",
-        "rounds":"7",
-        "description": "This is the programs description from the API Mock",
-        "status": "live",
-        "channels":["sms","email"],
-        "progress":{
-                "completed":"2500",
-                "incomplete":"300"
+                "id": "xxx-xxxxx-xx-xx-x-x-xxxx-xxxx-xxx-x",
+                "name": "Program name 1",
+                "brand": {
+                    "name": "Baby Soft",
+                    "id": "xxx-xxxxxxx-xx-xxxxx-xx"
                 },
-        "sent":{
-        
-            "sms":{
-                "last_thirty_days":"45",
-                "total":"500"
-            },
-            "email":{
-                "last_thirty_days":"500",
-                "total":"1300"}
-            }
-        },
-        "unsubscribers":{
-        
-            "sms":{
-                "last_thirty_days":"7",
-                "total":"50"
-            },
-            "email":{
-                "last_thirty_days":"30",
-                "total":"56"}
-            }
+                "activationchannels": ["SMS", "EMAIL"],
+                "user_id": "3",
+                "datecreated": "2",
+                "datelaunched": "2",
+                "startdate": "Monday 1 September",
+                "enddate": "Friday 12 September",
+                "keyfield": "Pregnancy Due Date",
+                "frequency": "Weekly",
+                "rounds": "7",
+                "description": "This is the programs description from the API Mock",
+                "status": "live",
+                "progress": {
+                    "completed": 2500,
+                    "incomplete": 300
+                },
+                "sent": {
+                    "sms": {
+                        "last_thirty_days": 45,
+                        "total": 500
+                    },
+                    "email": {
+                        "last_thirty_days": 500,
+                        "total": 1300
+                    }
+                },
+                "unsubscribers": {
+
+                    "sms": {
+                        "last_thirty_days": "7",
+                        "total": "50"
+                    },
+                    "email": {
+                        "last_thirty_days": "30",
+                        "total": "56"
+                    }
+
+                }
         }
-        
     ```
 
 ### Delete a Program [DELETE]
