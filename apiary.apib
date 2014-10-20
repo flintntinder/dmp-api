@@ -2495,35 +2495,9 @@ Please update field names
 + Request (application/json;charset=UTF-8)
  
          {
-            "communication": 
-            {
-                "programid": "XXXX-X-Program-ID",
-                "id": "xx-xxxd1",
-                "title": "Communication 1",
-                "description": "New description for communication",
-                "time": "",
-                "keyfield": "pregnancy due date",
-                "when": "After",
-                "times": 24,
-                "frequency": "weeks",
-                "type": 
-                {
-                    "sms": {
-                        "active":false,
-                        "message": ""
-                    },
-                    "email": {
-                        "active":true,
-                        "title": "The title goes here",
-                        "subjectline": "User created subject line",
-                        "emailfrom": "info@kc.co.za",
-                        "viewonlinelink": "View link is inserted here",
-                        "unsubscribelink": "unsubscribe link value lies here",
-                        "clickthroughurl": "click through URL value here",
-                        "emailpackage":""
-                    }
-                }
-            }
+            "programid": "XXXX-X-Program-ID",
+            "title": "Communication 1",
+            "type":"email"
          }
 
 + Response  200 (application/json;charset=UTF-8)
@@ -2544,33 +2518,30 @@ Please update field names
 + Request (application/json;charset=UTF-8)
 
          {
-            "communication": 
+            "programid": "XXXX-X-Program-ID",
+            "id": "xx-xxxd1",
+            "title": "Communication 1",
+            "description": "New description for communication",
+            "time": "",
+            "keyfield": "pregnancy due date",
+            "when": "After",
+            "times": 24,
+            "frequency": "weeks",
+            "type": 
             {
-                "programid": "XXXX-X-Program-ID",
-                "id": "xx-xxxd1",
-                "title": "Communication 1",
-                "description": "New description  for communication",
-                "time": "",
-                "keyfield": "pregnancy due date",
-                "when": "After",
-                "times": 25,
-                "frequency": "weeks",
-                "type": 
-                {
-                    "sms": {
-                        "active":false,
-                        "message": ""
-                    },
-                    "email": {
-                        "active":true,
-                        "title": "The title goes here",
-                        "subjectline": "User created subject line",
-                        "emailfrom": "info@kc.co.za",
-                        "viewonlinelink": "View link is inserted here",
-                        "unsubscribelink": "unsubscribe link value lies here",
-                        "clickthroughurl": "click through URL value here",
-                        "emailpackage":""
-                    }
+                "sms": {
+                    "active":false,
+                    "message": ""
+                },
+                "email": {
+                    "active":true,
+                    "title": "The title goes here",
+                    "subjectline": "User created subject line",
+                    "emailfrom": "info@kc.co.za",
+                    "viewonlinelink": "View link is inserted here",
+                    "unsubscribelink": "unsubscribe link value lies here",
+                    "clickthroughurl": "click through URL value here",
+                    "emailpackage":""
                 }
             }
          }
@@ -2586,33 +2557,30 @@ Please update field names
  
      ```
          {
-            "communication": 
+            "programid": "XXXX-X-Program-ID",
+            "id": "xx-xxxd1",
+            "title": "Communication 1",
+            "description": "New description for communication",
+            "time": "",
+            "keyfield": "pregnancy due date",
+            "when": "After",
+            "times": 24,
+            "frequency": "weeks",
+            "type": 
             {
-                "programid": "XXXX-X-Program-ID",
-                "id": "xx-xxxd1",
-                "title": "Communication 1",
-                "description": "New description  for communication",
-                "time": "",
-                "keyfield": "pregnancy due date",
-                "when": "After",
-                "times": 24,
-                "frequency": "weeks",
-                "type": 
-                {
-                    "sms": {
-                        "active":false,
-                        "message": ""
-                    },
-                    "email": {
-                        "active":true,
-                        "title": "The title goes here",
-                        "subjectline": "User created subject line",
-                        "emailfrom": "info@kc.co.za",
-                        "viewonlinelink": "View link is inserted here",
-                        "unsubscribelink": "unsubscribe link value lies here",
-                        "clickthroughurl": "click through URL value here",
-                        "emailpackage":""
-                    }
+                "sms": {
+                    "active":false,
+                    "message": ""
+                },
+                "email": {
+                    "active":true,
+                    "title": "The title goes here",
+                    "subjectline": "User created subject line",
+                    "emailfrom": "info@kc.co.za",
+                    "viewonlinelink": "View link is inserted here",
+                    "unsubscribelink": "unsubscribe link value lies here",
+                    "clickthroughurl": "click through URL value here",
+                    "emailpackage":""
                 }
             }
          }
