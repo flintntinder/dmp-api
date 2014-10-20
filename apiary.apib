@@ -1891,11 +1891,21 @@ This will then attach a consumer to a campaign, thereby making that consumber a 
     
     ```
         {
-            "consumer": "B7A1AD92-5DE8-437C-94A3-A9EE4009C91E"
+            "consumerid": "B7A1AD92-5DE8-437C-94A3-A9EE4009C91E"
         }
     ```
 
 + Response 200
+
+  
+    ```
+        {
+            "id" : "44D590FA-0C94-4762-9C69-74C920459921"
+            "campaignid": "46a6849e-2f7e-4a8e-9693-c9daa84233a4",
+            "consumerid": "B7A1AD92-5DE8-437C-94A3-A9EE4009C91E",
+            "status" : "200"
+        }
+    ```
 
 ## Campaign Subscriber [/campaign_subscriber/delete/{guid}]
 
@@ -1916,6 +1926,16 @@ This will then attach a consumer to a campaign, thereby making that consumber a 
     
 + Response 200
 
+ ```
+        {
+            "id" : "44D590FA-0C94-4762-9C69-74C920459921"
+            "campaignid": "46a6849e-2f7e-4a8e-9693-c9daa84233a4",
+            "consumerid": "B7A1AD92-5DE8-437C-94A3-A9EE4009C91E",
+            "status" : "200"
+        }
+ ```
+    
+
 ## Campaign Subscribers [/campaign_subscribers/{guid}]
 
 This will add or remove multiple users to/from a campaign. A list of all currently assigned users may
@@ -1931,21 +1951,117 @@ Please update field names
 
 - `Subscriber ID`
 
++ Request (application/json)
+
+ ```
+    {
+        "consumers": [
+              {
+                "consumerid": "12A863EF-26D4-4AE5-817E-C166AC527621"
+              },
+              {
+                "consumerid": "12A863EF-26D4-4AE5-817E-C166AC527622"
+              },
+              {
+                "consumerid": "12A863EF-26D4-4AE5-817E-C166AC527623"
+              }
+        ]
+    }
+          
+ ```
+ 
 + Response 200
 
 ### View Campaign Subscribers [GET]
 
+- `Campaign ID`
++ Response 200
+
+    ```
+    {  
+        "consumers":[  
+            {  
+                "campaignid":"46a6849e-2f7e-4a8e-9693-c9daa84233a4",
+                "consumerid":"12A863EF-26D4-4AE5-817E-C166AC527621",
+                "consumername":"john1 marks1"
+            },
+            {  
+                "campaignid":"46a6849e-2f7e-4a8e-9693-c9daa84233a4",
+                "consumerid":"12A863EF-26D4-4AE5-817E-C166AC527622",
+                "consumername":"john2 marks2"
+            },
+            {  
+                "campaignid":"46a6849e-2f7e-4a8e-9693-c9daa84233a4",
+                "consumerid":"12A863EF-26D4-4AE5-817E-C166AC527623",
+                "consumername":"john3 marks3"
+            },
+            {  
+                "campaignid":"46a6849e-2f7e-4a8e-9693-c9daa84233a4",
+                "consumerid":"12A863EF-26D4-4AE5-817E-C166AC527624",
+                "consumername":"john4 marks4"
+            },
+            {  
+                "campaignid":"46a6849e-2f7e-4a8e-9693-c9daa84233a4",
+                "consumerid":"12A863EF-26D4-4AE5-817E-C166AC527625",
+                "consumername":"john5 marks5"
+            }
+        ]
+    }
+    ```
+
+## Campaign Subscribers [/campaign_subscribers/delete/{guid}]
+
+### Delete Campaign Subscribers [POST]
+
 Please update field names
 
 - `Subscriber ID`
+
++ Request (application/json)
+
+ ```
+    {
+        "consumers": [
+              {
+                "consumerid": "12A863EF-26D4-4AE5-817E-C166AC527621"
+              },
+              {
+                "consumerid": "12A863EF-26D4-4AE5-817E-C166AC527622"
+              },
+              {
+                "consumerid": "12A863EF-26D4-4AE5-817E-C166AC527623"
+              }
+        ]
+    }
+ ```
+
 + Response 200
 
-### Delete Campaign Subscribers [DELETE]
-
-Please update field names
-
-- `Subscriber ID`
-+ Response 200
+ ```
+ {
+  "consumers": [
+        {
+            "id" : "44D590FA-0C94-4762-9C69-74C920459921"
+            "campaignid": "46a6849e-2f7e-4a8e-9693-c9daa84233a4",
+            "consumerid": "B7A1AD92-5DE8-437C-94A3-A9EE4009C91E",
+            "status" : "200"
+        },
+        {
+            "id" : "44D590FA-0C94-4762-9C69-74C920459922"
+            "campaignid": "46a6849e-2f7e-4a8e-9693-c9daa84233a4",
+            "consumerid": "B7A1AD92-5DE8-437C-94A3-A9EE4009C91B",
+            "status" : "200"
+        },
+        {
+            "id" : "44D590FA-0C94-4762-9C69-74C920459923"
+            "campaignid": "46a6849e-2f7e-4a8e-9693-c9daa84233a1",
+            "consumerid": "B7A1AD92-5DE8-437C-94A3-A9EE4009C91S",
+            "status" : "Subscriber cannot be deleted."
+        }
+    ]
+  }
+ ```
+ 
 
 ## Campaign Responses [/campaigns/responses/{guid}]
 This will return the current metrics for a campaign.
