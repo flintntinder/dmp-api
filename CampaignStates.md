@@ -1,15 +1,15 @@
 # Campaign States
 
-Opened
-Pending
-- Rejected (Opened)
-- Approved (Live)
-Live
+- Opened
+- Pending
+    - <Rejected> -> Opened
+    - <Approved> -> Live
+- Live
     - Paused [check deployment date, show relevant options]
     - Running
     - Complete
-Archived
-Deleted
+- Archived
+- Deleted
 
 
 There will be a separate endpoint to handle these state changes.
