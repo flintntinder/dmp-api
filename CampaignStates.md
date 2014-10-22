@@ -2,8 +2,8 @@
 
 - Opened
 - Pending
-    - <Rejected> -> Opened
-    - <Approved> -> Live
+    - [Rejected] -> Opened
+    - [Approved] -> Live
 - Live
     - Paused [check deployment date, show relevant options]
     - Running
