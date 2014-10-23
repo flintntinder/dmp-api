@@ -2646,7 +2646,16 @@ Please update field names
             "maritalstatus": "Single",
             "pregnancyduedate": "2014-12-25",
             "numberofchildren": "1",
-            "commpreference": "sms & email",
+            "commpreference": [
+                            {
+                                "brand":"xxxxx-xxxx",
+                                "preference":["SMS","Email"]
+                            },
+                            {
+                                "brand":"xxxxx-xxxx-01",
+                                "preference":["SMS"]
+                            }                            
+            ],
             "province": "Gauteng",
             "country": {
                 "name": "South Africa",
@@ -2670,6 +2679,38 @@ Please update field names
                     "status": "unsubscribed"
                 },
                 
+            ]
+            "campaign_activity":[
+                {
+                "id":"xxxx-xx-x-x-x-xxxxx-00",
+                "activity":[{
+                        "date":"12/15/14",
+                        "activity":"unsubscribed"
+                }]
+                },
+                {
+                "id":"xxxx-xx-x-x-x-xxxxx-01",
+                "activity":[{
+                        "date":"12/15/14",
+                        "activity":"subscribed"
+                }]
+                }
+            ],
+            "program_activity":[
+                {
+                "id":"xxxx-xx-x-x-x-xxxxx-00",
+                "activity":[{
+                        "date":"12/15/14",
+                        "activity":"received communication 1"
+                }]
+                },
+                {
+                "id":"xxxx-xx-x-x-x-xxxxx-01",
+                "activity":[{
+                        "date":"13/15/14",
+                        "activity":"unsubscibed to program"
+                }]
+                }
             ]
         }
         ```
