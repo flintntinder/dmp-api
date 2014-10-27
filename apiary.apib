@@ -1196,6 +1196,9 @@ Sets the Brand `active` flag to `false`.
 
 ## Campaign [/campaign/]
 
+- Create campaign.
+- Success will redirect user to campaign edit
+
 ### Create Campaign [POST]
 
 + Request (application/json)
@@ -1217,12 +1220,10 @@ Sets the Brand `active` flag to `false`.
     ```
 
 ## Campaign [/campaign/{guid}]
+
+
+ 
 ### Edit Campaign [POST]
-
-
-
-Please update field names
-
 
 - `Brand ID`
 - `Name`
@@ -1328,28 +1329,7 @@ Please update field names
     
 ### View Campaign [GET]
 
-Please update field names
-
-- `Total sent`
-- `Total bounced`
-- `Total unique opens`
-- `Total clicks`
-- `Total unique clicks`
-- `Total modified`
-- `Total unsubscribed`
-- `Total delivered`
-- `Percentage bounced`
-- `Percentage delivered`
-- `Percentage opened`
-- `Percentage clicked`
-- `Percentage clicked to open`
-- `Percentage modified`
-- `Percentage unsubscribed`
-- `SMSs sent`
-- `SMSs bounced`
-- `SMSs unsubscribed`
-- `SMSs percentage bounced`
-- `SMSs percentage unsubscribed`
+- Full response contains campaign data details including consumer demographics.
 
 + Response 200 (application/json;charset=UTF-8)
 
@@ -1557,18 +1537,31 @@ Please update field names
 + Parameters 
     + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The campaign GUID
     
-## Campaign [/campaign/delete/{guid}]
-### Delete Campaign [POST]
 
-Sets the campaign `active` flag to `false`.
+## Campaign [/campaign/status/{guid}]
+### Change campaign status [POST]
+
+- Sets the campaign's status to either Opened, Pending, Live, Paused, Running, Complete, Archived, Deleted.
+
+- Passing the Campaign ID as the GUID and the status GUID from the endpoint */campaignstatus/* 
+
 
 + Parameters 
     + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The campaign GUID
     
++ Request
+
+        {
+        "user_id":"xxx-xxxx-xxxx-x",
+        "status":"xxx-xxx"
+        }  
 
 + Response 200
 
-## Campaign Edit details [/campaign/edit/{guid}]
+## Campaign Edit [/campaign/edit/{guid}]
+
+- GUID is campaign ID 
+- This is used to get existing campaign data for editing and status determines which user level and access can make changes to the campaign
 
 + Parameters 
     + guid (required, string) ... 
