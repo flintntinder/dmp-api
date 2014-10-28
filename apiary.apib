@@ -1055,10 +1055,10 @@ Furthermore, *company* accounts should only be able to create brands for their o
                 "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e"
             },
             "campaign": {
-                "href": "/campaigns/create"
+                "href": "/campaign/create"
             },
             "program": {
-                "href": "/programs/create"
+                "href": "/program/create"
             },
             "company": {
                 "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
@@ -1104,10 +1104,10 @@ Furthermore, *company* accounts should only be able to save brands for their own
                 "href": "/brand/e33898de-6302-4756-8f0c-5f6c5218e02e"
             },
             "campaign": {
-                "href": "/campaigns/create"
+                "href": "/campaign/create"
             },
             "program": {
-                "href": "/programs/create"
+                "href": "/program/create"
             },
             "company": {
                 "href": "/company/a53e98e4-0197-4513-be6d-49836e406aaa"
@@ -1200,9 +1200,9 @@ Sets the Brand `active` flag to `false`.
 
 
 - Create campaign.
-- Success will redirect user to campaign edit on the front end
+- Success will return new campaign ID and redirect user to campaign edit on the front end 
 
-Fields
+ ######Fields
 - `name` The campiagn name
 - `brand_id` GUID of the brand the campaign is being created for
 - `user_id` GUID of the user who is creating the campaign
@@ -1232,23 +1232,48 @@ Fields
 ### Edit Campaign [POST]
 
 This contains the full campaign setup data
+Used to save campaing setup data
 
 - `Brand ID`
 - `Name`
 - `Description`
 - `Start date & time`
-- `Status` 
 - `End date & time` (optional)
+- `Status` 
+- `Campaign type`
 - `Activation channels`
+    - `sms`
+        - `active`(Boolean) 
+        - `activationmessage`
+        - `deploymentdate`
+    - `email`
+        - `active`
+        - `title` 
+        - `subjectline`
+        - `emailfrom`
+        - `emailreplyto`
+        - `viewonlinetitle`
+        - `unsubscribelink`
+        - `zipfilename` 
+        - `deploymentdate`
+        - `clickthroughurl`
 - `Engagement channels`
-- `SMS message` (optional)
-- `SMS response message` (optional)
-- `SMS opt-out` (optional)
-- `Email Subject line` (optional)
-- `View online text` (optional)
-- `Unsubscribe text` (optional)
-- `Status` (optional)
-
+    - `smsshortcode`
+        - `active`
+        - `shortcode`
+        - `keyword`
+        - `responsemessage`
+        - `capturefield`
+            - `name`
+            - `title`
+            - `type`  
+    - `webform`          
+        - `active`
+        - `capturefields` 
+            - `name`
+            - `title`
+            - `type`
+        - `captureurl`
 
 + Request (application/json)
 
@@ -1338,7 +1363,7 @@ This contains the full campaign setup data
     
 ### View Campaign [GET]
 
-- Full response contains campaign setup data including consumer demographics.
+- Full response contains campaign setup data including consumer demographics and curent activity in he campaign.
 
 + Response 200 (application/json;charset=UTF-8)
 
@@ -1570,7 +1595,7 @@ This contains the full campaign setup data
 ## Campaign Edit [/campaign/edit/{guid}]
 
 - GUID is campaign ID 
-- This is used to get existing campaign data for editing and status determines which user level and access can make changes to the campaign
+- This is used to get existing campaign data for editing and status determines which user level can make changes to the campaign
 
 + Parameters 
     + guid (required, string) ... 
@@ -1660,6 +1685,8 @@ This contains the full campaign setup data
 
 
 ## Campaign [/campaign/targeted_consumers/{guid}]
+
+GUID is campaign ID
 
 ### Create Campaign targeted Consumers [POST]
 
@@ -1895,7 +1922,7 @@ Here the request will contain the actual file
 
 - `Consumer ID` (the consumer guid) 
 
-The campaign guid will be passed as a paramater and the consumer guid as a json object.
+The campaign guid will be passed as a parameter and the consumer guid as a json object.
 This will then attach a consumer to a campaign, thereby making that consumber a subscriber to the campaign.
 
 
@@ -1908,7 +1935,6 @@ This will then attach a consumer to a campaign, thereby making that consumber a 
     ```
 
 + Response 200
-
   
     ```
         {
@@ -2100,6 +2126,9 @@ Please update field names
 
 ### Create Program [POST]
 
+- Creates program and returns new id 
+- User gets redirected to Program edit
+
 + Request (application/json)
     
     ```
@@ -2125,19 +2154,36 @@ Please update field names
 
 ### Save a Program [POST]
 
-Please update field names
+Save program, set status to Opened.
 
-- `Program ID`
-- `Company ID`
-- `Brand ID`
-- `Name`
-- `Description`
-- `Start date & time`
-- `End date & time (optional)`
-- `Engagement channels`
-- `SMS opt-out (optional)`
-- `1Cadence field`
-- `1Status (optional)`
+- `brandid`
+- `userid`
+- `name`
+- `description`
+- `when`
+- `keyfield`
+- `requiresoptin`
+    - `status`
+    - `campaign`
+    - `field`
+
+- `rounds`
+- `frequency`
+- `channel`
+    - `sms`
+        - `active`
+        - `optin`
+        - `optout`
+    - `email`
+        - `active`
+        - `title`
+        - `subjectline`
+        - `emailfrom`
+        - `viewonlinelink`
+        - `unsubscribelink` 
+
+- `emailpackage`
+
 
 + Request (application/json)
 
@@ -2177,19 +2223,42 @@ Please update field names
 
 ### View a Program [GET]
 
-Please update field names
+Get single program basic data
 
-- `Program ID`
-- `Company ID`
-- `Brand ID`
-- `Name`
-- `Description`
-- `Start date & time`
-- `End date & time (optional)`
-- `Engagement channels`
-- `SMS opt-out (optional)`
-- `1Cadence field`
-- `1Status (optional)`
+- `id`
+- `name`
+- `brand`
+    - `name`
+    - `id`
+- `activationchannels`
+- `user_id`
+- `datecreated`
+- `datelaunched`
+- `startdate`
+- `enddate`
+- `keyfield`
+- `frequency`
+- `rounds`
+- `description`
+- `status`
+- `progress`
+    - `completed`
+    - `incomplete`
+- `sent`
+    - `sms`
+        - `last_thirty_days`
+        - `total`
+    - `email`
+        - `last_thirty_days`
+        - `total`
+- `unsubscribers`
+    - `sms`
+        - `last_thirty_days`
+        - `total`
+    - `email`
+        - `last_thirty_days`
+        - `total`
+
 
 + Response  200 (application/json;charset=UTF-8)
 
@@ -2241,30 +2310,33 @@ Please update field names
         }
     ```
 
-### Delete a Program [DELETE]
+## Program [/program/status/{guid}]
+### Change program status [POST]
 
-Please update field names
+- Sets the program's status to either Opened, Pending, Live, Paused, Running, Complete, Archived, Deleted.
 
-- `Program ID`
-- `Company ID`
-- `Brand ID`
-- `Name`
-- `Description`
-- `Start date & time`
-- `End date & time (optional)`
-- `Engagement channels`
-- `SMS opt-out (optional)`
-- `1Cadence field`
-- `1Status (optional)`
+- Passing the program ID as the GUID and the status GUID from the endpoint */campaignstatus/* 
 
-+ Response  200
+
++ Parameters 
+    + guid (required, string, `e33898de-6302-4756-8f0c-5f6c5218e02e`) ... The program GUID
+    
++ Request
+
+        {
+        "user_id":"xxx-xxxx-xxxx-x",
+        "status":"xxx-xxx"
+        }  
+
++ Response 200
+
 
 ## Program Edit details [/programs/edit/{guid}]
 
 + Parameters 
     + guid (required, string) ... 
     
-### Get Campaign Edit details [GET]
+### Get Program Edit details [GET]
 
 + Response 200
 
@@ -2302,71 +2374,6 @@ Please update field names
                     }
                 }
     ```
-
-
-
-## Programs Messaging [/programs/message/{programID}]
-
-+ Parameters
-    + programID (string,required) ...
-
-### Create Programs Message [POST]
-
-Please update fields
-
-- `Message ID`
-- `Program ID`
-- `Message number`
-- `Condition`
-
-+ Response 200
-
-### View Programs Message [GET]
-
-Please update fields
-
-- `Message ID`
-- `Program ID`
-- `Message number`
-- `Condition`
-
-+ Response 200
-
-### Delete Programs Message [DELETE]
-
-Please update fields
-
-- `Message ID`
-- `Program ID`
-- `Message number`
-- `Condition`
-
-+ Response 200
-
-
-
-
-## Programs SMS [/programs/assets/sms/{messageID}]
-This adds a SMS message to a program message
-
- + Parameters 
-     + messageID (required, string) ... 
-
-### Create Program Message [POST]
-
-- `SMS Message`
-+ Response 200
-
-### View Program Message [GET]
-
-- `SMS Message`
-+ Response 200
-
-### Delete Program Message [DELETE]
-
-- `SMS Message`
-+ Response 200
-
 
 
 
@@ -3108,8 +3115,6 @@ Allows you to add, read or delete any meta data for a single consumer specified 
 
 ## Consumers Brand Metrics [/metrics/consumers/brand/{brandId}]
 
-**WIP**
-
 + Parameters
     + brandId (string, required) ...
     
@@ -3301,15 +3306,82 @@ Please update field names
     ```
     
 
-## Targeted Consumers Metrics [/metrics/targeted_consumers/brand/{brandId}]
+## Targeted Consumers Metrics [/metrics/targeted_consumers/]
 
-**WIP**
-
-+ Parameters
-    + brandId (string, required) ...
+Aceepts DB segmentation data and returns demographics related to submitted database segmentation
     
-### View Consumers Metrics by Brand[GET]
-Please update field names
+### View Consumers Demographics[POST]
+
++ Request (application/json)
+    
+    ```
+       {
+            "brand": "Baby Soft",
+            "product": [
+                        "Washlets", 
+                        "Enviro-roll",
+                        "Mini",
+                        "Gold",
+                        "Newborn"
+            ],
+            "province": [ 
+                        "Gauteng",
+                        "Eastern Cape",
+                        "Western Cape",
+                        "Limpopo",
+                        "Mpumalanga",
+                        "North West",
+                        "Free State",
+                        "Northern Cape",
+                        "Unknown" 
+                    ],
+            "age": [               
+                        "sixteen_twentyfour",
+                        "twentyfive_thirtyfour",
+                        "thirtyfive_fortyfive",
+                        "fortyfive_plus",
+                        "unknown"
+                            ],
+            "gender": [
+                        "Male",
+                        "Female",
+                        "Unknown"
+                    ],
+            "maritalStatus": [
+                        "Married Couples",
+                        "Married with Kids",
+                        "Single",
+                        "Single parent",
+                        "Expecting parent",
+                        "Unknown"
+                    ],
+            "consumerTier": [
+                        "A",
+                        "B",
+                        "C"
+            ],
+            "commsPreference": [
+                        "SMS",
+                        "EMAIL",
+                        "UNKOWN"
+            ],
+            "customFields": [
+                        {
+                        "name": "Field 1",
+                        "operator": "Equals",
+                        "value": "111"
+                        },
+                        {
+                        "name": "Field 3",
+                        "operator": "Between",
+                        "value": {
+                            "first": "3",
+                            "second": "7"
+                            }
+                        }
+            ]
+        }
+    ```
 
 + Response 200 (application/json;charset=UTF-8)
 
@@ -3501,9 +3573,6 @@ Please update field names
 
 ## Campaign Brand [/metrics/campaigns/brand/{brandguid}]
 
-**WIP**
-
-
 ### View campaigns by brands [GET]
 Please update field names
 
@@ -3623,9 +3692,6 @@ Please update field names
 
 
 ## Program Brand [/metrics/programs/brand/{brandguid}]
-
-**WIP**
-
 
 ### View Programs Metrics by brand [GET]
 Please update field names
@@ -3951,25 +4017,25 @@ Status 206 is returned if one or more look up fields where incorrectly passed (e
 Status 400 is returned if one or more mandatory fields are missing (campaign guid, email or mobile).
 Status 500 is returned if the user cannot be saved due to a server error
 
-+ Response 200 (application/json;charset=UTF-8)
 + Response 206 (application/json;charset=UTF-8)
 
     ``` 
         {  
         "FailReason":Meaningful fail message, listing missing content"
         }
+    ```
 
 + Response 400 (application/json;charset=UTF-8)
 
     ``` 
         {  
         "FailReason":Message lists missing field"
-
         }
+    ```
 + Response 500 (application/json;charset=UTF-8)
 
     ``` 
         {  
         "FailReason":Meaningful fail message"
-
         }
+    ```
