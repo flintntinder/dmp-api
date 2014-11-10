@@ -35,7 +35,9 @@ Non stewards will only be able to create and edit campaigns depending on the acc
 This means, when the user logs in, their "Steward" level needs to be returned, plus their account role per brand as part of their brands list.
 
 When a user logs in the following is the proposed returned structure.
-Focusing on the role under "user" and the roles under "brands"
+Focusing on the "steward" field under "user" and the roles under "brands"
+
+Steward being 1 and Non-steward being 0;
 
 ```json
 {
@@ -58,7 +60,7 @@ Focusing on the role under "user" and the roles under "brands"
 			"name": "Kimbery Clark",
 			"roleId": 3
 		}],
-		"role": "1", // [{0: Non-Steward}, {1: Steward}]
+		"steward": "1", 
 		"title": "Genius",
 		"firstname": "Rowan",
 		"lastname": "Deysel",
