@@ -31,7 +31,8 @@ This then determines if a user can archive or activate Programs or campaigns.
 When a user logs in the following is the proposed returned structure.
 Focusing on the role under "user" and the roles under "brands"
 
-{"securitytoken":"54d79452-a831-4b83-bffe-1bc1e9fe42b7",
+{
+"securitytoken":"54d79452-a831-4b83-bffe-1bc1e9fe42b7",
 "status":"200",
 "user":{
     "brands":[
@@ -60,5 +61,5 @@ Focusing on the role under "user" and the roles under "brands"
     "role":"3",
     "title":"Genius"
     }
-  }
+    }
 
