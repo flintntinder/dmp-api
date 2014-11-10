@@ -9,7 +9,7 @@ Below is a detailed description of the proposal.
 
 Level | Permissions
 -------------|--------|------------
-Steward | 0 1
+Steward | 0, 1
 Non steward | 1
 
 List of all the permissions for the above levels.
@@ -30,7 +30,7 @@ This then determines if a user can archive or activate Programs or campaigns.
 
 When a user logs in the following is the proposed returned structure.
 Focusing on the role under "user" and the roles under "brands"
-
+```json
 {
 "securitytoken":"54d79452-a831-4b83-bffe-1bc1e9fe42b7",
 "status":"200",
@@ -62,4 +62,4 @@ Focusing on the role under "user" and the roles under "brands"
     "title":"Genius"
     }
     }
-
+```
