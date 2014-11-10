@@ -42,6 +42,7 @@ Focusing on the role under "user" and the roles under "brands"
 	"securitytoken": "54d79452-a831-4b83-bffe-1bc1e9fe42b7",
 	"status": "200",
 	"user": {
+		"id": "0248b1e7-da23-4319-bfa3-d1ea4be47786",
 		"brands": [{
 			"id": "469bbea6-2532-4bf1-84b2-af656da10325",
 			"name": "Kotex",
@@ -57,15 +58,14 @@ Focusing on the role under "user" and the roles under "brands"
 			"name": "Kimbery Clark",
 			"roleId": 3
 		}],
-		"display_name": "Rowan Deysel",
-		"email": "emmanuel@codecafe.co.za",
+		"role": "1", // [{0: Non-Steward}, {1: Steward}]
+		"title": "Genius",
 		"firstname": "Rowan",
-		"id": "0248b1e7-da23-4319-bfa3-d1ea4be47786",
 		"lastname": "Deysel",
+		"displayName": "Rowan Deysel",
+		"email": "rowan@codecafe.co.za",
 		"mobile": "0714409713",
-		"photo_url": "https:\/\/bbb.com\/rowanface.jpg",
-		"role": "3",
-		"title": "Genius"
+		"photoUrl": "https:\/\/bbb.com\/rowanface.jpg"
 	}
 }
 ```
