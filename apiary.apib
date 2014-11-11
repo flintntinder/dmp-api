@@ -321,122 +321,221 @@ Users are **not** Consumers; Users can log into the platform to manage and updat
 
     ```
     {
-        "users": [{
-            "id": "25892e17-80f6-415f-9c65-7395632f0224",
-            "firstname": "Casper",
-            "lastname": "Odendaal",
-            "email": "casper@flintntinder.com",
-            "mobile": "123456789",
-            "title": "Web Designer",
-            "role": "super",
-            "photo_url": "images\/avatars\/casper.jpg",
-            "brands": [
-                {
-                    "id": "469bbea6-2532-4bf1-84b2-af656da10325",
-                    "name": "Kotex"
-                },
-                {
-                    "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
-                    "name": "Huggies"
-                }
-            ]
-            
-            
-        }, {
-            "id": "25892e17-80f6-415f-9c65-7395632f0223",
-            "firstname": "John",
-            "lastname": "Smith",
-            "email": "john@flintntinder.com",
-            "mobile": "123456789",
-            "title": "Tea guy",
-            "role": "admin",
-            "photo_url": "images\/avatars\/john.jpg",
-            "brands": [
-                {
-                    "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
-                    "name": "Huggies"
-                },
-                {
-                    "id": "469bbea6-2532-4bf1-84b2-af656da10325",
-                    "name": "Kotex"
-                }
-            ]
-            
-        }, {
-            "id": "25892e17-80f6-415f-9c65-7395632f0225",
-            "firstname": "Emmanuel",
-            "lastname": "Matsiyana",
-            "email": "emmanuel@flintntinder.com",
-            "mobile": "123456789",
-            "title": "Web Designer",
-            "role": "admin",
-            "photo_url": "images\/avatars\/emmanuel.jpg",
-            "brands": [
-                {
-                    "id": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
-                    "name": "Huggies"
-                },
-                {
-                    "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
-                    "name": "Baby Soft"
-                }
-            ]
-        }, {
-            "id": "25892e17-80f6-415f-9c65-7395632f0226",
-            "firstname": "Willem",
-            "lastname": "Labu",
-            "email": "willem@flintntinder.com",
-            "mobile": "123456789",
-            "title": "TD",
-            "role": "company",
-            "photo_url": "images\/avatars\/willem.jpg",
-            "brands": [
-                {
-                    "id": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
-                    "name": "Baby Soft"
-                }
-            ]
-        }, {
-            "id": "25892e17-80f6-415f-9c65-7395632f0227",
-            "firstname": "Lianie",
-            "lastname": "Potgieter",
-            "email": "lianie@flintntinder.com",
-            "mobile": "123456789",
-            "title": "Art Director",
-            "role": "brand",
-            "photo_url": "images\/avatars\/lianie.jpg",
-            "brands": [
-                {
-                    "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
-                    "name": "Baby Soft"
-                },
-                {
-                    "id": "d262e101-d37d-47aa-b0f2-7200da6e43f1",
-                    "name": "Huggies"
-                }
-            ]
-            
-            
-            
-        }, {
-            "id": "25892e17-80f6-415f-9c65-7395632f0228",
-            "firstname": "Nimay",
-            "lastname": "Parekh",
-            "email": "nimay@flintntinder.com",
-            "mobile": "123456789",
-            "title": "MD",
-            "role": "basic",
-            "photo_url": "images\/avatars\/nimay.jpg",
-            
-            "brands": [
-                {
-                    "id": "469bbea6-2532-4bf1-84b2-af656da10325",
-                    "name": "Kotex"
-                }
-            ]
+      "users": [
+        {
+          "_link": {
+            "self": {
+              "href": "/user/e27fe79e-aa1e-4121-93f2-7965aff0b23f"
+            }
+          },
+          "brands": [
+            {
+              "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
+              "name": "Baby Soft",
+              "role": "1"
+            },
+            {
+              "id": "469bbea6-2532-4bf1-84b2-af656da10325",
+              "name": "Kotex",
+              "role": "3"
+            }
+          ],
+          "country": {
+            "code": "ZA",
+            "dialcode": "011",
+            "name": "South Africa"
+          },
+          "created_at": "9/30/2014 1:27:08 PM",
+          "display_name": "Stan Marsh",
+          "email": "What@aaa.coma",
+          "firstname": "Stan",
+          "id": "e27fe79e-aa1e-4121-93f2-7965aff0b23f",
+          "language": {
+            "code": "en",
+            "name": "English"
+          },
+          "last_active": "11/6/2014 9:40:45 AM",
+          "lastname": "Marsh",
+          "mobile": "123456789",
+          "photo_url": "https://example.com/john.jpg",
+          "steward":"0",
+          "title": "Dr"
+        },
+        {
+          "_link": {
+            "self": {
+              "href": "/user/324e8e26-69b8-491b-a61e-a4d54b548058"
+            }
+          },
+          "brands": [],
+          "country": {
+            "code": "ZA",
+            "dialcode": "011",
+            "name": "South Africa"
+          },
+          "created_at": "9/30/2014 2:24:58 PM",
+          "display_name": "J ooooo",
+          "email": "jeremy@oddfuture.com",
+          "firstname": "Jeremy",
+          "id": "324e8e26-69b8-491b-a61e-a4d54b548058",
+          "language": {
+            "code": "en",
+            "name": "English"
+          },
+          "last_active": "11/6/2014 1:38:51 PM",
+          "lastname": "Oddity",
+          "mobile": "235231425",
+          "photo_url": "https://test.com/aaaa.jpg",
+          "steward":"0",
+          "title": "Mr"
+        },
+        {
+          "_link": {
+            "self": {
+              "href": "/user/a9cf4462-e270-4a66-a485-8f48c7a116d8"
+            }
+          },
+          "brands": [
+            {
+              "id": "469bbea6-2532-4bf1-84b2-af656da10325",
+              "name": "Kotex",
+              "role": "4"
+            }
+          ],
+          "country": {
+            "code": "ZA",
+            "dialcode": "011",
+            "name": "South Africa"
+          },
+          "created_at": "9/30/2014 2:26:04 PM",
+          "display_name": "Jean Dames",
+          "email": "james@Denim.com",
+          "firstname": "James",
+          "id": "a9cf4462-e270-4a66-a485-8f48c7a116d8",
+          "language": {
+            "code": "en",
+            "name": "English"
+          },
+          "last_active": "9/30/2014 2:26:04 PM",
+          "lastname": "Dean",
+          "mobile": "253252113124124",
+          "photo_url": "https://aaaa.com/test.jpg",
+          "steward":"0",
+          "title": ""
+        },
+        {
+          "_link": {
+            "self": {
+              "href": "/user/0248b1e7-da23-4319-bfa3-d1ea4be47786"
+            }
+          },
+          "brands": [
+            {
+              "id": "469bbea6-2532-4bf1-84b2-af656da10325",
+              "name": "Kotex",
+              "role": "1"
+            },
+            {
+              "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
+              "name": "Baby Soft",
+              "role": "1"
+            }
+          ],
+          "country": {
+            "code": "ZA",
+            "dialcode": "011",
+            "name": "South Africa"
+          },
+          "created_at": "10/1/2014 7:17:07 AM",
+          "display_name": "Rowan Deysel",
+          "email": "emmanuel@flintntinder.com",
+          "firstname": "Emmanuel",
+          "id": "0248b1e7-da23-4319-bfa3-d1ea4be47786",
+          "language": {
+            "code": "en",
+            "name": "English"
+          },
+          "last_active": "11/11/2014 9:52:23 AM",
+          "lastname": "Matsiyana",
+          "mobile": "0747154090",
+          "photo_url": "https://bbb.com/rowanface.jpg",
+          "steward":"1",
+          "title": "Developer"
+        },
+        {
+          "_link": {
+            "self": {
+              "href": "/user/e8d45178-3172-4291-9e84-a7dcfe9d30f2"
+            }
+          },
+          "brands": [
+            {
+              "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
+              "name": "Baby Soft",
+              "role": "2"
+            }
+          ],
+          "country": {
+            "code": "ZA",
+            "dialcode": "011",
+            "name": "South Africa"
+          },
+          "created_at": "11/3/2014 8:40:59 AM",
+          "display_name": "Aaron Short",
+          "email": "Aaron2@codecafe.co.za",
+          "firstname": "Aaron",
+          "id": "e8d45178-3172-4291-9e84-a7dcfe9d30f2",
+          "language": {
+            "code": "en",
+            "name": "English"
+          },
+          "last_active": "11/3/2014 10:57:29 AM",
+          "lastname": "Short",
+          "mobile": "071 440 0281",
+          "photo_url": "https://test.com/Aaron.jpg",
+          "steward":"1",
+          "title": "Lead Developer"
+        },
+        {
+          "_link": {
+            "self": {
+              "href": "/user/7a4975b3-d52e-4306-a7ba-6a8382df344d"
+            }
+          },
+          "brands": [
+            {
+              "id": "40c03869-6424-4fab-b56a-797eb603e7fa",
+              "name": "Baby Soft",
+              "role": "4"
+            },
+            {
+              "id": "469bbea6-2532-4bf1-84b2-af656da10325",
+              "name": "Kotex",
+              "role": "1"
+            }
+          ],
+          "country": {
+            "code": "ZA",
+            "dialcode": "011",
+            "name": "South Africa"
+          },
+          "created_at": "11/7/2014 2:30:02 PM",
+          "display_name": "Paul Daniel",
+          "email": "Pdan@codecafe.co.za",
+          "firstname": "Paul",
+          "id": "7a4975b3-d52e-4306-a7ba-6a8382df344d",
+          "language": {
+            "code": "en",
+            "name": "English"
+          },
+          "last_active": "11/7/2014 2:58:19 PM",
+          "lastname": "Daniel",
+          "mobile": "071 331 1372",
+          "photo_url": "https://test.com/Aaron.jpg",
+          "steward":"0",
+          "title": "Cleaner"
         }
-        
-        ]
+      ]
     }
     ```
 
