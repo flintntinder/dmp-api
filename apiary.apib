@@ -2450,40 +2450,28 @@ Get single program basic data
 
     ```
         {
-                    "brandid": "xxx-00xxxx-1",
-                    "userid": "xxx-xxx-a-xx-x-xx-xxxx-b-xxx-x-x",
-                    "id": "X-xxx-xx-x-x-xx-x-0",
-                    "name": "New Program for December 2014",
-                    "description": "Description ",
-                    "when": "Before",
-                    "keyfield": "Select a field",
-                    "requiresoptin": {
-                        "status": true,
-                        "campaign": "Select a campaign",
-                        "field": "Select a field"
-                    },
-                    "rounds": 7,
-                    "frequency": "Select frequency",
-                    "channel": {
-                        "sms": {
-                            "active": true,
-                            "optin": "Thank you for opting into our Program",
-                            "optout": "We will miss you"
-                        },
-                        "email": {
-                            "active": false,
-                            "title": "",
-                            "subjectline": "",
-                            "emailfrom": "Select an address",
-                            "viewonlinelink": "",
-                            "unsubscribelink": ""
-                        },
-                        "emailpackage":""
-                    }
+            "brand": "xxx-x-xxxxx-01",
+            "user": "xxxx-xxx--xxxxx007",
+            "name": "Program 007",
+            "description": "New mission",
+            "frequency": "Daily",
+            "commSendTime": "10:00",
+            "campaign": {
+                "id": "",
+                "field": "date of birth"
+            },
+            "channel": {
+                "sms": {
+                    "active": true,
+                    "account": "xxx-xxx-xxx-01"
+                },
+                "email": {
+                    "active": true,
+                    "account": "xxx-xxx-x01-xxxx"
                 }
+            }
+        }
     ```
-
-
 
 ## Programs Email Assets [/programs/assets/email/{messageID}]
 This adds email assets to a program message
