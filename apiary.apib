@@ -2693,34 +2693,26 @@ Please update field names
  
 + Request (application/json;charset=UTF-8)
 
-         {
-            "programid": "XXXX-X-Program-ID",
-            "id": "xx-xxxd1",
-            "title": "Communication 1",
-            "description": "New description for communication",
-            "time": "",
-            "keyfield": "pregnancy due date",
-            "when": "After",
-            "position": 24,
-            "frequency": "weeks",
-            "type": 
-            {
-                "sms": {
-                    "active":false,
-                    "message": ""
-                },
-                "email": {
-                    "active":true,
-                    "title": "The title goes here",
-                    "subjectline": "User created subject line",
-                    "emailfrom": "info@kc.co.za",
-                    "viewonlinelink": "View link is inserted here",
-                    "unsubscribelink": "unsubscribe link value lies here",
-                    "clickthroughurl": "click through URL value here",
-                    "emailpackage":""
+        {
+                "program": guid,
+                "title": string,
+                "description": string,
+                "offset": positive integer,
+                "when ": ["before", "after", "subscribe", "unsubscribe"],
+                "type": ["sms", "email"],
+                "sms": 
+                    {
+                    "message": string
+                    },
+                "email": 
+                    {
+                    "subject": string,
+                    "viewonlinelink": string,
+                    "unsubscribelink": string,
+                    "clickthroughurl": string
                 }
-            }
-         }
+        }
+         
          
 + Response  200 (application/json;charset=UTF-8)
 
@@ -2732,34 +2724,25 @@ Please update field names
 + Response  200 (application/json;charset=UTF-8)
  
      ```
-         {
-            "programid": "XXXX-X-Program-ID",
-            "id": "xx-xxxd1",
-            "title": "Communication 1",
-            "description": "New description for communication",
-            "time": "",
-            "keyfield": "pregnancy due date",
-            "when": "After",
-            "position": 24,
-            "frequency": "weeks",
-            "type": 
-            {
-                "sms": {
-                    "active":false,
-                    "message": ""
-                },
-                "email": {
-                    "active":true,
-                    "title": "The title goes here",
-                    "subjectline": "User created subject line",
-                    "emailfrom": "info@kc.co.za",
-                    "viewonlinelink": "View link is inserted here",
-                    "unsubscribelink": "unsubscribe link value lies here",
-                    "clickthroughurl": "click through URL value here",
-                    "emailpackage":""
+        {
+                "program": guid,
+                "title": string,
+                "description": string,
+                "offset": positive integer,
+                "when ": ["before", "after", "subscribe", "unsubscribe"],
+                "type": ["sms", "email"],
+                "sms": 
+                    {
+                    "message": string
+                    },
+                "email": 
+                    {
+                    "subject": string,
+                    "viewonlinelink": string,
+                    "unsubscribelink": string,
+                    "clickthroughurl": string
                 }
-            }
-         }
+        }
      ``` 
 
 # Group Consumer
