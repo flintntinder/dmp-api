@@ -2727,22 +2727,20 @@ Please update field names
         {
                 "program": "guid",
                 "title": "Test communication",
-                "description": "string",
-                "offset": "positive integer",
-                "when ": ["before", "after", "subscribe", "unsubscribe"],
-                "type": ["sms", "email"],
-                "sms": 
-                    {
-                    "message": "string"
-                    },
-                "email": 
-                    {
-                    "subject": "string",
-                    "viewonlinelink": "string",
-                    "unsubscribelink": "string",
-                    "clickthroughurl": "string"
+                "description": "New communication data, for this type of communication",
+                "offset": "0",
+                "when ": "before",
+                "type": "sms",
+                "sms": {
+                    "message": "The Comms Message"
+                },
+                "email": {
+                    "subject": "What do you know?",
+                    "viewonlinelink": "Cant view email?, Click here",
+                    "unsubscribelink": "www.unsubscribelink.com",
+                    "clickthroughurl": "www.dotcom.com"
                 }
-        }
+            }
      ``` 
 
 # Group Consumer
