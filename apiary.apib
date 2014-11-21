@@ -3106,6 +3106,220 @@ Get a basic view of any specific Consumer.
 
 
 
+## Consumer [/consumer/filterdemographics/]
+
+### Filter consumers get demographics [POST]
+
+A general filter for consumers. 
+
++ Request (application/json)
+    
+    ```
+       {
+            "brand": "Baby Soft",
+           
+            "province": [ 
+                        "Gauteng",
+                        "Eastern Cape"
+                    ],
+            "gender": [
+                        "Male",
+                        "Female",
+                        "Unknown"
+                    ],
+            
+            "customFields": [
+                        {
+                        "name": "eyecolor",
+                        "_operator": "Equals",
+                        "value": "blue"
+                        },
+                        {
+                        "name": "kotexfield1",
+                          "_operator": "Between",
+                          "values": {
+                            "first": "3",
+                            "second": "7"
+                          }
+                      }
+            ]
+        }
+    ```
+
++ Response 200 (application/json)
+
+    ```
+        {
+        "count":1,
+        "genders": [
+                {
+                    "name": "female",
+                    "value": 2
+                },
+                {
+                    "name": "unknown",
+                    "value": 0
+                },
+                {
+                    "name": "male",
+                    "value": 2
+                }
+                ],
+            "ages": [
+                {
+                    "name": "unknown",
+                    "value": 0
+                },
+                {
+                    "name": "sixteen_twentyfour",
+                    "value": 0
+                },
+                {
+                    "name": "twentyfive_thirtyfour",
+                    "value": 4
+                },
+                {
+                    "name": "thirtyfive_fortyfour",
+                    "value": 0
+                },
+                {
+                    "name": "fortyfive_plus",
+                    "value": 0
+                }
+                ],
+            "provinces": [
+                {
+                    "name": "Eastern Cape",
+                    "value": 4
+                },
+                {
+                    "name": "Free State",
+                    "value": 6
+                },
+                {
+                    "name": "Gauteng",
+                    "value": 4
+                },
+                {
+                    "name": "Kwazulu Natal",
+                    "value": 0
+                },
+                {
+                    "name": "Limpopo",
+                    "value": 5
+                },
+                {
+                    "name": "Mpumalanga",
+                    "value": 42
+                },
+                {
+                    "name": "Northern Cape",
+                    "value": 12
+                },
+                {
+                    "name": "North West",
+                    "value": 23
+                },
+                {
+                    "name": "Western Cape",
+                    "value": 40
+                },
+                {
+                    "name": "unknown",
+                    "value": 89
+                }
+                ],
+            "maritalstatus": [
+                {
+                    "name": "Married",
+                    "value": 300
+                },
+                {
+                    "name": "Married with Kids",
+                    "value": 6
+                },
+                {
+                    "name": "Single Parent",
+                    "value": 60
+                },
+                {
+                    "name": "Pregnant",
+                    "value": 6
+                },
+                {
+                    "name": "Unknown",
+                    "value": 6
+                }
+                ],
+            "activationchannel": [
+                {
+                    "name": "sms",
+                    "value": 80
+                },
+                {
+                    "name": "email",
+                    "value": 31
+                }
+                ],
+            "responsechannel": [
+                {
+                    "name": "shortcode",
+                    "value": 21
+                },
+                {
+                    "name": "webform",
+                    "value": 11
+                }
+                ],
+            "activity": [
+                {
+                    "name": "growth",
+                    "value": 10.4
+                },
+                {
+                    "name": "active",
+                    "value": 11.6
+                },
+                {
+                    "name": "inactive",
+                    "value": 4.2
+                },
+                {
+                    "name": "new_consumers",
+                    "value": 1.4
+                },
+                {
+                    "name": "dupes",
+                    "value": 0
+                },
+                {
+                    "name": "unsubs",
+                    "value": 400
+                }
+                ],
+            "tiers": [
+                {
+                    "name": "A",
+                    "value": 1
+                },
+                {
+                    "name": "B",
+                    "value": 5
+                },
+                {
+                    "name": "C",
+                    "value": 0
+                },
+                {
+                    "name": "undefined",
+                    "value": 5
+                }
+                ]
+            }
+        }
+
+
+
 
 ## Consumer Engagement Campaigns [/consumer/engagement/campaigns/{guid}]
  + Parameters
@@ -4212,7 +4426,82 @@ Here, we will have any functions that don't quite apply to any other group speci
             ]
         }
     ```
+  
+  
+
+
+
+
+
+
+
+
+
+
+   
+## Email account list [/email_accounts/]
+
+### Get a list of all the emails currently saved [GET]
+
+
++ Response 200 (application/json;charset=UTF-8)
+
+    ``` 
+       {
+        "email_accounts":[
+                {
+                "active":true,
+                "brand":"d262e101-d37d-47aa-b0f2-7200da6e43f1",
+                "friendlyname":"Code Cafe Test",
+                "guid":"F8E3A759-7EB0-47FB-B0F6-067A6A1EB515",
+                "password":"A1626A49-160C-49E5-A700-E3253B65220D",
+                "replyto":"john@codecafe.co.za",
+                "username":"DeveloperTest@fntmail.com"
+                }
+            ]
+        }
+    ```
     
+## Send Test Email [/test/email/]  
+
+### Send a test email. [POST]
+
+
+This end-point requires the following parameters to be sent:
+
+- `to address` (string) The addresses that this email will go to. Limited to 5.
+- `email account` (guid) from the  email_accounts function
+- `subject_line` (string)
+- `text` (string) The text
+- `campaign_id` (string)
+- `program_communication_id` (string)
+
+
+
++ Request (application/json;charset=UTF-8)
+
+    ```
+    {
+        "to_address": '312223f22-9e5c-4c95-ba90-79b2ce@mailinator.com;Rowan@codecafe.co.za;375227f33-9e5c-4c95-ba90-79b2ce@mailinator.com;375227f22-9e5c-4c95-ba90-79b2ce@mailinator.com',
+        "email_account": 'F8E3A759-7EB0-47FB-B0F6-067A6A1EB515',
+        "subject_line": 'This is a test!',
+        "text": 'error-free outsourcing before revolutionary process improvements. Monotonectally incentivize out-of-the-box mindshare and.',
+        "campaign_id": '',
+        "program_communication_id": ''
+    }
+    ```
+
++ Response 200
+
+ ```
+    {
+        "status": "200", "message": "Test email sent to:375227f33-9e5c-4c95-ba90-79b2ce@mailinator.com etc. "
+    }
+    ```
+
++ Response 401
+    
+      
 
 # Group Capture Points
 
