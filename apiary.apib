@@ -4430,6 +4430,63 @@ Here, we will have any functions that don't quite apply to any other group speci
   
 
 
+  
+## Sms account list [/sms_accounts/]
+
+### Get a list of all the sms accounts currently saved [GET]
+
+
++ Response 200 (application/json;charset=UTF-8)
+
+    ``` 
+    {
+        "sms_accounts":[
+            {
+            "active":true,
+            "appid":"2438",
+            "brand":"40c03869-6424-4fab-b56a-797eb603e7fa",
+            "guid":"6AC8ED34-6B11-49D0-A92D-3B341AE795E7",
+            "notificationEmail":"john@codecafe.co.za",
+            "password":"Yu8Fw46",
+            "username":"KimClk"
+            }
+        ]
+    }
+    ```
+    
+## Send Test sms [/test/sms/]  
+
+### Send a test sms. [POST]
+
+
+This end-point requires the following parameters to be sent:
+
+- `cell` (string) The single number that this sms will go to.
+- `sms account` (guid) from the  sms_accounts function
+- `message` (string)
+
+
++ Request (application/json;charset=UTF-8)
+
+    ```
+    {
+        "sms_account": '6AC8ED34-6B11-49D0-A92D-3B341AE795E7',
+        "cell": '071 111 1111',
+        "message": 'This is a test SMS from KCDM.'
+    }
+    ```
+
++ Response 200
+
+ ```
+    {
+        "status": "200", "message": "Test sms sent to:071 111 1111"
+    }
+    ```
+
++ Response 401
+    
+
 
 
 
