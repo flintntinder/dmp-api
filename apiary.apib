@@ -2341,36 +2341,27 @@ Save program, set status to Opened.
 + Request (application/json)
 
         {
-                    "brandid": "xxx-00xxxx-1",
-                    "userid": "xxx-xxx-a-xx-x-xx-xxxx-b-xxx-x-x",
-                    "name": "New Program for December 2014",
-                    "description": "Description ",
-                    "when": "Before",
-                    "keyfield": "Select a field",
-                    "requiresoptin": {
-                        "status": true,
-                        "campaign": "a7a775b0-a44c-4c18-8911-8bbb0d7a5535",
-                        "field": "Age"
-                    },
-                    "rounds": 7,
-                    "frequency": "Daily",
-                    "channel": {
-                        "sms": {
-                            "active": true,
-                            "optin": "Thank you for opting into our Program",
-                            "optout": "We will miss you"
-                        },
-                        "email": {
-                            "active": false,
-                            "title": "",
-                            "subjectline": "",
-                            "emailfrom": "Select an address",
-                            "viewonlinelink": "",
-                            "unsubscribelink": ""
-                        },
-                        "emailpackage":""
-                    }
+            "brand": "xxx-x-xxxxx-01",
+            "user": "xxxx-xxx--xxxxx007",
+            "name": "Program 007",
+            "description": "New mission",
+            "frequency": "Daily",
+            "commSendTime": "10:00",
+            "campaign": {
+                "id": "",
+                "field": "date of birth"
+            },
+            "channel": {
+                "sms": {
+                    "active": true,
+                    "account": "xxx-xxx-xxx-01"
+                },
+                "email": {
+                    "active": true,
+                    "account": "xxx-xxx-x01-xxxx"
                 }
+            }
+        }
 
 + Response  200 (application/json;charset=UTF-8)
 
